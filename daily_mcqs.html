@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<title>Today's MCQs — SSCracker Daily Practice</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="ss_theme.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0D1F3C;--navy2:#132847;--gold:#F5A623;--gold-dim:#B87A18;--green:#22C55E;--red:#EF4444;--page:#F2F6FF;--card:#fff;--border:#DDE6F5;--text:#1a1a2e;--muted:#5a6480;--r:14px;--r-sm:9px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--page);color:var(--text);min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+header{background:var(--navy);padding:0 18px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25);}
+.hi{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:8px;}
+.bl{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;color:var(--navy);}
+.bn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;}
+main{max-width:900px;margin:0 auto;padding:20px 12px 48px;}
+.page-hero{background:var(--navy2);border-radius:var(--r);padding:20px 22px;margin-bottom:20px;border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
+.page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+.hero-date{font-family:'Rajdhani',sans-serif;font-size:.7rem;color:#5a7099;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.hero-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:4px;}
+.hero-sub{font-size:.83rem;color:#7a90b0;}
+.stream-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.stab{padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .18s;}
+.stab.active{background:var(--navy);border-color:var(--navy);color:var(--gold);}
+.stab:hover:not(.active){border-color:var(--navy);color:var(--navy);}
+.score-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.score-nums{display:flex;gap:16px;}
+.score-num{text-align:center;}
+.sn-val{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;}
+.sn-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+.green{color:var(--green);}
+.red{color:var(--red);}
+.gold{color:var(--gold-dim);}
+.submit-all-btn{padding:8px 18px;border-radius:var(--r-sm);border:none;background:var(--navy);color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.submit-all-btn:hover{box-shadow:0 4px 16px rgba(245,166,35,.25);}
+.mcq-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px;animation:fadeUp .3s ease both;transition:border-color .2s;}
+.mcq-card.answered-correct{border-color:var(--green);}
+.mcq-card.answered-wrong{border-color:var(--red);}
+.q-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+.q-num{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;}
+.q-topic{font-size:.7rem;background:#EEF3FF;color:var(--navy);border-radius:4px;padding:2px 8px;font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;}
+.diff-pips{display:flex;gap:3px;}
+.pip{width:7px;height:7px;border-radius:50%;background:var(--border);}
+.pip.on{background:var(--gold);}
+.q-text{font-size:.92rem;font-weight:500;color:var(--text);line-height:1.65;margin-bottom:14px;}
+.opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.opt{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:#FAFCFF;cursor:pointer;text-align:left;width:100%;font-size:.87rem;color:var(--text);transition:all .15s;font-family:'Noto Sans',sans-serif;}
+.opt:hover:not(:disabled){border-color:var(--navy);background:#EEF3FF;transform:translateX(3px);}
+.opt.sel{border-color:var(--navy);background:#E8EEFF;box-shadow:inset 3px 0 0 var(--navy);}
+.opt.correct{border-color:var(--green);background:#F0FDF4;box-shadow:inset 3px 0 0 var(--green);}
+.opt.wrong{border-color:var(--red);background:#FEF2F2;box-shadow:inset 3px 0 0 var(--red);}
+.opt:disabled{cursor:default;}
+.opt-let{width:24px;height:24px;border-radius:5px;background:var(--border);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;font-family:'Rajdhani',sans-serif;}
+.opt.sel  .opt-let{background:var(--navy);color:#fff;}
+.opt.correct .opt-let{background:var(--green);color:#fff;}
+.opt.wrong   .opt-let{background:var(--red);color:#fff;}
+.explanation{display:none;background:#F0F5FF;border-left:3px solid var(--navy);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 12px;font-size:.82rem;color:var(--navy);line-height:1.6;margin-top:8px;}
+.shortcut{background:#FFFBEB;border-left:3px solid var(--gold);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-size:.78rem;color:#78350F;margin-top:6px;display:none;}
+.empty-state{text-align:center;padding:48px 20px;background:var(--card);border-radius:var(--r);border:1px dashed var(--border);}
+.empty-icon{font-size:36px;margin-bottom:12px;}
+.loading-pulse{display:flex;gap:8px;justify-content:center;align-items:center;padding:40px;}
+.ld{width:10px;height:10px;border-radius:50%;background:var(--navy);opacity:.3;animation:ld-bounce .6s infinite;}
+.ld:nth-child(2){animation-delay:.15s;}
+.ld:nth-child(3){animation-delay:.3s;}
+@keyframes ld-bounce{0%,80%,100%{transform:scale(.8);opacity:.3}40%{transform:scale(1.1);opacity:1}}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:14px;border-top:1px solid var(--border);}
+.navlinks a{color:var(--navy);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;background:var(--page);padding:6px 11px;border-radius:var(--r-sm);border:1px solid var(--border);transition:all .15s;}
+.navlinks a:hover{background:var(--navy);color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hi">
+    <div class="brand"><div class="bl">SC</div><div><div class="bn">SSCracker</div></div></div>
+    <a href="index.html" style="color:#7a90b0;font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:600;text-decoration:none;letter-spacing:.04em;">← Home</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="hero-date" id="heroDate">Today's Date</div>
+    <div class="hero-title">📅 आज के Fresh MCQs</div>
+    <div class="hero-sub">AI-generated daily practice — हर रोज़ 75 नए questions. Score देखें, explanation पढ़ें।</div>
+  </div>
+
+  <div class="stream-tabs" id="streamTabs"></div>
+
+  <div class="score-bar" id="scoreBar">
+    <div class="score-nums">
+      <div class="score-num"><div class="sn-val green" id="sCorrect">0</div><div class="sn-label">Correct</div></div>
+      <div class="score-num"><div class="sn-val red"   id="sWrong">0</div><div class="sn-label">Wrong</div></div>
+      <div class="score-num"><div class="sn-val gold"  id="sLeft">0</div><div class="sn-label">Remaining</div></div>
+    </div>
+    <button class="submit-all-btn" id="submitAllBtn" onclick="submitAll()">Submit All & See Score</button>
+  </div>
+
+  <div id="mcqContainer">
+    <div class="loading-pulse"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div>
+  </div>
+
+  <div class="navlinks">
+    <a href="index.html">🏠 Home</a>
+    <a href="nda/MOCK_TEST/mock_test_index.html">📝 Mock Tests</a>
+    <a href="ask_doubt.html">💬 AI Tutor</a>
+    <a href="leaderboard.html">🏆 Leaderboard</a>
+    <a href="nda/student_dashboard.html">📊 Dashboard</a>
+  </div>
+</main>
+
+<script src="ss_config.js"></script>
+<script src="gamification.js"></script>
+<script src="lang.js"></script>
+<script>
+var allMCQs     = {};
+var currentStream = 'NDA';
+var answers     = {};   /* { mcqId: chosenIndex } */
+var submitted   = {};   /* { mcqId: true } */
+var correct = 0, wrong = 0;
+
+/* ── LOAD MCQs ── */
+async function loadMCQs() {
+  try {
+    var resp = await fetch('daily_mcqs.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('File not found');
+    var data = await resp.json();
+    allMCQs = data.streams || {};
+
+    /* Update hero date */
+    var d = new Date(data.generatedAt || Date.now());
+    document.getElementById('heroDate').textContent =
+      d.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+    buildStreamTabs(data.streams);
+    renderMCQs(currentStream);
+
+  } catch(e) {
+    /* Fallback — show demo MCQs if file not available */
+    showDemoState();
+  }
+}
+
+function buildStreamTabs(streams) {
+  var labels = { NDA:'NDA', DP:'Delhi Police', SSCGD:'SSC GD', BANKPO:'Bank PO' };
+  var html = '';
+  Object.keys(streams).forEach(function(key) {
+    var count = (streams[key].mcqs || []).length;
+    html += '<button class="stab' + (key===currentStream?' active':'') + '" onclick="switchStream(\'' + key + '\')">' +
+      (labels[key]||key) + ' <span style="opacity:.6;font-size:.68rem;">(' + count + ')</span>' +
+    '</button>';
+  });
+  document.getElementById('streamTabs').innerHTML = html;
+}
+
+function switchStream(key) {
+  currentStream = key;
+  document.querySelectorAll('.stab').forEach(function(t,i) {
+    var keys = Object.keys(allMCQs);
+    t.classList.toggle('active', keys[i] === key);
+  });
+  renderMCQs(key);
+  updateScore();
+}
+
+function renderMCQs(streamKey) {
+  var stream = allMCQs[streamKey];
+  var container = document.getElementById('mcqContainer');
+  if (!stream || !stream.mcqs || !stream.mcqs.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><div style="font-family:Rajdhani,sans-serif;font-weight:700;font-size:1rem;color:var(--navy);">MCQs load नहीं हुए</div><div style="font-size:.83rem;color:var(--muted);margin-top:6px;">Refresh करें या कल आएं — रोज़ 5am पर नए questions आते हैं।</div></div>';
+    return;
+  }
+
+  var html = '';
+  stream.mcqs.forEach(function(q, i) {
+    var diff = q.difficulty || 3;
+    var pips = '';
+    for (var p=1;p<=5;p++) pips += '<div class="pip' + (p<=diff?' on':'') + '"></div>';
+    var savedAns = answers[q.id];
+    var isSubmitted = submitted[q.id];
+
+    html += '<div class="mcq-card' + (isSubmitted ? (savedAns===q.answer?' answered-correct':' answered-wrong') : '') + '" id="card_' + q.id + '" style="animation-delay:' + (i*.04) + 's">' +
+      '<div class="q-header">' +
+        '<div class="q-num">Q' + (i+1) + '</div>' +
+        '<div class="q-topic">' + esc(q.topic||q.subject||'') + '</div>' +
+        '<div class="diff-pips">' + pips + '</div>' +
+      '</div>' +
+      '<div class="q-text">' + esc(q.question) + '</div>' +
+      '<div class="opts" id="opts_' + q.id + '">';
+
+    (q.options||[]).forEach(function(opt, oi) {
+      var cls = 'opt';
+      if (isSubmitted) {
+        if (oi === q.answer) cls += ' correct';
+        else if (oi === savedAns && savedAns !== q.answer) cls += ' wrong';
+      } else if (savedAns === oi) {
+        cls += ' sel';
+      }
+      html += '<button class="' + cls + '" ' + (isSubmitted?'disabled':'') +
+        ' onclick="selectOpt(\'' + q.id + '\',' + oi + ',' + q.answer + ',' + isSubmitted + ')">' +
+        '<span class="opt-let">' + String.fromCharCode(65+oi) + '</span>' +
+        esc(opt) +
+      '</button>';
+    });
+
+    html += '</div>';
+
+    if (isSubmitted) {
+      html += '<div class="explanation" style="display:block">' +
+        '📖 ' + esc(q.explanation || '') + '</div>';
+      if (q.shortcut) {
+        html += '<div class="shortcut" style="display:block">💡 ' + esc(q.shortcut) + '</div>';
+      }
+    }
+
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+  updateScore();
+}
+
+function selectOpt(qId, chosen, correct_idx, alreadyDone) {
+  if (alreadyDone) return;
+  answers[qId] = chosen;
+
+  /* Update visual */
+  var opts = document.querySelectorAll('#opts_' + qId + ' .opt');
+  opts.forEach(function(o, i) {
+    o.classList.toggle('sel', i === chosen);
+  });
+  updateScore();
+}
+
+function submitAll() {
+  var stream = allMCQs[currentStream];
+  if (!stream) return;
+
+  stream.mcqs.forEach(function(q) {
+    if (answers[q.id] !== undefined && !submitted[q.id]) {
+      submitted[q.id] = true;
+    }
+  });
+
+  renderMCQs(currentStream);
+  updateScore();
+
+  /* Gamification */
+  if (window.SSG) {
+    var c = stream.mcqs.filter(function(q){ return answers[q.id]===q.answer; }).length;
+    var tot = stream.mcqs.length;
+    window.SSG.award('mock_completed', { score: c, total: tot });
+  }
+
+  document.getElementById('mcqContainer').scrollIntoView({ behavior:'smooth' });
+}
+
+function updateScore() {
+  var stream = allMCQs[currentStream];
+  if (!stream) return;
+  var c=0, w=0, left=0;
+  (stream.mcqs||[]).forEach(function(q) {
+    if (submitted[q.id]) {
+      if (answers[q.id]===q.answer) c++; else w++;
+    } else if (answers[q.id]!==undefined) {
+      /* Answered but not submitted */
+    } else left++;
+  });
+  var total = (stream.mcqs||[]).length;
+  left = total - Object.keys(submitted).filter(function(id){ return (stream.mcqs||[]).some(function(q){return q.id===id;}); }).length;
+  document.getElementById('sCorrect').textContent = c;
+  document.getElementById('sWrong').textContent   = w;
+  document.getElementById('sLeft').textContent    = left;
+}
+
+function showDemoState() {
+  document.getElementById('heroDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('streamTabs').innerHTML = '<div style="font-size:.83rem;color:var(--muted);">MCQ file load नहीं हुई।</div>';
+  document.getElementById('mcqContainer').innerHTML = '<div class="empty-state"><div class="empty-icon">⚙️</div><div style="font-family:Rajdhani,sans-serif;font-weight:700;font-size:1rem;color:var(--navy);">MCQ Agent Setup Required</div><div style="font-size:.83rem;color:var(--muted);margin-top:6px;line-height:1.6;">GitHub Actions cron चला कर daily_mcqs.json generate करें।<br>Setup: repo → Settings → Secrets → ANTHROPIC_API_KEY add करें।</div></div>';
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('heroDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+loadMCQs();
+</script>
+</body>
+</html>

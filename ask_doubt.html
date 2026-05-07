@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="ss_theme.css"/>
+<meta charset="UTF-8">
+<title>AI Tutor – SSCracker | Shyamsthali LLP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:#002e5b; --navy2:#003e7a; --navy3:#00285a;
+  --gold:#f5a623; --gold2:#e8941a;
+  --ai-bg:#f0f7ff; --ai-border:#bcd6f5; --ai-text:#003366;
+  --success:#e8f5e9; --success-text:#2e7d32;
+  --warn:#fff8e1; --warn-border:#ffb300;
+  --card:#ffffff; --page:#f2f5fc;
+  --text:#1a1a2e; --muted:#5a6480;
+  --radius:14px; --radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--page);color:var(--text);min-height:100vh;}
+
+/* ── Header ── */
+header{
+  background:var(--navy);
+  padding:0 20px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(0,0,0,.25);
+}
+.header-inner{
+  max-width:780px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;gap:12px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gold);display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:15px;color:var(--navy);
+  flex-shrink:0;
+}
+.brand-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.15rem;color:#fff;line-height:1.1;}
+.brand-sub{font-size:.7rem;color:#aac4e8;font-weight:400;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.lang-toggle{
+  display:flex;background:rgba(255,255,255,.12);border-radius:20px;padding:3px;gap:2px;
+}
+.lang-btn{
+  padding:5px 12px;border-radius:16px;border:none;cursor:pointer;
+  font-size:.75rem;font-weight:600;transition:all .2s;background:transparent;color:#aac4e8;
+  font-family:'Baloo 2',cursive;
+}
+.lang-btn.active{background:var(--gold);color:var(--navy);}
+.ai-badge{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:20px;padding:4px 10px;font-size:.72rem;color:#aac4e8;
+}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:#4caf50;animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+
+/* ── Layout ── */
+main{max-width:780px;margin:24px auto 40px;padding:0 14px;}
+
+/* ── Hero ── */
+.hero{
+  background:var(--navy2);border-radius:var(--radius);
+  padding:20px 22px;margin-bottom:20px;
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;gap:14px;align-items:flex-start;
+}
+.hero-icon{font-size:32px;flex-shrink:0;margin-top:2px;}
+.hero h1{font-family:'Baloo 2',cursive;font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:5px;}
+.hero p{font-size:.88rem;color:#aac4e8;line-height:1.5;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.chip{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;padding:3px 10px;font-size:.72rem;color:#cde0f5;
+}
+
+/* ── Card ── */
+.card{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid #dde5f4;padding:22px 20px;
+  margin-bottom:20px;
+}
+
+/* ── Form ── */
+.form-row{margin-bottom:14px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:500px){.form-row-2{grid-template-columns:1fr;}}
+label{
+  display:block;margin-bottom:5px;
+  font-size:.82rem;font-weight:600;color:var(--navy);
+  font-family:'Baloo 2',cursive;
+}
+label .hi{font-weight:400;color:var(--muted);font-size:.78rem;}
+input,select,textarea{
+  width:100%;padding:10px 12px;
+  border:1.5px solid #d0d8ef;border-radius:var(--radius-sm);
+  font-size:.9rem;font-family:'Noto Sans',sans-serif;color:var(--text);
+  background:#fafbff;transition:border-color .2s,box-shadow .2s;outline:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--navy);box-shadow:0 0 0 3px rgba(0,46,91,.1);background:#fff;
+}
+textarea{resize:vertical;min-height:100px;line-height:1.6;}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6480' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.hint{font-size:.75rem;color:var(--muted);margin-top:4px;}
+
+/* ── Language Select ── */
+.lang-select-row{
+  display:flex;gap:8px;margin-bottom:16px;
+}
+.lang-select-btn{
+  flex:1;padding:9px;border-radius:var(--radius-sm);
+  border:1.5px solid #d0d8ef;background:#fafbff;cursor:pointer;
+  font-family:'Baloo 2',cursive;font-size:.85rem;font-weight:600;
+  color:var(--muted);transition:all .2s;text-align:center;
+}
+.lang-select-btn.sel{
+  border-color:var(--navy);background:#eef3ff;color:var(--navy);
+}
+
+/* ── Submit button ── */
+.submit-btn{
+  width:100%;padding:13px;border:none;border-radius:var(--radius-sm);
+  background:var(--navy);color:#fff;font-family:'Baloo 2',cursive;
+  font-size:1rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background .2s,transform .1s;margin-top:4px;
+}
+.submit-btn:hover{background:var(--navy2);}
+.submit-btn:active{transform:scale(.99);}
+.submit-btn:disabled{background:#8fa0b8;cursor:not-allowed;transform:none;}
+
+/* ── AI Answer Panel ── */
+#aiPanel{
+  display:none;
+  background:var(--ai-bg);border:1.5px solid var(--ai-border);
+  border-radius:var(--radius);padding:20px;margin-top:16px;
+}
+.ai-header{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--ai-border);
+}
+.ai-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--navy);display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:13px;color:var(--gold);
+  flex-shrink:0;
+}
+.ai-meta{flex:1;}
+.ai-meta-title{font-size:.85rem;font-weight:600;color:var(--navy);}
+.ai-meta-sub{font-size:.73rem;color:var(--muted);}
+.ai-context{
+  background:rgba(0,46,91,.06);border-radius:var(--radius-sm);
+  padding:8px 12px;margin-bottom:12px;font-size:.8rem;color:var(--navy);
+}
+.ai-context strong{font-weight:600;}
+#aiAnswer{
+  font-size:.92rem;line-height:1.8;color:var(--ai-text);
+  min-height:40px;white-space:pre-wrap;word-break:break-word;
+}
+#aiAnswer .cursor{
+  display:inline-block;width:2px;height:1em;background:var(--navy);
+  vertical-align:text-bottom;margin-left:2px;
+  animation:blink .7s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.ai-footer{
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--ai-border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.ai-footer-note{font-size:.75rem;color:var(--muted);}
+.ask-again-btn{
+  padding:7px 14px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--navy);background:transparent;
+  color:var(--navy);font-family:'Baloo 2',cursive;font-weight:600;
+  font-size:.8rem;cursor:pointer;transition:all .2s;
+}
+.ask-again-btn:hover{background:var(--navy);color:#fff;}
+
+/* ── Thinking indicator ── */
+#thinking{display:none;padding:12px 0;}
+.thinking-dots{display:flex;align-items:center;gap:5px;}
+.thinking-dots span{
+  width:8px;height:8px;border-radius:50%;background:var(--navy);opacity:.3;
+  animation:bounce-dot .8s infinite;
+}
+.thinking-dots span:nth-child(2){animation-delay:.15s;}
+.thinking-dots span:nth-child(3){animation-delay:.3s;}
+@keyframes bounce-dot{0%,80%,100%{transform:scale(.8);opacity:.3}40%{transform:scale(1.1);opacity:1}}
+.thinking-text{font-size:.82rem;color:var(--muted);margin-left:4px;font-style:italic;}
+
+/* ── Error box ── */
+#errorBox{
+  display:none;background:#fdecea;border:1px solid #f5c6c2;
+  border-radius:var(--radius-sm);padding:12px;margin-top:12px;
+  font-size:.85rem;color:#c0392b;
+}
+
+/* ── History ── */
+.history-section{margin-top:8px;}
+.history-title{
+  font-family:'Baloo 2',cursive;font-size:.85rem;font-weight:600;
+  color:var(--muted);margin-bottom:10px;
+}
+.history-item{
+  background:#f7f9ff;border:1px solid #e4eaf8;border-radius:var(--radius-sm);
+  padding:10px 12px;margin-bottom:8px;cursor:pointer;transition:border-color .15s;
+}
+.history-item:hover{border-color:var(--navy);}
+.hi-q{font-size:.83rem;font-weight:600;color:var(--text);margin-bottom:2px;}
+.hi-meta{font-size:.73rem;color:var(--muted);}
+
+/* ── Tip box ── */
+.tip-box{
+  background:var(--warn);border-left:4px solid var(--warn-border);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:10px 14px;font-size:.83rem;color:#5a4000;line-height:1.5;
+  margin-top:16px;
+}
+.tip-box strong{color:#7a5200;}
+
+/* ── Nav links ── */
+.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid #eaeef8;}
+.navlinks a{
+  display:inline-block;color:var(--navy);text-decoration:none;
+  font-weight:600;font-size:.82rem;background:#f0f4ff;
+  padding:7px 12px;border-radius:var(--radius-sm);border:1px solid #d4ddf5;
+  transition:all .15s;
+}
+.navlinks a:hover{background:var(--navy);color:#fff;}
+
+/* ── Spinner ── */
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .hero{padding:14px 14px;}
+  .hero h1{font-size:1.15rem;}
+  .card{padding:16px 14px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">SC</div>
+      <div>
+        <div class="brand-name">SSCracker</div>
+        <div class="brand-sub">Shyamsthali LLP</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="ai-badge">
+        <span class="ai-dot"></span>
+        <span id="aiStatusText">AI Tutor Live</span>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="uiHI" onclick="setUILang('hi')">हिंदी</button>
+        <button class="lang-btn" id="uiEN" onclick="setUILang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div class="hero-icon">&#129303;</div>
+    <div>
+      <h1 id="heroTitle">AI Tutor — अपना Doubt पूछिए</h1>
+      <p id="heroSub">24/7 AI-powered mentor. NDA, SSC GD, Delhi Police, Bank PO — किसी भी subject का doubt 3 seconds में solve होगा। Hindi और English दोनों में।</p>
+      <div class="hero-chips">
+        <span class="chip">NDA</span>
+        <span class="chip">SSC GD</span>
+        <span class="chip">Delhi Police</span>
+        <span class="chip">Bank PO</span>
+        <span class="chip">24 / 7</span>
+        <span class="chip">Hindi + English</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- Answer Language -->
+    <div class="form-row">
+      <label id="ansLangLabel">जवाब किस भाषा में चाहिए? <span class="hi">(Answer language)</span></label>
+      <div class="lang-select-row">
+        <button class="lang-select-btn sel" id="btnHindi" onclick="setAnswerLang('hi')">&#127470;&#127475; हिंदी में</button>
+        <button class="lang-select-btn" id="btnEnglish" onclick="setAnswerLang('en')">&#127468;&#127463; English</button>
+        <button class="lang-select-btn" id="btnBoth" onclick="setAnswerLang('both')">Both / दोनों</button>
+      </div>
+    </div>
+
+    <form id="doubtForm">
+
+      <div class="form-row-2">
+        <div>
+          <label for="name" id="lblName">नाम <span class="hi">(Name)</span></label>
+          <input type="text" id="name" placeholder="आपका नाम" required/>
+        </div>
+        <div>
+          <label for="course" id="lblCourse">Course</label>
+          <select id="course" required></select>
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div>
+          <label for="subject" id="lblSubject">Subject / विषय</label>
+          <select id="subject" required></select>
+        </div>
+        <div>
+          <label for="chapter" id="lblChapter">Chapter / अध्याय</label>
+          <input type="text" id="chapter" placeholder="e.g. Quadratic Equations" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="question" id="lblQuestion">आपका Doubt / Your Question</label>
+        <textarea id="question" placeholder="अपना question यहाँ लिखिए — Hindi या English में..." required></textarea>
+        <div class="hint" id="hintQuestion">जितना detail में लिखेंगे, उतना अच्छा जवाब मिलेगा।</div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="submitBtnIcon">&#127775;</span>
+        <span id="submitBtnText">AI Tutor से पूछिए</span>
+      </button>
+    </form>
+
+    <!-- Thinking indicator -->
+    <div id="thinking">
+      <div class="thinking-dots">
+        <span></span><span></span><span></span>
+        <span class="thinking-text" id="thinkingText">AI Tutor सोच रहा है...</span>
+      </div>
+    </div>
+
+    <!-- Error box -->
+    <div id="errorBox"></div>
+
+    <!-- AI Answer Panel -->
+    <div id="aiPanel">
+      <div class="ai-header">
+        <div class="ai-avatar">AI</div>
+        <div class="ai-meta">
+          <div class="ai-meta-title" id="aiMetaTitle">SSCracker AI Tutor</div>
+          <div class="ai-meta-sub" id="aiMetaSub">Powered by Claude — Shyamsthali LLP</div>
+        </div>
+      </div>
+      <div class="ai-context" id="aiContext"></div>
+      <div id="aiAnswer"></div>
+      <div class="ai-footer">
+        <span class="ai-footer-note" id="aiFooterNote">यह जवाब AI द्वारा दिया गया है। किसी doubt के लिए फिर से पूछें।</span>
+        <button class="ask-again-btn" id="askAgainBtn" onclick="resetForm()">नया Doubt पूछें</button>
+      </div>
+    </div>
+
+    <!-- Tip box -->
+    <div class="tip-box" id="tipBox">
+      <strong id="tipTitle">&#128161; Tip:</strong>
+      <span id="tipText"> Doubt लिखते समय course + subject + chapter + question no. जरूर लिखिए — जैसे "NDA – Math – Algebra – Quadratic Equation, Q.3". इससे AI तुरंत समझ पायेगा।</span>
+    </div>
+
+    <!-- Recent history -->
+    <div class="history-section" id="historySection" style="display:none;">
+      <div class="history-title" id="historyTitle">&#128338; आपके पिछले Doubts</div>
+      <div id="historyList"></div>
+    </div>
+
+    <div class="navlinks">
+      <a href="index.html">&#127968; Home</a>
+      <a href="nda/nda_index.html">&#128216; NDA</a>
+      <a href="delhi_police/dp_index.html">&#128110; Delhi Police</a>
+      <a href="ssc_GD/ssc_gd_index.html">&#128737; SSC GD</a>
+    </div>
+  </div>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════════
+   CONFIGURATION
+═══════════════════════════════════════════ */
+const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+const MAX_TOKENS   = 1024;
+
+/* ═══════════════════════════════════════════
+   UI LANGUAGE STRINGS
+═══════════════════════════════════════════ */
+const UI = {
+  hi: {
+    heroTitle:    'AI Tutor — अपना Doubt पूछिए',
+    heroSub:      '24/7 AI-powered mentor. किसी भी subject का doubt 3 seconds में solve होगा। Hindi और English दोनों में।',
+    ansLangLabel: 'जवाब किस भाषा में चाहिए? (Answer language)',
+    lblName:      'नाम',
+    lblCourse:    'Course',
+    lblSubject:   'Subject / विषय',
+    lblChapter:   'Chapter / अध्याय',
+    lblQuestion:  'आपका Doubt / Your Question',
+    hintQ:        'जितना detail में लिखेंगे, उतना अच्छा जवाब मिलेगा।',
+    submitBtn:    'AI Tutor से पूछिए',
+    thinking:     'AI Tutor सोच रहा है...',
+    tipTitle:     '💡 Tip:',
+    tipText:      ' Doubt लिखते समय course + subject + chapter + question no. जरूर लिखिए। इससे AI तुरंत समझ पायेगा।',
+    historyTitle: '🕘 आपके पिछले Doubts',
+    aiFooter:     'यह जवाब AI द्वारा दिया गया है। किसी doubt के लिए फिर से पूछें।',
+    askAgain:     'नया Doubt पूछें',
+    aiStatus:     'AI Tutor Live',
+    namePH:       'आपका नाम',
+    questionPH:   'अपना question यहाँ लिखिए — Hindi या English में...',
+  },
+  en: {
+    heroTitle:    'AI Tutor — Ask Your Doubt',
+    heroSub:      '24/7 AI-powered mentor. Get instant answers for NDA, SSC GD, Delhi Police, Bank PO — in Hindi or English.',
+    ansLangLabel: 'Answer language / जवाब की भाषा',
+    lblName:      'Name / नाम',
+    lblCourse:    'Course',
+    lblSubject:   'Subject',
+    lblChapter:   'Chapter',
+    lblQuestion:  'Your Doubt / Question',
+    hintQ:        'The more detail you give, the better the answer.',
+    submitBtn:    'Ask AI Tutor',
+    thinking:     'AI Tutor is thinking...',
+    tipTitle:     '💡 Tip:',
+    tipText:      ' Mention course + subject + chapter + question number for the best answer. e.g. "NDA – Math – Algebra – Q.3".',
+    historyTitle: '🕘 Your Recent Doubts',
+    aiFooter:     'This answer is AI-generated. Ask another doubt anytime.',
+    askAgain:     'Ask Another Doubt',
+    aiStatus:     'AI Tutor Live',
+    namePH:       'Your name',
+    questionPH:   'Type your question here — in Hindi or English...',
+  }
+};
+
+/* ═══════════════════════════════════════════
+   COURSE MAP (same as original)
+═══════════════════════════════════════════ */
+const COURSE_MAP = {
+  NDA:{label:'NDA',subjects:['Mathematics (Paper 1)','English (GAT)','General Knowledge (GAT)','Physics','Chemistry','Biology','History','Geography','Polity','Economics','Current Affairs','Strategy / Time Management']},
+  DP:{label:'Delhi Police',subjects:['Reasoning','Quantitative Aptitude / Maths','General Knowledge','Current Affairs','English / Hindi','Computer Basics','Strategy / Time Management']},
+  SSCGD:{label:'SSC GD',subjects:['Reasoning','Quantitative Aptitude / Maths','English / Hindi','General Knowledge','General Science','Current Affairs','Strategy / Time Management']},
+  BANKPO:{label:'Bank PO (IBPS)',subjects:['Quantitative Aptitude','Reasoning Ability','English Language','General Awareness','Computer Knowledge','Strategy / Time Management']},
+  Other:{label:'Other / अन्य',subjects:['Mathematics','English','Reasoning','General Knowledge','General Science','Current Affairs','Other']}
+};
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let uiLang     = 'hi';
+let answerLang = 'hi';
+let isLoading  = false;
+
+/* ═══════════════════════════════════════════
+   DOM REFS
+═══════════════════════════════════════════ */
+const courseSel   = document.getElementById('course');
+const subjectSel  = document.getElementById('subject');
+const form        = document.getElementById('doubtForm');
+const submitBtn   = document.getElementById('submitBtn');
+const aiPanel     = document.getElementById('aiPanel');
+const aiAnswer    = document.getElementById('aiAnswer');
+const aiContext   = document.getElementById('aiContext');
+const thinkingEl  = document.getElementById('thinking');
+const errorBox    = document.getElementById('errorBox');
+
+/* ═══════════════════════════════════════════
+   UI LANGUAGE SWITCHER
+═══════════════════════════════════════════ */
+function setUILang(lang) {
+  uiLang = lang;
+  const t = UI[lang];
+  document.getElementById('heroTitle').textContent    = t.heroTitle;
+  document.getElementById('heroSub').textContent      = t.heroSub;
+  document.getElementById('ansLangLabel').textContent = t.ansLangLabel;
+  document.getElementById('lblName').innerHTML        = t.lblName;
+  document.getElementById('lblCourse').textContent    = t.lblCourse;
+  document.getElementById('lblSubject').textContent   = t.lblSubject;
+  document.getElementById('lblChapter').textContent   = t.lblChapter;
+  document.getElementById('lblQuestion').textContent  = t.lblQuestion;
+  document.getElementById('hintQuestion').textContent = t.hintQ;
+  document.getElementById('submitBtnText').textContent= t.submitBtn;
+  document.getElementById('thinkingText').textContent = t.thinking;
+  document.getElementById('tipTitle').textContent     = t.tipTitle;
+  document.getElementById('tipText').textContent      = t.tipText;
+  document.getElementById('historyTitle').textContent = t.historyTitle;
+  document.getElementById('aiFooterNote').textContent = t.aiFooter;
+  document.getElementById('askAgainBtn').textContent  = t.askAgain;
+  document.getElementById('aiStatusText').textContent = t.aiStatus;
+  document.getElementById('name').placeholder         = t.namePH;
+  document.getElementById('question').placeholder     = t.questionPH;
+  document.getElementById('uiHI').classList.toggle('active', lang==='hi');
+  document.getElementById('uiEN').classList.toggle('active', lang==='en');
+  try { localStorage.setItem('ss_ui_lang', lang); } catch(e){}
+}
+
+/* ═══════════════════════════════════════════
+   ANSWER LANGUAGE SELECTOR
+═══════════════════════════════════════════ */
+function setAnswerLang(lang) {
+  answerLang = lang;
+  ['btnHindi','btnEnglish','btnBoth'].forEach(id => document.getElementById(id).classList.remove('sel'));
+  if(lang==='hi')   document.getElementById('btnHindi').classList.add('sel');
+  if(lang==='en')   document.getElementById('btnEnglish').classList.add('sel');
+  if(lang==='both') document.getElementById('btnBoth').classList.add('sel');
+  try { localStorage.setItem('ss_ans_lang', lang); } catch(e){}
+}
+
+/* ═══════════════════════════════════════════
+   COURSE / SUBJECT POPULATION
+═══════════════════════════════════════════ */
+function buildCourseOptions() {
+  courseSel.innerHTML = '';
+  Object.entries(COURSE_MAP).forEach(([k,v]) => {
+    const o = document.createElement('option');
+    o.value = k; o.textContent = v.label;
+    courseSel.appendChild(o);
+  });
+}
+
+function populateSubjects(courseKey) {
+  const subjects = (COURSE_MAP[courseKey] || COURSE_MAP.Other).subjects;
+  subjectSel.innerHTML = '';
+  subjects.forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    subjectSel.appendChild(o);
+  });
+}
+
+function normalizeCourse(v) {
+  if(!v) return null;
+  const s = v.toLowerCase().trim();
+  if(s==='nda') return 'NDA';
+  if(s==='dp'||s.includes('delhi')||s.includes('police')) return 'DP';
+  if(s==='sscgd'||s.includes('ssc')||s==='gd') return 'SSCGD';
+  if(s.includes('bank')||s.includes('ibps')||s.includes('po')) return 'BANKPO';
+  return null;
+}
+
+function initCourse() {
+  buildCourseOptions();
+  const param   = normalizeCourse(new URLSearchParams(location.search).get('course'));
+  let saved;
+  try { saved = localStorage.getItem('ss_last_course'); } catch(e){}
+  const key = (param && COURSE_MAP[param]) ? param : (saved && COURSE_MAP[saved]) ? saved : 'NDA';
+  courseSel.value = key;
+  populateSubjects(key);
+}
+
+courseSel.addEventListener('change', () => {
+  populateSubjects(courseSel.value);
+  try { localStorage.setItem('ss_last_course', courseSel.value); } catch(e){}
+});
+
+/* ═══════════════════════════════════════════
+   BUILD SYSTEM PROMPT
+═══════════════════════════════════════════ */
+function buildSystemPrompt(data) {
+  const langInstr = {
+    hi:   'तुम्हें जवाब ONLY हिंदी में देना है। Simple, clear Hindi use करो — Devanagari script में। Technical terms अंग्रेजी में रख सकते हो जहाँ जरूरी हो।',
+    en:   'Answer ONLY in English. Use clear, simple language appropriate for a competitive exam student in India.',
+    both: 'First give the answer in Hindi (हिंदी में), then give the same answer in English below a divider "---".'
+  }[data.ansLang];
+
+  return `You are SSCracker AI Tutor — an expert mentor for Indian competitive exam aspirants studying for ${data.course}. You work for Shyamsthali LLP.
+
+Your persona: Warm, encouraging, expert teacher. You explain concepts step-by-step. You use examples relevant to Indian students. You never leave a student confused.
+
+LANGUAGE INSTRUCTION: ${langInstr}
+
+EXAM CONTEXT: ${data.course} — ${data.subject} — Chapter: ${data.chapter}
+
+ANSWER FORMAT:
+1. Start with a direct answer to the question (1-2 lines)
+2. Step-by-step explanation with numbered steps
+3. A worked example if the subject is Math/Reasoning/Aptitude
+4. A memory trick or shortcut (mention "Trick:" or "Shortcut:")
+5. End with one encouraging line for the student
+
+RULES:
+- Keep answer focused and exam-relevant
+- For Math/Science: show working clearly
+- For GK/History/Polity: give facts concisely with context
+- Never use markdown headers like ## — use plain text with line breaks
+- Keep total response under 400 words
+- You are their personal mentor, not a textbook`;
+}
+
+/* ═══════════════════════════════════════════
+   STREAMING CLAUDE API CALL
+═══════════════════════════════════════════ */
+async function callClaudeStreaming(data) {
+  const systemPrompt = buildSystemPrompt(data);
+  const userMsg = `Course: ${data.course}
+Subject: ${data.subject}
+Chapter: ${data.chapter}
+Student Name: ${data.name}
+
+Question: ${data.question}`;
+
+  const response = await fetch(window.SS_CONFIG.PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: CLAUDE_MODEL,
+      max_tokens: MAX_TOKENS,
+      stream: true,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userMsg }]
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error?.message || `API error ${response.status}`);
+  }
+
+  return response;
+}
+
+/* ═══════════════════════════════════════════
+   PARSE SSE STREAM
+═══════════════════════════════════════════ */
+async function* parseSSEStream(response) {
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (raw === '[DONE]') return;
+      try {
+        const evt = JSON.parse(raw);
+        if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta') {
+          yield evt.delta.text;
+        }
+      } catch(e) {}
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RENDER STREAMING ANSWER
+═══════════════════════════════════════════ */
+async function streamAnswer(data) {
+  // Show panel, hide thinking
+  thinkingEl.style.display = 'none';
+  aiPanel.style.display = 'block';
+
+  // Set context bar
+  aiContext.innerHTML = `<strong>${data.course}</strong> &nbsp;›&nbsp; ${data.subject} &nbsp;›&nbsp; ${data.chapter}`;
+
+  // Set meta subtitle
+  const langLabel = {hi:'हिंदी में जवाब', en:'Answer in English', both:'हिंदी + English'}[data.ansLang];
+  document.getElementById('aiMetaSub').textContent = `${langLabel} · Shyamsthali LLP`;
+
+  // Clear + add cursor
+  aiAnswer.innerHTML = '<span class="cursor"></span>';
+  let fullText = '';
+  const cursor = aiAnswer.querySelector('.cursor');
+
+  try {
+    const response = await callClaudeStreaming(data);
+    for await (const chunk of parseSSEStream(response)) {
+      fullText += chunk;
+      // Insert before cursor
+      const textNode = document.createTextNode(chunk);
+      aiAnswer.insertBefore(textNode, cursor);
+    }
+  } catch(err) {
+    throw err;
+  } finally {
+    // Remove cursor when done
+    if(cursor.parentNode) cursor.remove();
+  }
+
+  // Save to history
+  saveToHistory({ ...data, answer: fullText, time: new Date().toISOString() });
+  renderHistory();
+}
+
+/* ═══════════════════════════════════════════
+   FORM SUBMIT
+═══════════════════════════════════════════ */
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (isLoading) return;
+
+  const data = {
+    name:     document.getElementById('name').value.trim(),
+    course:   courseSel.value,
+    subject:  subjectSel.value,
+    chapter:  document.getElementById('chapter').value.trim(),
+    question: document.getElementById('question').value.trim(),
+    ansLang:  answerLang
+  };
+
+  if (!data.name || !data.chapter || !data.question) return;
+
+  isLoading = true;
+  errorBox.style.display = 'none';
+  aiPanel.style.display = 'none';
+  thinkingEl.style.display = 'block';
+  document.getElementById('tipBox').style.display = 'none';
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spin"></span> <span>' + (uiLang==='hi' ? 'पूछ रहे हैं...' : 'Asking...') + '</span>';
+
+  try {
+    await streamAnswer(data);
+    // Save course preference
+    try { localStorage.setItem('ss_last_course', data.course); } catch(e){}
+  } catch(err) {
+    thinkingEl.style.display = 'none';
+    errorBox.style.display = 'block';
+    errorBox.textContent = uiLang==='hi'
+      ? `❌ कुछ गड़बड़ हुई: ${err.message}. कृपया दोबारा try करें।`
+      : `❌ Error: ${err.message}. Please try again.`;
+  } finally {
+    isLoading = false;
+    submitBtn.disabled = false;
+    document.getElementById('submitBtnIcon').textContent = '✨';
+    document.getElementById('submitBtnText').textContent = UI[uiLang].submitBtn;
+  }
+});
+
+/* ═══════════════════════════════════════════
+   RESET FORM
+═══════════════════════════════════════════ */
+function resetForm() {
+  aiPanel.style.display = 'none';
+  errorBox.style.display = 'none';
+  document.getElementById('tipBox').style.display = 'block';
+  document.getElementById('question').value = '';
+  document.getElementById('chapter').value = '';
+  document.getElementById('question').focus();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══════════════════════════════════════════
+   HISTORY
+═══════════════════════════════════════════ */
+function saveToHistory(item) {
+  let h = [];
+  try { h = JSON.parse(localStorage.getItem('ss_doubt_history') || '[]'); } catch(e){}
+  h.unshift(item);
+  if (h.length > 5) h = h.slice(0, 5);
+  try { localStorage.setItem('ss_doubt_history', JSON.stringify(h)); } catch(e){}
+}
+
+function renderHistory() {
+  let h = [];
+  try { h = JSON.parse(localStorage.getItem('ss_doubt_history') || '[]'); } catch(e){}
+  const sec = document.getElementById('historySection');
+  const list = document.getElementById('historyList');
+  if (!h.length) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  list.innerHTML = h.map((item, i) => `
+    <div class="history-item" onclick="loadHistoryItem(${i})">
+      <div class="hi-q">${escHtml(item.question.slice(0,80))}${item.question.length>80?'...':''}</div>
+      <div class="hi-meta">${item.course} · ${item.subject} · ${new Date(item.time).toLocaleDateString('en-IN')}</div>
+    </div>`).join('');
+}
+
+function loadHistoryItem(i) {
+  let h = [];
+  try { h = JSON.parse(localStorage.getItem('ss_doubt_history') || '[]'); } catch(e){}
+  const item = h[i];
+  if (!item) return;
+  aiContext.innerHTML = `<strong>${item.course}</strong> &nbsp;›&nbsp; ${item.subject} &nbsp;›&nbsp; ${item.chapter}`;
+  aiAnswer.textContent = item.answer || '';
+  document.getElementById('aiMetaSub').textContent = 'Previous answer · Shyamsthali LLP';
+  aiPanel.style.display = 'block';
+  aiPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+(function init() {
+  initCourse();
+  renderHistory();
+
+  // Restore UI lang
+  let savedUILang;
+  try { savedUILang = localStorage.getItem('ss_ui_lang'); } catch(e){}
+  if (savedUILang === 'en') setUILang('en'); else setUILang('hi');
+
+  // Restore answer lang
+  let savedAnsLang;
+  try { savedAnsLang = localStorage.getItem('ss_ans_lang'); } catch(e){}
+  if (savedAnsLang) setAnswerLang(savedAnsLang);
+})();
+</script>
+<script src="ss_config.js"></script>
+<script src="gamification.js"></script>
+<script src="lang.js"></script>
+<script src="ss_ai_core.js"></script>
+</body>
+</html>

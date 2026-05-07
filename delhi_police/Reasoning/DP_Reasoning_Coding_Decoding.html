@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+<meta charset="utf-8">
+<title>DP Reasoning – Coding & Decoding (Delhi Police)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f9fafb;margin:0;padding:0;}
+.header{background:#1e3a8a;color:#fff;padding:14px 20px;font-size:22px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:#fff;padding:18px;margin-bottom:16px;border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.18);}
+h2,h3{margin-top:0;}
+ol{padding-left:20px;}
+.hindi{color:#1f2937;font-size:14px;}
+.example-box{background:#eef2ff;padding:10px;margin:8px 0;border-radius:8px;}
+.challenge{background:#fff3e0;border-left:5px solid #f97316;padding:12px;}
+</style>
+</head>
+
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Reasoning_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+
+<div class="header">Delhi Police – Coding & Decoding / कूट लेखन</div>
+
+<div class="container">
+
+<div class="card">
+<h2>🎙 Concept / आधार</h2>
+<p class="hindi">
+Coding–Decoding में एक शब्द/संख्या को किसी rule के अनुसार बदलकर लिखा जाता है।  
+Exam में हमें उस rule को पहचानकर नए शब्द का code खोजना होता है।
+</p>
+<p>Major patterns:</p>
+<ul>
+<li>Letter shifting (+1, −1, +2 etc.)</li>
+<li>Position values (A=1, B=2 … Z=26)</li>
+<li>Opposite letters (A↔Z, B↔Y …)</li>
+<li>Word coding (replace, reverse, rearrange)</li>
+<li>Number coding (sum, product, square)</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>1️⃣ Letter Coding / अक्षर आधारित कोडिंग</h2>
+
+<div class="example-box">
+<b>Example:</b> If CAT is coded as DBU, what is code for DOG?<br>
+C→D (+1), A→B (+1), T→U (+1)<br>
+Same rule:<br>
+D→E, O→P, G→H → <b>EPH</b>
+</div>
+
+<div class="example-box">
+<b>Example:</b> If FAN → EBM, what is PEN?<br>
+F→E (−1), A→B (+1), N→M (−1)<br>
+Use −1,+1,−1:<br>
+P→O, E→F, N→M → <b>OFM</b>
+</div>
+</div>
+
+<div class="card">
+<h2>2️⃣ Word Coding / शब्द आधारित कोडिंग</h2>
+
+<div class="example-box">
+<b>Example:</b> If TEACHER → TERCAHE, what is STUDENT?<br>
+Pattern: First 3 letters same, last 3 reversed.<br>
+STUDENT → STU + DNE → <b>STUDNE</b>
+</div>
+
+<div class="example-box">
+<b>Example:</b> If POLICE → ELICOP, what is DOCTOR?<br>
+Pattern: Reverse + shift.<br>
+DOCTOR → ROTCOD → <b>ROTCOD</b>
+</div>
+</div>
+
+<div class="card">
+<h2>3️⃣ Number Coding / संख्या आधारित कोडिंग</h2>
+
+<div class="example-box">
+<b>Example:</b> If HOT → 40, what is FUN?<br>
+H(8)+O(15)+T(20)=43 → −3 = 40<br>
+FUN: F(6)+U(21)+N(14)=41 → −3 = <b>38</b>
+</div>
+
+<div class="example-box">
+<b>Example:</b> If DELHI → 38, find JAIPUR?<br>
+D(4)+E(5)+L(12)+H(8)+I(9)=38<br>
+J(10)+A(1)+I(9)+P(16)+U(21)+R(18)=75 → <b>75</b>
+</div>
+</div>
+
+<div class="card">
+<h2>4️⃣ Mixed Coding / मिश्रित कोडिंग</h2>
+
+<div class="example-box">
+<b>Example:</b><br>
+DOG → XTR<br>
+CAT → XPA<br>
+Find BAT?<br><br>
+Observe mapping:<br>
+D→X, O→T, G→R (predefined mapping set)<br>
+Similarly B→X, A→P, T→A → <b>XPA</b>
+</div>
+</div>
+
+<div class="card">
+<h2>✔ Practice MCQs (Delhi Police Pattern)</h2>
+
+<ol>
+<li>If SKY → TLZ, what is STAR?<br><b>Ans:</b> TUBS</li>
+
+<li>If GUN → HTM, what is FIRE?<br><b>Ans:</b> GJSF</li>
+
+<li>If BALL → CBMM, code for CALL?<br><b>Ans:</b> DBMM</li>
+
+<li>If ROAD → QNB C, what is LOAD?<br><b>Ans:</b> KNBC</li>
+
+<li>If CRIME → DSJNF, what is POLICE?<br><b>Ans:</b> QPMJDF</li>
+
+<li>If CAT → 24, what is DOG?<br><b>Ans:</b> 26</li>
+
+<li>If TREE → 56, what is LEAF?<br><b>Ans:</b> 22</li>
+
+<li>If DELHI → 38, what is KOLKATA?<br><b>Ans:</b> 68</li>
+
+<li>If MAP → N BQ, what is LAP?<br><b>Ans:</b> M BQ</li>
+
+<li>If MANGO → NB OHP, what is GRAPE?<br><b>Ans:</b> HSBQF</li>
+</ol>
+</div>
+
+<div class="card challenge">
+<h2>🔥 Challenge Question</h2>
+<p>
+If POLICE → QPMJDF, then CRIMINAL → ?
+</p>
+<p>
+Shift +1 rule:<br>
+C→D, R→S, I→J, M→N, I→J, N→O, A→B, L→M<br>
+<b>Answer: DSJNJOBM</b>
+</p>
+</div>
+
+<div class="card">
+<p class="hindi"><b>Motivation:</b> Coding–Decoding पूरा pattern game है।  
+Daily practice से 15–20 seconds में सवाल solve हो जाते हैं। 🚓🔥</p>
+</div>
+<div class="back-link">
+⬅ <a href="Reasoning_Index.html">Back to Reasoning Index</a>
+</div>
+
+</div>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>

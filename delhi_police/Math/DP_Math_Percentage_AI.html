@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+    <meta charset="UTF-8" />
+    <title>Percentage – AI Guided Practice | Delhi Police Constable</title>
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 16px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f5f7fb;
+        }
+
+        .chapter-header {
+            background: #143b72;
+            color: #fff;
+            padding: 18px 24px;
+            border-radius: 14px;
+            margin: 18px 0 24px;
+        }
+
+        .chapter-header h1 {
+            margin: 0 0 4px;
+            font-size: 1.6rem;
+        }
+
+        .chapter-header p {
+            margin: 2px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .practice-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 18px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #143b72;
+        }
+
+        .meta-line {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .meta-pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #eef3ff;
+            font-size: 0.8rem;
+            margin-right: 6px;
+        }
+
+        #questionText {
+            margin: 12px 0 10px;
+            font-weight: 500;
+        }
+
+        #optionsList {
+            list-style: none;
+            padding-left: 0;
+            margin: 0 0 10px;
+        }
+
+        #optionsList li {
+            margin-bottom: 6px;
+        }
+
+        #optionsList label {
+            display: block;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: #f7f8fc;
+            cursor: pointer;
+        }
+
+        #optionsList input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .btn-primary,
+        .btn-secondary,
+        .btn-ghost {
+            border-radius: 999px;
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #1366d6;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #eef3ff;
+            color: #143b72;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #555;
+        }
+
+        .feedback-bar {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #f5f7ff;
+        }
+
+        .feedback-bar.correct {
+            background: #e7f9f0;
+            color: #11623b;
+        }
+
+        .feedback-bar.incorrect {
+            background: #ffecef;
+            color: #a0223c;
+        }
+
+        #hintBox, #explanationBox {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #f9fafc;
+            border-left: 3px solid #c5d4ff;
+            white-space: pre-wrap;
+        }
+
+        .back-link {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .back-link a {
+            color: #143b72;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .chapter-header {
+                padding: 14px 16px;
+            }
+            .btn-row {
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Math_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+
+    <!-- HEADER -->
+    <div class="chapter-header">
+        <h1 id="chapterTitle">Percentage – AI Guided Practice</h1>
+        <p>Delhi Police Constable | Maths Chapter</p>
+        <p>Focus: Basic to Medium level questions with AI hints & teacher-style explanation.</p>
+    </div>
+
+    <!-- PRACTICE CARD -->
+    <div class="practice-card">
+        <div class="meta-line">
+            <span class="meta-pill">Subject: <span id="metaSubject">MATH</span></span>
+            <span class="meta-pill">Difficulty: <span id="metaDifficulty">–</span></span>
+            <span class="meta-pill">Time: <span id="metaTime">0 sec</span></span>
+        </div>
+
+        <div id="questionArea">
+            <div id="questionText">Click “Start Question” to begin.</div>
+            <ol id="optionsList"></ol>
+        </div>
+
+        <div class="btn-row">
+            <button id="btnStart" class="btn-primary">Start Question</button>
+            <button id="btnSubmit" class="btn-secondary" disabled>Submit Answer</button>
+            <button id="btnNext" class="btn-secondary" disabled>Next Question</button>
+        </div>
+
+        <div class="btn-row">
+            <button id="btnHint1" class="btn-ghost" disabled>Hint 1</button>
+            <button id="btnHint2" class="btn-ghost" disabled>Hint 2</button>
+            <button id="btnHint3" class="btn-ghost" disabled>Hint 3</button>
+            <button id="btnExplainText" class="btn-ghost" disabled>Show Explanation (Text)</button>
+            <button id="btnExplainVoice" class="btn-ghost" disabled>Teacher Explanation (Voice)</button>
+            <button id="btnStopVoice" class="btn-ghost" disabled>Stop Voice</button>
+        </div>
+
+        <div id="feedbackBar" class="feedback-bar" style="display:none;"></div>
+        <div id="hintBox" style="display:none;"></div>
+        <div id="explanationBox" style="display:none;"></div>
+    </div>
+
+    <!-- BACK LINK (EDIT PATH AS NEEDED) -->
+    <div class="back-link">
+        <a href="Math_Index.html">&larr; Back to Main Index</a>
+    </div>
+
+    <!-- MAIN SCRIPT -->
+    <script type="module">
+        /* ----------------------------------------------------
+         * CONFIG – CHANGE ONLY THESE LINES PER CHAPTER
+         * -------------------------------------------------- */
+        const SUBJECT_KEY = "math";        // e.g. "math", "reasoning", "gk", "delhi_gk"
+        const CHAPTER_KEY = "Percentage";  // Must exactly match key in dp_question_bank.js
+        const PAGE_TITLE = "Percentage – AI Guided Practice";
+
+        document.getElementById("chapterTitle").textContent = PAGE_TITLE;
+        document.getElementById("metaSubject").textContent = SUBJECT_KEY.toUpperCase();
+
+        /* ----------------------------------------------------
+         * IMPORTS
+         * Adjust path (“../” vs “../../”) depending on folder.
+         * For Math/English/Reasoning folders, "../JS/..." is
+         * usually correct. If file is deeper, use "../../JS/...".
+         * -------------------------------------------------- */
+        import AIAgent from "../JS/ai_agent.js";
+        import QuestionBank from "../JS/dp_question_bank.js";
+        import DPVoiceEngine from "../JS/dp_voice_engine.js";
+
+        /* ----------------------------------------------------
+         * STATE
+         * -------------------------------------------------- */
+        let currentQuestion = null;
+        let questionStartTime = null;
+        let questionIndexUsed = []; // we can keep history if needed
+
+        const metaDifficultyEl = document.getElementById("metaDifficulty");
+        const metaTimeEl       = document.getElementById("metaTime");
+        const questionTextEl   = document.getElementById("questionText");
+        const optionsListEl    = document.getElementById("optionsList");
+        const feedbackBarEl    = document.getElementById("feedbackBar");
+        const hintBoxEl        = document.getElementById("hintBox");
+        const explanationBoxEl = document.getElementById("explanationBox");
+
+        const btnStart        = document.getElementById("btnStart");
+        const btnSubmit       = document.getElementById("btnSubmit");
+        const btnNext         = document.getElementById("btnNext");
+        const btnHint1        = document.getElementById("btnHint1");
+        const btnHint2        = document.getElementById("btnHint2");
+        const btnHint3        = document.getElementById("btnHint3");
+        const btnExplainText  = document.getElementById("btnExplainText");
+        const btnExplainVoice = document.getElementById("btnExplainVoice");
+        const btnStopVoice    = document.getElementById("btnStopVoice");
+
+        /* ----------------------------------------------------
+         * UTILS
+         * -------------------------------------------------- */
+        function getPool() {
+            const subj = QuestionBank.questions[SUBJECT_KEY];
+            if (!subj) return [];
+            const arr = subj[CHAPTER_KEY];
+            if (!arr || !Array.isArray(arr)) return [];
+            return arr;
+        }
+
+        function pickRandomQuestion() {
+            const pool = getPool();
+            if (pool.length === 0) return null;
+            const idx = Math.floor(Math.random() * pool.length);
+            questionIndexUsed.push(idx);
+            return pool[idx];
+        }
+
+        function resetUIForNewQuestion() {
+            feedbackBarEl.style.display = "none";
+            feedbackBarEl.className = "feedback-bar";
+            feedbackBarEl.textContent = "";
+
+            hintBoxEl.style.display = "none";
+            hintBoxEl.textContent = "";
+
+            explanationBoxEl.style.display = "none";
+            explanationBoxEl.textContent = "";
+
+            // enable controls
+            btnSubmit.disabled       = false;
+            btnNext.disabled         = true;
+            btnHint1.disabled        = false;
+            btnHint2.disabled        = false;
+            btnHint3.disabled        = false;
+            btnExplainText.disabled  = true;
+            btnExplainVoice.disabled = true;
+            btnStopVoice.disabled    = false;
+        }
+
+        function renderQuestion(q) {
+            currentQuestion = q;
+            metaDifficultyEl.textContent = q.difficulty || "–";
+            metaTimeEl.textContent = "0 sec";
+
+            questionTextEl.textContent = q.question || "Question text missing.";
+            optionsListEl.innerHTML = "";
+
+            if (Array.isArray(q.options)) {
+                q.options.forEach((opt, idx) => {
+                    const li  = document.createElement("li");
+                    const id  = "opt_" + idx;
+                    li.innerHTML = `
+                        <label>
+                            <input type="radio" name="chapterOption" id="${id}" value="${idx}">
+                            ${String.fromCharCode(65 + idx)}. ${opt}
+                        </label>
+                    `;
+                    optionsListEl.appendChild(li);
+                });
+            }
+
+            questionStartTime = Date.now();
+        }
+
+        function getSelectedOptionIndex() {
+            const radios = document.querySelectorAll("input[name='chapterOption']");
+            for (const r of radios) {
+                if (r.checked) return parseInt(r.value, 10);
+            }
+            return null;
+        }
+
+        function getTimeSpent() {
+            if (!questionStartTime) return 0;
+            const delta = Math.floor((Date.now() - questionStartTime) / 1000);
+            metaTimeEl.textContent = delta + " sec";
+            return delta;
+        }
+
+        /* ----------------------------------------------------
+         * EVENT HANDLERS
+         * -------------------------------------------------- */
+        btnStart.addEventListener("click", () => {
+            AIAgent.resetSession();            // fresh for this chapter session
+            const q = pickRandomQuestion();
+            if (!q) {
+                alert("No questions found in QuestionBank for " + SUBJECT_KEY + " → " + CHAPTER_KEY);
+                return;
+            }
+            resetUIForNewQuestion();
+            renderQuestion(q);
+            btnStart.disabled = true;
+        });
+
+        btnSubmit.addEventListener("click", () => {
+            if (!currentQuestion) return;
+
+            const choice = getSelectedOptionIndex();
+            if (choice === null) {
+                alert("Please select an option.");
+                return;
+            }
+
+            const tSpent = getTimeSpent();
+            const evalResult = AIAgent.evaluateAnswer(currentQuestion, choice, tSpent);
+            const feedback   = AIAgent.getInstantFeedback(evalResult.isCorrect, currentQuestion, tSpent);
+
+            feedbackBarEl.style.display = "block";
+            feedbackBarEl.textContent   = feedback;
+
+            if (evalResult.isCorrect) {
+                feedbackBarEl.classList.add("correct");
+            } else {
+                feedbackBarEl.classList.add("incorrect");
+            }
+
+            // allow explanation + next
+            btnExplainText.disabled  = false;
+            btnExplainVoice.disabled = false;
+            btnNext.disabled         = false;
+        });
+
+        btnNext.addEventListener("click", () => {
+            const q = pickRandomQuestion();
+            if (!q) {
+                alert("No more questions available. Please add more in QuestionBank.");
+                return;
+            }
+            resetUIForNewQuestion();
+            renderQuestion(q);
+        });
+
+        function showHint(level) {
+            if (!currentQuestion) return;
+            const hintArr = currentQuestion.hints || [];
+            let hintText  = "";
+
+            if (hintArr[level - 1]) {
+                hintText = "Hint " + level + ": " + hintArr[level - 1];
+            } else {
+                hintText = AIAgent.getHint(currentQuestion, level) || "Think about the basics of this concept.";
+            }
+
+            hintBoxEl.style.display = "block";
+            hintBoxEl.textContent   = hintText;
+        }
+
+        btnHint1.addEventListener("click", () => showHint(1));
+        btnHint2.addEventListener("click", () => showHint(2));
+        btnHint3.addEventListener("click", () => showHint(3));
+
+        btnExplainText.addEventListener("click", () => {
+            if (!currentQuestion) return;
+            const text = currentQuestion.explanation || "Explanation not added yet.";
+            explanationBoxEl.style.display = "block";
+            explanationBoxEl.textContent   = text.trim();
+        });
+
+        btnExplainVoice.addEventListener("click", () => {
+            if (!currentQuestion) return;
+            DPVoiceEngine.speakTeacherExplanation(currentQuestion, "mix");
+        });
+
+        btnStopVoice.addEventListener("click", () => {
+            DPVoiceEngine.stopVoice();
+        });
+    </script>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>

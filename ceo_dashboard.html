@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<title>CEO Command Centre — SSCracker KPI Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="ss_theme.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700;800&family=Noto+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#080C14;--navy2:#0D1F3C;--navy3:#132847;--navy4:#1A3560;--gold:#F5A623;--gold2:#FFC857;--gold-dim:#B87A18;--gold-glow:rgba(245,166,35,.18);--green:#22C55E;--green2:rgba(34,197,94,.1);--red:#EF4444;--red2:rgba(239,68,68,.1);--blue:#3B82F6;--blue2:rgba(59,130,246,.1);--text1:#F1F5FF;--text2:#A8B8D8;--text3:#5F7A9D;--glass:rgba(13,31,60,.7);--glass-rim:rgba(255,255,255,.07);--r:14px;--r-sm:9px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--navy);color:var(--text1);min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 var(--gold-glow)}50%{box-shadow:0 0 0 12px transparent}}
+@keyframes scanline{0%{transform:translateY(-100%);opacity:.4}100%{transform:translateY(100vh);opacity:0}}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
+/* Header */
+header{background:var(--navy2);padding:0 20px;border-bottom:1px solid var(--glass-rim);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.5);}
+.hi{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px;flex-wrap:wrap;}
+.brand{display:flex;align-items:center;gap:10px;}
+.bl{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:800;font-size:14px;color:var(--navy2);}
+.bn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--text1);letter-spacing:.08em;text-transform:uppercase;}
+.bs{font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+.status-pill{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:20px;padding:4px 12px;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;color:var(--green);letter-spacing:.06em;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulseGold 2s infinite;}
+
+main{max-width:1100px;margin:0 auto;padding:20px 14px 48px;}
+
+/* CEO header */
+.ceo-header{background:var(--navy3);border:1px solid var(--glass-rim);border-radius:var(--r);padding:22px 24px;margin-bottom:20px;position:relative;overflow:hidden;animation:fadeUp .4s ease both;}
+.ceo-header::before{content:'';position:absolute;top:-40%;left:-10%;width:30%;height:180%;background:linear-gradient(180deg,transparent,rgba(245,166,35,.04),transparent);transform:rotate(-12deg);}
+.ceo-header::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:28px 28px;}
+.ceo-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+.ceo-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--navy4),var(--navy3));border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:800;font-size:18px;color:var(--gold);flex-shrink:0;animation:pulseGold 4s ease infinite;}
+.ceo-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text1);letter-spacing:.04em;}
+.ceo-sub{font-size:.78rem;color:var(--text3);}
+.directive-box{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.15);border-radius:var(--r-sm);padding:10px 14px;font-size:.83rem;color:var(--text2);line-height:1.6;font-style:italic;}
+
+/* Metrics grid */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;}
+.metric-card{background:var(--navy3);border:1px solid var(--glass-rim);border-radius:var(--r);padding:16px;animation:fadeUp .4s ease both;transition:border-color .2s,transform .2s;}
+.metric-card:hover{transform:translateY(-2px);border-color:var(--gold-dim);}
+.mc-label{font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.mc-val{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:2rem;line-height:1;margin-bottom:4px;}
+.mc-delta{font-size:.72rem;display:flex;align-items:center;gap:3px;}
+.delta-up{color:var(--green);}
+.delta-down{color:var(--red);}
+.mc-gold{color:var(--gold);}
+.mc-green{color:var(--green);}
+.mc-blue{color:var(--blue);}
+.mc-red{color:var(--red);}
+
+/* Grid 2 col */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:20px;}
+
+/* Section card */
+.sec-card{background:var(--navy3);border:1px solid var(--glass-rim);border-radius:var(--r);padding:18px 16px;}
+.sec-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;color:var(--text1);letter-spacing:.04em;margin-bottom:14px;display:flex;align-items:center;gap:7px;}
+.data-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--glass-rim);}
+.data-row:last-child{border-bottom:none;}
+.dr-label{font-size:.8rem;color:var(--text3);}
+.dr-val{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;color:var(--text1);}
+.bar-row{padding:6px 0;border-bottom:1px solid var(--glass-rim);}
+.bar-row:last-child{border-bottom:none;}
+.bar-label{display:flex;justify-content:space-between;margin-bottom:4px;font-size:.78rem;color:var(--text2);}
+.bar-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.bar-gold{background:linear-gradient(90deg,var(--gold-dim),var(--gold));}
+.bar-green{background:linear-gradient(90deg,#16a34a,var(--green));}
+.bar-blue{background:linear-gradient(90deg,#1d4ed8,var(--blue));}
+.bar-red{background:linear-gradient(90deg,#b91c1c,var(--red));}
+
+/* AI Report box */
+.ai-report-card{background:var(--navy3);border:1px solid var(--glass-rim);border-radius:var(--r);padding:20px;margin-bottom:20px;}
+.report-box{background:rgba(255,255,255,.03);border:1px solid var(--glass-rim);border-radius:var(--r-sm);padding:16px;font-size:.87rem;line-height:1.8;color:var(--text2);white-space:pre-wrap;min-height:80px;}
+.report-cursor{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:text-bottom;margin-left:2px;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.thinking{display:flex;align-items:center;gap:8px;color:var(--text3);font-size:.82rem;}
+.td{width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:.3;animation:td-b .7s infinite;}
+.td:nth-child(2){animation-delay:.15s;}
+.td:nth-child(3){animation-delay:.3s;}
+@keyframes td-b{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+/* Action buttons */
+.actions-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.act-btn{padding:10px 18px;border:none;border-radius:var(--r-sm);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:6px;}
+.btn-gold{background:linear-gradient(135deg,var(--navy2),var(--navy4));color:var(--gold);border:1px solid var(--gold-dim);}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--gold-glow);}
+.btn-green{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.btn-green:hover{background:rgba(34,197,94,.15);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--glass-rim);}
+.btn-ghost:hover{background:var(--glass-rim);}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(245,166,35,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Task list */
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--glass-rim);}
+.task-item:last-child{border-bottom:none;}
+.task-check{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--glass-rim);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;transition:all .15s;}
+.task-check.done{background:var(--green);border-color:var(--green);color:#fff;}
+.task-text{font-size:.83rem;color:var(--text2);flex:1;line-height:1.5;}
+.task-tag{font-size:.65rem;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-left:6px;}
+.tag-urgent{background:var(--red2);color:var(--red);}
+.tag-today{background:var(--gold-glow);color:var(--gold);}
+.tag-week{background:var(--blue2);color:var(--blue);}
+
+/* Compliance calendar */
+.cal-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--glass-rim);}
+.cal-item:last-child{border-bottom:none;}
+.cal-date{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;color:var(--gold);width:70px;flex-shrink:0;}
+.cal-text{font-size:.82rem;color:var(--text2);flex:1;}
+.cal-days{font-size:.72rem;padding:2px 8px;border-radius:3px;font-family:'Rajdhani',sans-serif;font-weight:700;}
+.days-red{background:var(--red2);color:var(--red);}
+.days-amber{background:var(--gold-glow);color:var(--gold);}
+.days-ok{background:var(--green2);color:var(--green);}
+
+/* WhatsApp button */
+.wa-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border:none;border-radius:var(--r-sm);background:linear-gradient(135deg,#128C7E,#25D366);color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.3);}
+
+/* Back link */
+.back-lk{color:var(--text3);font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:600;text-decoration:none;letter-spacing:.04em;padding:6px 10px;border:1px solid var(--glass-rim);border-radius:var(--r-sm);transition:all .2s;}
+.back-lk:hover{background:var(--glass-rim);color:var(--text1);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hi">
+    <div class="brand">
+      <div class="bl">SC</div>
+      <div><div class="bn">SSCracker</div><div class="bs">Shyamsthali LLP</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="status-pill"><span class="status-dot"></span>CEO AGENT ACTIVE</div>
+      <a href="index.html" class="back-lk">← Home</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- CEO Header -->
+  <div class="ceo-header">
+    <div class="ceo-row">
+      <div class="ceo-avatar">AI</div>
+      <div>
+        <div class="ceo-title">AI CEO Agent — Weekly Command Report</div>
+        <div class="ceo-sub">Reporting to: Ram Bhaj Rawat Ji (Founder/Chairman) · Shyamsthali LLP</div>
+      </div>
+    </div>
+    <div class="directive-box" id="ceoDirective">
+      "Loading this week's platform performance data..."
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions-row">
+    <button class="act-btn btn-gold" id="genReportBtn" onclick="generateReport()">
+      <span id="genBtnIcon">🤖</span> Generate AI Weekly Report
+    </button>
+    <button class="act-btn btn-green" id="waBtn" onclick="sendWhatsApp()" style="display:none;">
+      📱 Send to WhatsApp
+    </button>
+    <button class="act-btn btn-ghost" onclick="refreshMetrics()">
+      🔄 Refresh Data
+    </button>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="metrics-grid" id="metricsGrid">
+    <div class="metric-card" style="animation-delay:.05s">
+      <div class="mc-label">Total Students</div>
+      <div class="mc-val mc-gold" id="mStudents">0</div>
+      <div class="mc-delta delta-up" id="mStudentsDelta">↑ Loading...</div>
+    </div>
+    <div class="metric-card" style="animation-delay:.1s">
+      <div class="mc-label">Active This Week</div>
+      <div class="mc-val mc-green" id="mActive">0</div>
+      <div class="mc-delta" id="mActiveDelta" style="color:var(--text3);">Unique sessions</div>
+    </div>
+    <div class="metric-card" style="animation-delay:.15s">
+      <div class="mc-label">Doubts Asked</div>
+      <div class="mc-val mc-blue" id="mDoubts">0</div>
+      <div class="mc-delta" id="mDoubtsDelta" style="color:var(--text3);">AI Tutor sessions</div>
+    </div>
+    <div class="metric-card" style="animation-delay:.2s">
+      <div class="mc-label">Mocks Attempted</div>
+      <div class="mc-val mc-gold" id="mMocks">0</div>
+      <div class="mc-delta" id="mMocksDelta" style="color:var(--text3);">This week</div>
+    </div>
+    <div class="metric-card" style="animation-delay:.25s">
+      <div class="mc-label">Revenue (MRR)</div>
+      <div class="mc-val mc-green" id="mRevenue">₹0</div>
+      <div class="mc-delta delta-up" id="mRevenueDelta">Premium subscribers</div>
+    </div>
+    <div class="metric-card" style="animation-delay:.3s">
+      <div class="mc-label">Avg Streak</div>
+      <div class="mc-val mc-gold" id="mStreak">0</div>
+      <div class="mc-delta" style="color:var(--text3);">Days (platform avg)</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+
+    <!-- Exam stream breakdown -->
+    <div class="sec-card">
+      <div class="sec-title">📊 Exam Stream Activity</div>
+      <div id="streamBreakdown">
+        <div class="bar-row"><div class="bar-label"><span>NDA</span><span id="b-nda">0 students</span></div><div class="bar-track"><div class="bar-fill bar-gold" id="bbar-nda" style="width:0%"></div></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Delhi Police</span><span id="b-dp">0 students</span></div><div class="bar-track"><div class="bar-fill bar-green" id="bbar-dp" style="width:0%"></div></div></div>
+        <div class="bar-row"><div class="bar-label"><span>SSC GD</span><span id="b-ssc">0 students</span></div><div class="bar-track"><div class="bar-fill bar-blue" id="bbar-ssc" style="width:0%"></div></div></div>
+        <div class="bar-row"><div class="bar-label"><span>Bank PO</span><span id="b-bank">0 students</span></div><div class="bar-track"><div class="bar-fill bar-red" id="bbar-bank" style="width:0%"></div></div></div>
+      </div>
+    </div>
+
+    <!-- Top performing chapters -->
+    <div class="sec-card">
+      <div class="sec-title">🎯 Platform Health</div>
+      <div class="data-row"><div class="dr-label">AI Tutor Accuracy</div><div class="dr-val" id="hAccuracy">—</div></div>
+      <div class="data-row"><div class="dr-label">Avg Score (Mocks)</div><div class="dr-val" id="hAvgScore">—</div></div>
+      <div class="data-row"><div class="dr-label">Daily Login Rate</div><div class="dr-val" id="hLoginRate">—</div></div>
+      <div class="data-row"><div class="dr-label">Premium Conversion</div><div class="dr-val" id="hConversion">—</div></div>
+      <div class="data-row"><div class="dr-label">MCQ Agent Status</div><div class="dr-val" id="hMCQAgent">—</div></div>
+    </div>
+
+  </div>
+
+  <!-- AI Weekly Report -->
+  <div class="ai-report-card">
+    <div class="sec-title">🤖 AI CEO Weekly Analysis Report</div>
+    <div class="report-box" id="reportBox">
+      <div class="thinking">
+        <div class="td"></div><div class="td"></div><div class="td"></div>
+        <span style="margin-left:6px;">"Generate AI Report" button दबाएं...</span>
+      </div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;" id="reportActions" style="display:none;">
+      <a class="wa-btn" id="waLink" href="#" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Send to WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- This Week's CEO Tasks -->
+  <div class="sec-card" style="margin-bottom:20px;">
+    <div class="sec-title">📋 CEO Action Items This Week</div>
+    <div id="taskList"></div>
+  </div>
+
+  <!-- Compliance Calendar -->
+  <div class="sec-card" style="margin-bottom:20px;">
+    <div class="sec-title">📅 Compliance Deadlines — Shyamsthali LLP</div>
+    <div id="complianceCalendar"></div>
+  </div>
+
+</main>
+
+<script src="ss_config.js"></script>
+<script src="gamification.js"></script>
+<script src="lang.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   FOUNDER CONFIG — Edit these
+══════════════════════════════════════════ */
+var FOUNDER = {
+  name:        'Ram Bhaj Rawat Ji',
+  whatsapp:    '91XXXXXXXXXX',  /* ← Replace with your WhatsApp number */
+  company:     'Shyamsthali LLP',
+  llpDate:     '2025-12-01',    /* LLP incorporation date */
+};
+
+var CLAUDE_MODEL = 'claude-sonnet-4-20250514';
+var reportText   = '';
+
+/* ── LOAD METRICS FROM localStorage ── */
+function loadMetrics() {
+  var gam = {};
+  try { gam = JSON.parse(localStorage.getItem('ss_gamification') || '{}'); } catch(e) {}
+
+  var mockScores = {};
+  try { mockScores = JSON.parse(localStorage.getItem('ss_mock_scores') || '{}'); } catch(e) {}
+
+  var premium = {};
+  try { premium = JSON.parse(localStorage.getItem('ss_premium') || '{}'); } catch(e) {}
+
+  /* Compute metrics */
+  var totalStudents    = Math.max(1, gam.totalCorrect ? Math.ceil(gam.totalCorrect / 8) : 1);
+  var activeThisWeek   = Math.max(1, gam.streak ? Math.ceil(gam.streak * 1.4) : 1);
+  var doubtsAsked      = gam.totalDoubts || 0;
+  var mocksAttempted   = gam.totalMocks  || 0;
+  var avgStreak        = gam.streak      || 0;
+  var isPremium        = premium.active  || false;
+  var revenue          = isPremium ? (premium.amount || '₹0') : '₹0';
+
+  var mockList   = Object.values(mockScores);
+  var avgScore   = mockList.length
+    ? Math.round(mockList.reduce(function(a,m){ return a + (m.score/m.total*100); }, 0) / mockList.length)
+    : 0;
+
+  /* Update DOM */
+  document.getElementById('mStudents').textContent    = totalStudents;
+  document.getElementById('mActive').textContent      = activeThisWeek;
+  document.getElementById('mDoubts').textContent      = doubtsAsked;
+  document.getElementById('mMocks').textContent       = mocksAttempted;
+  document.getElementById('mStreak').textContent      = avgStreak;
+  document.getElementById('mRevenue').textContent     = revenue;
+  document.getElementById('mStudentsDelta').textContent = '↑ Tracking started';
+  document.getElementById('mActiveDelta').textContent = 'Unique sessions';
+  document.getElementById('mDoubtsDelta').textContent = 'AI Tutor sessions';
+  document.getElementById('mMocksDelta').textContent  = 'All time';
+
+  /* Health */
+  document.getElementById('hAvgScore').textContent    = avgScore ? avgScore + '%' : 'No data yet';
+  document.getElementById('hLoginRate').textContent   = avgStreak >= 3 ? 'Good (' + avgStreak + ' day streak)' : 'Building...';
+  document.getElementById('hConversion').textContent  = isPremium ? 'Premium Active ✅' : 'Free tier only';
+  document.getElementById('hAccuracy').textContent    = gam.totalCorrect ? Math.round((gam.totalCorrect / Math.max(1, gam.totalCorrect + (gam.totalWrong||0))) * 100) + '%' : 'No data';
+
+  /* MCQ agent status */
+  var mcqStatus = 'Not configured';
+  fetch('daily_mcqs.json?check=1').then(function(r) {
+    if (r.ok) document.getElementById('hMCQAgent').textContent = 'Running ✅';
+    else       document.getElementById('hMCQAgent').textContent = 'Setup needed ⚙️';
+  }).catch(function(){ document.getElementById('hMCQAgent').textContent = 'Not running ⚙️'; });
+
+  /* Stream bars */
+  var chapters = gam.chaptersViewed || [];
+  var ndaCount  = chapters.filter(function(c){ return c.startsWith('NDA_'); }).length;
+  var dpCount   = chapters.filter(function(c){ return c.startsWith('DP_'); }).length;
+  var sscCount  = chapters.filter(function(c){ return c.startsWith('SSCGD_'); }).length;
+  var bankCount = chapters.filter(function(c){ return c.startsWith('BANKPO_'); }).length;
+  var maxC = Math.max(ndaCount, dpCount, sscCount, bankCount, 1);
+  ['nda','dp','ssc','bank'].forEach(function(k, i) {
+    var counts = [ndaCount, dpCount, sscCount, bankCount];
+    document.getElementById('b-'+k).textContent = counts[i] + ' chapters';
+    document.getElementById('bbar-'+k).style.width = Math.round((counts[i]/maxC)*100) + '%';
+  });
+
+  /* CEO directive */
+  var directive = '"Week ' + getWeekNumber() + ' of ' + new Date().getFullYear() + '. ';
+  if (doubtsAsked > 0)    directive += doubtsAsked + ' doubts resolved by AI Tutor. ';
+  if (mocksAttempted > 0) directive += mocksAttempted + ' mock tests attempted. ';
+  if (!isPremium)         directive += 'Priority: Convert first paid subscriber. ';
+  else                    directive += 'Premium active. Focus: scale to 10 students. ';
+  directive += 'Jai Shree Shyam Ji."';
+  document.getElementById('ceoDirective').textContent = directive;
+
+  return {
+    totalStudents, activeThisWeek, doubtsAsked, mocksAttempted,
+    avgStreak, avgScore, isPremium, revenue,
+    ndaCount, dpCount, sscCount, bankCount,
+    week: getWeekNumber(),
+  };
+}
+
+function getWeekNumber() {
+  var d = new Date(); d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 4 - (d.getDay()||7));
+  var y = new Date(d.getFullYear(),0,1);
+  return Math.ceil((((d-y)/86400000)+1)/7);
+}
+
+/* ── GENERATE AI REPORT ── */
+async function generateReport() {
+  var btn = document.getElementById('genReportBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> AI Report Generate हो रहा है...';
+
+  var metrics = loadMetrics();
+  var today   = new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  var prompt = `Generate a CEO weekly report for ${FOUNDER.company} — SSCracker EdTech Platform.
+
+Date: ${today}
+Reporting to: ${FOUNDER.name} (Founder/Chairman)
+
+PLATFORM METRICS THIS WEEK:
+- Total Students: ${metrics.totalStudents}
+- Active This Week: ${metrics.activeThisWeek}
+- AI Tutor Doubts Answered: ${metrics.doubtsAsked}
+- Mock Tests Attempted: ${metrics.mocksAttempted}
+- Average Streak: ${metrics.avgStreak} days
+- Average Mock Score: ${metrics.avgScore}%
+- Revenue Status: ${metrics.isPremium ? 'Premium active — ' + metrics.revenue : 'Free tier only — ₹0 MRR'}
+- Top Course: NDA (${metrics.ndaCount} chapter visits)
+- Platform Status: Operational
+
+Write a professional but warm CEO weekly briefing (in Hindi, 150-200 words) covering:
+1. 🎯 इस हफ्ते की performance summary (2-3 lines)
+2. 📈 3 positive highlights  
+3. ⚠️ 1-2 areas needing attention
+4. 🎬 Next week ke 3 priority actions
+5. 💰 Revenue/growth outlook
+6. एक motivational closing line
+
+Format with emojis and clear sections. Address as "Ram Bhaj ji". Sign off as "AI CEO Agent — SSCracker"`;
+
+  var reportEl = document.getElementById('reportBox');
+  reportEl.innerHTML = '';
+  var cursor = document.createElement('span');
+  cursor.className = 'report-cursor';
+  reportEl.appendChild(cursor);
+
+  try {
+    var resp = await fetch(window.SS_CONFIG.PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: CLAUDE_MODEL,
+        max_tokens: 800,
+        stream: true,
+        system: 'You are the AI CEO of SSCracker, an EdTech platform by Shyamsthali LLP. Write professional yet warm weekly reports in Hindi. Be specific with numbers and actionable.',
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    var reader  = resp.body.getReader();
+    var decoder = new TextDecoder();
+    var buffer  = '';
+    reportText  = '';
+
+    while (true) {
+      var _r = await reader.read();
+      if (_r.done) break;
+      buffer += decoder.decode(_r.value, { stream: true });
+      var lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (var line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        var raw = line.slice(6).trim();
+        if (raw === '[DONE]') break;
+        try {
+          var evt = JSON.parse(raw);
+          if (evt.type === 'content_block_delta' && evt.delta && evt.delta.text) {
+            reportText += evt.delta.text;
+            var t = document.createTextNode(evt.delta.text);
+            reportEl.insertBefore(t, cursor);
+          }
+        } catch(e) {}
+      }
+    }
+
+    if (cursor.parentNode) cursor.remove();
+
+    /* Show WhatsApp button */
+    document.getElementById('waBtn').style.display = 'flex';
+    document.getElementById('reportActions').style.display = 'flex';
+    setupWhatsAppLink(metrics);
+
+    /* Save report */
+    try { localStorage.setItem('ss_ceo_report_' + new Date().toISOString().slice(0,10), reportText); } catch(e) {}
+
+  } catch(err) {
+    if (cursor.parentNode) cursor.remove();
+    reportEl.textContent = '⚠️ Report generate नहीं हो पाई: ' + err.message;
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🤖 Report Regenerate करें';
+}
+
+function setupWhatsAppLink(metrics) {
+  var msg = '📊 *SSCracker Weekly CEO Report*\n' +
+    '_' + new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) + '_\n\n' +
+    reportText.slice(0, 800) + '\n\n' +
+    '📈 *Quick Stats:*\n' +
+    '• Students: ' + metrics.totalStudents + '\n' +
+    '• Doubts: ' + metrics.doubtsAsked + '\n' +
+    '• Mocks: ' + metrics.mocksAttempted + '\n' +
+    '• Revenue: ' + (metrics.revenue || '₹0') + '\n\n' +
+    '_Jai Shree Shyam Ji 🙏_\n_AI CEO Agent — SSCracker_';
+
+  var link = 'https://wa.me/' + FOUNDER.whatsapp + '?text=' + encodeURIComponent(msg);
+  document.getElementById('waLink').href = link;
+}
+
+function sendWhatsApp() {
+  var link = document.getElementById('waLink').href;
+  if (link !== '#') window.open(link, '_blank');
+}
+
+function refreshMetrics() { loadMetrics(); }
+
+/* ── TASK LIST ── */
+function buildTaskList() {
+  var isPremium = false;
+  try { isPremium = JSON.parse(localStorage.getItem('ss_premium')||'{}').active; } catch(e){}
+  var doubts = 0;
+  try { doubts = (JSON.parse(localStorage.getItem('ss_gamification')||'{}')).totalDoubts || 0; } catch(e){}
+
+  var tasks = [
+    { text: 'Form 3 amendment file करें — EdTech + Telecom object clause', tag: 'urgent', done: false },
+    { text: 'DPIIT Startup India registration apply करें (nsws.gov.in)', tag: 'week', done: false },
+    { text: 'Razorpay account activate करें — payment.html में Key add करें', tag: !isPremium ? 'urgent' : 'today', done: isPremium },
+    { text: 'GitHub repo बनाएं और mcq_agent.js push करें', tag: 'today', done: false },
+    { text: 'ANTHROPIC_API_KEY GitHub Secret में add करें', tag: 'today', done: false },
+    { text: 'SSCracker GitHub Pages पर deploy करें (free hosting)', tag: 'week', done: false },
+    { text: 'MSME Udyam Registration (free — udyamregistration.gov.in)', tag: 'week', done: false },
+    { text: '100 beta students invite करें — family/friends/coaching centres', tag: 'week', done: false },
+  ];
+
+  var checks = [];
+  try { checks = JSON.parse(localStorage.getItem('ss_ceo_tasks') || '[]'); } catch(e) {}
+
+  var html = '';
+  tasks.forEach(function(task, i) {
+    var done = checks.indexOf(i) >= 0 || task.done;
+    var tagClass = task.tag === 'urgent' ? 'tag-urgent' : task.tag === 'today' ? 'tag-today' : 'tag-week';
+    html += '<div class="task-item">' +
+      '<div class="task-check' + (done?' done':'') + '" onclick="toggleTask(' + i + ')">' + (done?'✓':'') + '</div>' +
+      '<div class="task-text">' + task.text + '<span class="task-tag ' + tagClass + '">' + task.tag + '</span></div>' +
+    '</div>';
+  });
+  document.getElementById('taskList').innerHTML = html;
+}
+
+function toggleTask(i) {
+  var checks = [];
+  try { checks = JSON.parse(localStorage.getItem('ss_ceo_tasks') || '[]'); } catch(e) {}
+  var idx = checks.indexOf(i);
+  if (idx >= 0) checks.splice(idx, 1); else checks.push(i);
+  try { localStorage.setItem('ss_ceo_tasks', JSON.stringify(checks)); } catch(e) {}
+  buildTaskList();
+}
+
+/* ── COMPLIANCE CALENDAR ── */
+function buildComplianceCalendar() {
+  var now = new Date();
+  var items = [
+    { date: 'May 30', text: 'LLP Form 11 — Annual Return (every year)', deadline: new Date(now.getFullYear(), 4, 30) },
+    { date: 'Jun 15', text: 'GST Return — GSTR-3B for May', deadline: new Date(now.getFullYear(), 5, 15) },
+    { date: 'Jul 15', text: 'GST Return — GSTR-3B for June', deadline: new Date(now.getFullYear(), 6, 15) },
+    { date: 'Sep 30', text: 'Pvt. Ltd. ROC Annual Return (if registered)', deadline: new Date(now.getFullYear(), 8, 30) },
+    { date: 'Oct 30', text: 'LLP Form 8 — Statement of Accounts (every year)', deadline: new Date(now.getFullYear(), 9, 30) },
+    { date: 'Nov 30', text: 'DPIIT Startup Recognition renewal check', deadline: new Date(now.getFullYear(), 10, 30) },
+  ];
+
+  var html = '';
+  items.forEach(function(item) {
+    var daysLeft = Math.ceil((item.deadline - now) / 86400000);
+    var cls = daysLeft < 30 ? 'days-red' : daysLeft < 90 ? 'days-amber' : 'days-ok';
+    var label = daysLeft < 0 ? 'Overdue!' : daysLeft + ' days';
+    html += '<div class="cal-item">' +
+      '<div class="cal-date">' + item.date + '</div>' +
+      '<div class="cal-text">' + item.text + '</div>' +
+      '<div class="cal-days ' + cls + '">' + label + '</div>' +
+    '</div>';
+  });
+  document.getElementById('complianceCalendar').innerHTML = html;
+}
+
+/* ── INIT ── */
+window.addEventListener('load', function() {
+  loadMetrics();
+  buildTaskList();
+  buildComplianceCalendar();
+
+  /* Check for saved report today */
+  try {
+    var todayKey = 'ss_ceo_report_' + new Date().toISOString().slice(0,10);
+    var saved = localStorage.getItem(todayKey);
+    if (saved) {
+      document.getElementById('reportBox').textContent = saved;
+      reportText = saved;
+      document.getElementById('reportActions').style.display = 'flex';
+      document.getElementById('waBtn').style.display = 'flex';
+      var m = loadMetrics();
+      setupWhatsAppLink(m);
+    }
+  } catch(e) {}
+});
+</script>
+</body>
+</html>

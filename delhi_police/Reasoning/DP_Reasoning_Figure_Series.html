@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+<meta charset='utf-8'>
+<title>DP Reasoning – Figure Series (Delhi Police)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f1f5f9;margin:0;padding:0;}
+.header{background:#0f766e;color:#fff;padding:14px 20px;font-size:22px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:#fff;padding:18px;margin-bottom:16px;border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.18);}
+h2,h3{margin-top:0;}
+.hindi{color:#374151;font-size:15px;}
+.example{background:#d1fae5;padding:12px;border-radius:8px;margin:10px 0;}
+.challenge{background:#fff7ed;border-left:5px solid #f59e0b;padding:12px;margin-top:12px;}
+ul{padding-left:20px;}
+</style>
+</head>
+
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Reasoning_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+
+<div class='header'>Delhi Police – Figure Series / आकृति श्रेणी</div>
+
+<div class='container'>
+
+<div class='card'>
+<h2>🎙 Introduction / परिचय</h2>
+<p class='hindi'>
+Figure Series में एक आकृति दूसरी आकृति में किस logic से बदल रही है, यह पहचानना होता है।  
+Delhi Police में केवल आसान patterns पूछे जाते हैं:
+</p>
+<ul>
+<li>Rotation (घुमाव)</li>
+<li>Flip / Mirror (उल्टा‑सीधा)</li>
+<li>Shading change (रंग/शेडिंग)</li>
+<li>Element add/remove (आकृति जोड़ना/घटाना)</li>
+<li>Movement (स्थिति बदलना)</li>
+</ul>
+</div>
+
+<div class='card'>
+<h2>✔ Common Patterns / सामान्य logic</h2>
+<ul>
+<li>90° clockwise rotation</li>
+<li>90° anti‑clockwise rotation</li>
+<li>Alternate shading</li>
+<li>Element shifting left → right</li>
+<li>Number of lines increasing</li>
+<li>Dot position moving in sequence</li>
+</ul>
+</div>
+
+<div class='card'>
+<h2>✔ Solved Examples (Simple DP Level)</h2>
+
+<div class='example'>
+<b>Example 1 – Rotation Pattern</b><br>
+⬆ → ➡ → ⬇ → ⬅  
+Next = <b>⬆</b> (cycle repeats)
+</div>
+
+<div class='example'>
+<b>Example 2 – Dot Movement</b><br>
+Dot moves clockwise in each frame:<br>
+Top → Right → Bottom → Left → ?  
+<b>Ans: Top</b>
+</div>
+
+<div class='example'>
+<b>Example 3 – Shading Pattern</b><br>
+Shaded → Unshaded → Shaded → Unshaded → ?  
+<b>Ans: Shaded</b>
+</div>
+
+<div class='example'>
+<b>Example 4 – Increasing Lines</b><br>
+1 line → 2 lines → 3 lines → ?  
+<b>Ans: 4 lines</b>
+</div>
+
+<div class='example'>
+<b>Example 5 – Element Addition</b><br>
+○ → ○● → ○●○ → ?  
+<b>Ans: ○●○●</b>
+</div>
+
+</div>
+
+<div class='card'>
+<h2>✔ Practice MCQs</h2>
+
+<ol>
+<li>Triangle rotates 90° clockwise each time. Next position?<br><b>Ans:</b> Upright triangle</li>
+
+<li>Square shading alternates. Last unshaded → next?<br><b>Ans:</b> Shaded</li>
+
+<li>Dot moves right → bottom → left → top → ?. <br><b>Ans:</b> Right</li>
+
+<li>Line count: 2, 4, 6, 8, ?. <br><b>Ans:</b> 10</li>
+
+<li>Half‑circle flips orientation. Up → down → up → ?. <br><b>Ans:</b> Down</li>
+
+<li>Arrow rotates anti‑clockwise 45°. After 3 steps? <br><b>Ans:</b> 135° position</li>
+
+<li>Star expands: 4 points → 5 points → 6 points → ?. <br><b>Ans:</b> 7 points</li>
+
+<li>Shaded area shifts clockwise. Next? <br><b>Ans:</b> Right side shaded</li>
+
+<li>Line shifts upward each step. Next? <br><b>Ans:</b> Top position</li>
+
+<li>Cross divides into more sections (2→4→6→?). <br><b>Ans:</b> 8</li>
+</ol>
+</div>
+
+<div class='card challenge'>
+<h2>🔥 Challenge Question</h2>
+<p>
+Circle → Circle with dot → Circle with two dots (opposite) → ?  
+</p>
+<p>
+Pattern: dots doubling symmetrically<br>
+<b>Answer: Circle with 4 dots (90° apart)</b>
+</p>
+</div>
+
+<div class='card'>
+<p class='hindi'><b>Motivation:</b> Figure Series को बस visualize करना है —  
+pattern दिखते ही 10–15 seconds में answer! 🚓🔥</p>
+</div>
+<<div class="back-link">
+⬅ <a href="Reasoning_Index.html">Back to Reasoning Index</a>
+</div>
+
+</div>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>

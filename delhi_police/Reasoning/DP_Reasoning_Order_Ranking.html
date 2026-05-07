@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+<meta charset="utf-8">
+<title>DP Reasoning – Order & Ranking (Delhi Police)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f9fafb;margin:0;padding:0;}
+.header{background:#7c2d12;color:#fff;padding:14px 20px;font-size:22px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:#fff;padding:18px;margin-bottom:16px;border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.18);}
+h2,h3{margin-top:0;}
+ol{padding-left:20px;}
+.hindi{color:#1f2937;font-size:14px;}
+.example{background:#fff7ed;padding:10px;border-radius:8px;margin:8px 0;}
+.challenge{background:#fef3c7;border-left:5px solid #d97706;padding:12px;margin-top:10px;}
+</style>
+</head>
+
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Reasoning_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+
+<div class="header">Delhi Police – Order & Ranking / क्रम व रैंक</div>
+
+<div class="container">
+
+<div class="card">
+<h2>🎙 Concept / आधार</h2>
+<p class="hindi">
+Order & Ranking में किसी व्यक्ति/वस्तु की position (स्थान) एक queue, line या group में ज्ञात करनी होती है।  
+Important concepts: Left–Right position, total persons, between count, after-before logic.
+</p>
+</div>
+
+<div class="card">
+<h2>✔ Key Formulas / मुख्य सूत्र</h2>
+<ul>
+<li><b>Total = Left Position + Right Position − 1</b></li>
+<li><b>Middle position = (Total + 1)/2</b></li>
+<li><b>Between = Difference − 1</b></li>
+<li>Left–Right conversion: Person count required</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✔ Solved Examples (Delhi Police Pattern)</h2>
+
+<div class="example">
+<b>Example 1:</b><br>
+A is 4th from left and 6th from right. Find total persons.<br>
+Total = 4 + 6 − 1 = <b>9</b>
+</div>
+
+<div class="example">
+<b>Example 2:</b><br>
+In a row of 15 persons, A is 7th from left. Position from right?<br>
+Right = Total − Left + 1 = 15 − 7 + 1 = <b>9</b>
+</div>
+
+<div class="example">
+<b>Example 3:</b><br>
+A is 10th from left, B is 14th from left. How many between?<br>
+Between = 14 − 10 − 1 = <b>3</b>
+</div>
+
+<div class="example">
+<b>Example 4:</b><br>
+A is 5th from right in a group of 20. Position from left?<br>
+Left = 20 − 5 + 1 = <b>16</b>
+</div>
+
+<div class="example">
+<b>Example 5:</b><br>
+In a line A is 6th from left and B is 7th from right. Total persons = 12.  
+Find persons between A & B.<br>
+Left(B)=Total−Right+1=12−7+1=6  
+Positions equal → <b>0 between</b>
+</div>
+</div>
+
+<div class="card">
+<h2>✔ Practice MCQs</h2>
+
+<ol>
+<li>A is 8th from left and 5th from right. Total persons?<br><b>Ans:</b> 12</li>
+
+<li>In row of 30, A is 12th from left. Position from right?<br><b>Ans:</b> 19</li>
+
+<li>A is 4th, B is 9th from left. Persons between?<br><b>Ans:</b> 4</li>
+
+<li>In group of 50, A is 20th from right. Position from left?<br><b>Ans:</b> 31</li>
+
+<li>A is 6th from left, B is 10th from left. Persons between?<br><b>Ans:</b> 3</li>
+
+<li>A is 3rd from right in line of 18. Position from left?<br><b>Ans:</b> 16</li>
+
+<li>A is 7th from left, B is 7th from right, total 13. Between?<br><b>Ans:</b> 0</li>
+
+<li>In row of 40, A is 25th from left. From right?<br><b>Ans:</b> 16</li>
+
+<li>A is 8th from right, total 20. From left?<br><b>Ans:</b> 13</li>
+
+<li>A is 10th, B is 14th from left. Between?<br><b>Ans:</b> 3</li>
+</ol>
+</div>
+
+<div class="card challenge">
+<h2>🔥 Challenge Question</h2>
+<p>
+A is 12th from left, B is 15th from right in a row of 24.  
+How many people are between them?
+</p>
+<p>
+Left(B) = 24 − 15 + 1 = 10  
+Difference = |12 − 10| = 2  
+Between = 2 − 1 = <b>1</b>
+</p>
+</div>
+
+<div class="card">
+<p class="hindi"><b>Motivation:</b> Order & Ranking पूरा formula-based है —  
+बस 3 मिनट के अंदर पूरा topic मजबूत! 🚓🔥</p>
+</div>
+<div class="back-link">
+⬅ <a href="Reasoning_Index.html">Back to Reasoning Index</a>
+</div>
+
+</div>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>

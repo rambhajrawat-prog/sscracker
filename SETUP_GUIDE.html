@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<title>SSCracker AI Setup Guide | Shyamsthali LLP</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700;800&family=Noto+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0D1F3C;--navy2:#132847;--gold:#F5A623;--gold-dim:#B87A18;--green:#22C55E;--red:#EF4444;--page:#F2F6FF;--card:#fff;--border:#DDE6F5;--text:#1a1a2e;--muted:#5a6480;--code-bg:#1e2d45;--r:14px;--r-sm:9px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--page);color:var(--text);min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+header{background:var(--navy);padding:0 18px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25);}
+.hi{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 0;}
+.brand{display:flex;align-items:center;gap:9px;}
+.bl{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:800;font-size:14px;color:var(--navy);}
+.bn{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;}
+main{max-width:860px;margin:0 auto;padding:24px 14px 60px;}
+.page-hero{background:var(--navy2);border-radius:var(--r);padding:22px 24px;margin-bottom:24px;border:1px solid rgba(255,255,255,.06);animation:fadeUp .4s ease both;}
+.hero-title{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;margin-bottom:6px;letter-spacing:.02em;}
+.hero-sub{font-size:.88rem;color:#7a90b0;line-height:1.6;}
+.time-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.2);border-radius:20px;padding:4px 12px;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;color:#22C55E;letter-spacing:.06em;margin-top:10px;}
+.progress-bar{display:flex;gap:0;border-radius:var(--r);overflow:hidden;margin-bottom:24px;border:1px solid var(--border);}
+.pb-seg{flex:1;padding:10px 8px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.pb1{background:#EEEDFE;color:#3C3489;}
+.pb2{background:#E1F5EE;color:#085041;}
+.pb3{background:#FAEEDA;color:#633806;}
+.pb4{background:#EAF3DE;color:#27500A;}
+.section{margin-bottom:28px;animation:fadeUp .4s ease both;}
+.section:nth-child(2){animation-delay:.05s;}
+.section:nth-child(3){animation-delay:.1s;}
+.section:nth-child(4){animation-delay:.15s;}
+.section-title{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:10px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:10px;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;}
+.step-body{}
+.step-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:5px;letter-spacing:.02em;}
+.step-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+.step-desc strong{color:var(--text);font-weight:600;}
+code{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:var(--code-bg);color:#e8f0fe;padding:2px 7px;border-radius:4px;}
+.code-block{background:var(--code-bg);color:#e8f0fe;border-radius:var(--r-sm);padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.7;margin:8px 0;overflow-x:auto;position:relative;}
+.copy-btn{position:absolute;top:8px;right:8px;padding:3px 10px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:4px;color:#F5A623;font-size:.68rem;font-family:'Rajdhani',sans-serif;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:all .15s;}
+.copy-btn:hover{background:rgba(245,166,35,.25);}
+.highlight{color:#FFC857;}
+.comment{color:#5a7a9d;font-style:italic;}
+.tip-box{background:#FFF8E1;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.82rem;color:#78350F;line-height:1.6;margin:10px 0;}
+.warn-box{background:#FEF2F2;border-left:3px solid var(--red);padding:10px 14px;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.82rem;color:#7f1d1d;line-height:1.6;margin:10px 0;}
+.ok-box{background:#F0FDF4;border-left:3px solid var(--green);padding:10px 14px;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.82rem;color:#166534;line-height:1.6;margin:10px 0;}
+.check-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--text);padding:5px 0;border-bottom:1px solid var(--border);list-style:none;line-height:1.5;}
+.check-list li:last-child{border-bottom:none;}
+.chk{color:var(--green);font-size:13px;margin-top:1px;flex-shrink:0;}
+.test-btn{padding:12px 24px;border:none;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--navy),#1A3560);color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid var(--gold-dim);}
+.test-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,166,35,.25);}
+.test-result{padding:10px 14px;border-radius:var(--r-sm);font-size:.85rem;margin-top:10px;display:none;font-family:'JetBrains Mono',monospace;}
+.test-ok{background:#F0FDF4;border:1px solid #86efac;color:#166534;}
+.test-fail{background:#FEF2F2;border:1px solid #fca5a5;color:#991b1b;}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:14px;border-top:1px solid var(--border);}
+.navlinks a{color:var(--navy);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;background:var(--page);padding:6px 11px;border-radius:var(--r-sm);border:1px solid var(--border);transition:all .15s;}
+.navlinks a:hover{background:var(--navy);color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hi">
+    <div class="brand"><div class="bl">SC</div><div><div class="bn">SSCracker Setup Guide</div></div></div>
+    <a href="index.html" style="color:#7a90b0;font-family:'Rajdhani',sans-serif;font-size:.78rem;font-weight:700;text-decoration:none;letter-spacing:.04em;">← Home</a>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-hero">
+    <div class="hero-title">🚀 AI Features Setup — 5 Minutes</div>
+    <div class="hero-sub">Jai Shree Shyam Ji! यह guide follow करके सभी AI features activate हो जाएंगे। बस 4 simple steps हैं — कोई coding नहीं, सिर्फ copy-paste।</div>
+    <div class="time-badge">⏱ Total time: 5-10 minutes</div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="pb-seg pb1">Step 1<br>Cloudflare</div>
+    <div class="pb-seg pb2">Step 2<br>API Key</div>
+    <div class="pb-seg pb3">Step 3<br>Config</div>
+    <div class="pb-seg pb4">Step 4<br>Test</div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="step-num" style="background:#EEEDFE;color:#3C3489;">1</div>
+      Cloudflare Worker बनाएं — Free Backend
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">1.1</div>
+      <div class="step-body">
+        <div class="step-title">Cloudflare account बनाएं</div>
+        <div class="step-desc">Browser में जाएं: <strong>workers.cloudflare.com</strong> → Sign up करें (सिर्फ email चाहिए, credit card नहीं)।</div>
+        <a href="https://workers.cloudflare.com" target="_blank" style="display:inline-block;padding:8px 16px;background:var(--navy);color:var(--gold);border-radius:var(--r-sm);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.04em;text-decoration:none;border:1px solid var(--gold-dim);">workers.cloudflare.com ↗</a>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">1.2</div>
+      <div class="step-body">
+        <div class="step-title">New Worker बनाएं</div>
+        <div class="step-desc">Login के बाद → <strong>Workers & Pages</strong> → <strong>Create Application</strong> → <strong>Create Worker</strong> → Worker का नाम दें: <code>sscracker-proxy</code> → <strong>Deploy</strong> click करें।</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">1.3</div>
+      <div class="step-body">
+        <div class="step-title">Code paste करें</div>
+        <div class="step-desc"><strong>Edit Code</strong> click करें → सारा existing code delete करें → <code>cloudflare_worker.js</code> का पूरा content copy करके paste करें → <strong>Save and Deploy</strong> click करें।</div>
+        <div class="tip-box">💡 <code>cloudflare_worker.js</code> file आपके SSCracker_v2 folder में है। Notepad से खोलें, Ctrl+A से सब select करें, copy करें।</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">1.4</div>
+      <div class="step-body">
+        <div class="step-title">Worker URL copy करें</div>
+        <div class="step-desc">Deploy होने के बाद आपको एक URL मिलेगा जैसे:</div>
+        <div class="code-block"><span class="highlight">https://sscracker-proxy.YOUR-NAME.workers.dev</span></div>
+        <div class="step-desc">यह URL copy करके रख लें — Step 3 में use होगा।</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="step-num" style="background:#E1F5EE;color:#085041;">2</div>
+      API Key Worker में Add करें
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#E1F5EE;color:#085041;font-size:13px;">2.1</div>
+      <div class="step-body">
+        <div class="step-title">Anthropic API Key लें</div>
+        <div class="step-desc">Browser में जाएं: <strong>console.anthropic.com</strong> → Login → <strong>API Keys</strong> → <strong>Create Key</strong> → Key copy करें।</div>
+        <div class="warn-box">⚠️ API Key किसी को share मत करें। यह आपके पैसे से जुड़ा है।</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#E1F5EE;color:#085041;font-size:13px;">2.2</div>
+      <div class="step-body">
+        <div class="step-title">Key को Worker Secret में Add करें</div>
+        <div class="step-desc">Cloudflare Dashboard → आपका Worker → <strong>Settings</strong> tab → <strong>Variables and Secrets</strong> → <strong>Add variable</strong>:</div>
+        <div class="code-block">Variable name: <span class="highlight">ANTHROPIC_API_KEY</span>
+Value:         <span class="highlight">sk-ant-...आपकी key...</span>
+Type:          <span class="highlight">Secret</span>  ← ✅ यह जरूर select करें</div>
+        <div class="step-desc">→ <strong>Save</strong> click करें।</div>
+        <div class="ok-box">✅ Secret type select करने से key encrypt हो जाती है — कोई देख नहीं सकता।</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="step-num" style="background:#FAEEDA;color:#633806;">3</div>
+      SSCracker में URL Configure करें
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#FAEEDA;color:#633806;font-size:13px;">3.1</div>
+      <div class="step-body">
+        <div class="step-title">ss_config.js खोलें</div>
+        <div class="step-desc">SSCracker_v2 folder → <code>ss_config.js</code> file → Notepad से open करें।</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#FAEEDA;color:#633806;font-size:13px;">3.2</div>
+      <div class="step-body">
+        <div class="step-title">PROXY_URL replace करें</div>
+        <div class="step-desc">File में यह line ढूंढें:</div>
+        <div class="code-block">PROXY_URL: <span class="comment">'https://YOUR-WORKER.workers.dev'</span>,</div>
+        <div class="step-desc">इसे अपने Worker URL से replace करें:</div>
+        <div class="code-block">PROXY_URL: <span class="highlight">'https://sscracker-proxy.YOUR-NAME.workers.dev'</span>,</div>
+        <div class="step-desc">File save करें (Ctrl+S)।</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#FAEEDA;color:#633806;font-size:13px;">3.3</div>
+      <div class="step-body">
+        <div class="step-title">Razorpay Key भी add करें (Task 6)</div>
+        <div class="step-desc">उसी ss_config.js में:</div>
+        <div class="code-block">RAZORPAY_KEY: <span class="highlight">'rzp_live_YOUR-ACTUAL-KEY'</span>,
+<span class="comment">/* dashboard.razorpay.com → Settings → API Keys */</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;">4</div>
+      Test करें — सब काम कर रहा है?
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">4.1</div>
+      <div class="step-body">
+        <div class="step-title">Worker URL Test करें</div>
+        <div class="step-desc">अपना Worker URL नीचे paste करें और Test button दबाएं:</div>
+        <input type="text" id="testUrl" placeholder="https://sscracker-proxy.YOUR-NAME.workers.dev" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:.82rem;margin:8px 0;outline:none;"/>
+        <button class="test-btn" onclick="testProxy()">🧪 Connection Test करें</button>
+        <div id="testResult" class="test-result"></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:#EAF3DE;color:#27500A;font-size:13px;">4.2</div>
+      <div class="step-body">
+        <div class="step-title">ask_doubt.html खोलें और test करें</div>
+        <div class="step-desc">Browser में <code>ask_doubt.html</code> open करें → कोई doubt submit करें → AI answer आना चाहिए।</div>
+        <div class="ok-box">✅ अगर answer stream हो रहा है — सब कुछ सही है! सभी 8 AI features अब काम कर रहे हैं।</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What works after setup -->
+  <div class="section">
+    <div class="section-title">
+      <div class="step-num" style="background:#EEEDFE;color:#3C3489;">✓</div>
+      Setup के बाद — यह सब काम करेगा
+    </div>
+    <div class="step-card" style="display:block;padding:16px 18px;">
+      <ul class="check-list">
+        <li><span class="chk">✓</span>💬 AI Tutor — हर doubt का instant answer (Hindi + English)</li>
+        <li><span class="chk">✓</span>🤖 Chapter Explainer — हर chapter पर "AI से समझें" button</li>
+        <li><span class="chk">✓</span>❌ Concept Checker — गलत answer पर automatic explanation</li>
+        <li><span class="chk">✓</span>🌟 Daily Motivator — हर दिन personalised motivational message</li>
+        <li><span class="chk">✓</span>📅 7-Day Study Plan — एक click पर personalised plan</li>
+        <li><span class="chk">✓</span>📊 Adaptive Mock — post-test AI analysis report in Hindi</li>
+        <li><span class="chk">✓</span>📋 CEO Weekly Report — आपके WhatsApp पर KPI report</li>
+        <li><span class="chk">✓</span>🔊 Voice Tutor — explanations को सुनने का feature</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="navlinks">
+    <a href="index.html">🏠 Home</a>
+    <a href="ceo_dashboard.html">📊 CEO Dashboard</a>
+    <a href="ask_doubt.html">💬 Test AI Tutor</a>
+    <a href="payment.html">💰 Payment Setup</a>
+  </div>
+
+</main>
+
+<script>
+async function testProxy() {
+  var url = document.getElementById('testUrl').value.trim();
+  var result = document.getElementById('testResult');
+
+  if (!url || !url.startsWith('http')) {
+    result.className = 'test-result test-fail';
+    result.style.display = 'block';
+    result.textContent = '❌ Valid URL enter करें (https://... से शुरू होना चाहिए)';
+    return;
+  }
+
+  result.className = 'test-result';
+  result.style.display = 'block';
+  result.textContent = '⏳ Testing connection...';
+
+  try {
+    var resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 30,
+        messages: [{ role: 'user', content: 'Reply with exactly: SSCRACKER_OK' }]
+      })
+    });
+
+    var data = await resp.json();
+    var text = (data.content || []).map(function(c){ return c.text||''; }).join('');
+
+    if (text.includes('SSCRACKER_OK') || text.includes('OK') || text.length > 0) {
+      result.className = 'test-result test-ok';
+      result.textContent = '✅ Connection successful! AI features अब काम करेंगे। Response: "' + text.slice(0,60) + '"';
+
+      /* Auto-update ss_config.js suggestion */
+      document.getElementById('testUrl').style.borderColor = '#22C55E';
+    } else if (data.error) {
+      result.className = 'test-result test-fail';
+      result.textContent = '❌ API Error: ' + data.error + '\n\nCheck: क्या ANTHROPIC_API_KEY Worker में add किया?';
+    } else {
+      result.className = 'test-result test-ok';
+      result.textContent = '✅ Worker respond कर रहा है! Response received. ss_config.js में यह URL paste करें।';
+    }
+  } catch(err) {
+    result.className = 'test-result test-fail';
+    result.textContent = '❌ Connection failed: ' + err.message + '\n\nCheck: Worker URL सही है? Worker deployed है?';
+  }
+}
+
+/* Allow Enter key in URL input */
+document.getElementById('testUrl').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') testProxy();
+});
+</script>
+</body>
+</html>

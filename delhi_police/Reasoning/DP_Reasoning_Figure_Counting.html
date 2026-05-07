@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+<meta charset='utf-8'>
+<title>DP Reasoning – Figure Counting (Delhi Police)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f1f5f9;margin:0;padding:0;}
+.header{background:#1e1b4b;color:#fff;padding:14px 20px;font-size:22px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+.card{background:#fff;padding:18px;margin-bottom:16px;border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.18);}
+h2,h3{margin-top:0;}
+.hindi{color:#374151;font-size:15px;}
+.example{background:#e0e7ff;padding:12px;border-radius:8px;margin:10px 0;}
+.challenge{background:#fff7ed;border-left:5px solid #f59e0b;padding:12px;margin-top:12px;}
+ul{padding-left:20px;}
+</style>
+</head>
+
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Reasoning_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+
+<div class='header'>Delhi Police – Figure Counting / आकरों की गणना</div>
+
+<div class='container'>
+
+<div class='card'>
+<h2>🎙 Introduction / परिचय</h2>
+<p class='hindi'>
+Figure Counting में किसी diagram में hidden lines, triangles, squares, rectangles आदि की संख्या गिनी जाती है।  
+Delhi Police में केवल basic triangle‑counting, square‑counting और line‑counting आते हैं।
+</p>
+</div>
+
+<div class='card'>
+<h2>✔ Key Techniques / मुख्य तकनीकें</h2>
+<ul>
+<li>Layers method (परतों की गिनती)</li>
+<li>Overlapping shapes identify करें</li>
+<li>Symmetry का उपयोग करें</li>
+<li>Left-to-right systematic counting</li>
+<li>Triangles के लिए “small + medium + large + whole figure” rule</li>
+</ul>
+</div>
+
+<div class='card'>
+<h2>✔ Solved Examples (Delhi Police Pattern)</h2>
+
+<div class='example'>
+<b>Example 1 – Basic Triangle Count:</b><br>
+If a triangle is divided into 4 smaller triangles (top, left, right, bottom):  
+Small = 4  
+Large (whole) = 1  
+<b>Total = 5 triangles</b>
+</div>
+
+<div class='example'>
+<b>Example 2 – Square Count:</b><br>
+2×2 grid:<br>
+Small squares = 4  
+Big square = 1  
+<b>Total = 5 squares</b>
+</div>
+
+<div class='example'>
+<b>Example 3 – Rectangle Count:</b><br>
+2×3 grid:  
+Rectangles = m(m+1) × n(n+1) / 4  
+= 2×3 grid → 2×3 gives 18 rectangles  
+<b>Ans = 18</b>
+</div>
+
+<div class='example'>
+<b>Example 4 – Lines Count:</b><br>
+If 3 parallel lines intersect 2 other parallel lines:  
+Intersections = 3×2 = 6  
+<b>Total segments = 6×2 = 12</b>
+</div>
+
+<div class='example'>
+<b>Example 5 – Complex Triangle (simple DP level):</b><br>
+A triangle cut by 1 horizontal and 1 vertical line:  
+Total triangles ≈ 6  
+<b>Ans = 6</b>
+</div>
+
+</div>
+
+<div class='card'>
+<h2>✔ Practice MCQs</h2>
+<ol>
+<li>How many triangles in a simple 3‑layer triangle?<br><b>Ans:</b> 13</li>
+<li>Number of squares in 3×3 grid?<br><b>Ans:</b> 14</li>
+<li>Rectangles in 2×2 grid?<br><b>Ans:</b> 9</li>
+<li>How many triangles in a star‑like shape with 6 small triangles?<br><b>Ans:</b> 6</li>
+<li>Squares in 4×4 grid?<br><b>Ans:</b> 30</li>
+<li>Rectangles in 3×3 grid?<br><b>Ans:</b> 36</li>
+<li>Triangles in a figure with 2 intersecting lines inside triangle?<br><b>Ans:</b> 8</li>
+<li>Lines formed by 4 parallel vertical + 3 parallel horizontal?<br><b>Ans:</b> 12</li>
+<li>Squares in L‑shaped figure (small 3 squares)?<br><b>Ans:</b> 3</li>
+<li>Triangles in diamond shape split into 4?<br><b>Ans:</b> 4</li>
+</ol>
+</div>
+
+<div class='card challenge'>
+<h2>🔥 Challenge Question</h2>
+<p>
+How many triangles are there in the diagram of a triangle with 3 horizontal partitions?
+</p>
+<p>
+Using formula for layered triangle: n(n+2)(2n+1)/8 for n=3<br>
+= 3×5×7 / 8 = 105/8 ≈ <b>13 triangles</b>
+</p>
+</div>
+
+<div class='card'>
+<p class='hindi'><b>Motivation:</b> Figure Counting सिर्फ practice का खेल है —  
+10 मिनट daily → full marks guaranteed! 🚓🔥</p>
+</div>
+<div class="back-link">
+⬅ <a href="Reasoning_Index.html">Back to Reasoning Index</a>
+</div>
+
+</div>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>

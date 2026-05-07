@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<title>Shyamsthali LLP — Command Centre</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#06090F; --bg2:#0A0F1A; --bg3:#0F1824;
+  --navy:#0D1F3C; --navy2:#132847; --navy3:#1A3560;
+  --gold:#F5A623; --gold2:#FFC857; --gold-dim:#B87A18;
+  --gold-glow:rgba(245,166,35,.2);
+  --green:#22C55E; --green2:rgba(34,197,94,.1);
+  --red:#EF4444; --red2:rgba(239,68,68,.1);
+  --blue:#3B82F6; --blue2:rgba(59,130,246,.1);
+  --purple:#A855F7; --purple2:rgba(168,85,247,.1);
+  --text1:#F0F4FF; --text2:#8BA3CC; --text3:#4A6080;
+  --rim:rgba(255,255,255,.06);
+  --rim2:rgba(255,255,255,.03);
+  --r:12px; --r-sm:8px; --r-lg:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--bg);color:var(--text1);min-height:100vh;overflow-x:hidden;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 var(--gold-glow)}50%{box-shadow:0 0 20px 4px var(--gold-glow)}}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100vw)}}
+
+/* ── LOGIN SCREEN ── */
+#loginScreen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.login-card{
+  width:100%;max-width:380px;
+  background:var(--bg3);border:1px solid var(--rim);
+  border-radius:var(--r-lg);padding:36px 28px;
+  text-align:center;
+  box-shadow:0 0 80px rgba(245,166,35,.06),0 32px 64px rgba(0,0,0,.6);
+  animation:fadeUp .5s ease both;
+}
+.login-logo{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  border:2px solid var(--gold-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;font-weight:800;
+  font-size:22px;color:var(--gold);
+  margin:0 auto 18px;animation:glow 3s ease infinite;
+}
+.login-title{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1.4rem;color:var(--text1);letter-spacing:.04em;margin-bottom:4px;}
+.login-sub{font-size:.78rem;color:var(--text3);margin-bottom:24px;letter-spacing:.06em;text-transform:uppercase;}
+.login-input{
+  width:100%;padding:11px 14px;
+  background:var(--bg2);border:1px solid var(--rim);
+  border-radius:var(--r-sm);color:var(--text1);
+  font-family:'Noto Sans',sans-serif;font-size:.9rem;
+  outline:none;margin-bottom:10px;
+  transition:border-color .2s;
+}
+.login-input:focus{border-color:var(--gold-dim);}
+.login-input::placeholder{color:var(--text3);}
+.login-btn{
+  width:100%;padding:12px;border:none;border-radius:var(--r-sm);
+  background:linear-gradient(135deg,var(--navy2),var(--navy3));
+  color:var(--gold);font-family:'Rajdhani',sans-serif;
+  font-weight:700;font-size:.9rem;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--gold-dim);
+  transition:all .2s;margin-top:4px;
+}
+.login-btn:hover{box-shadow:0 4px 20px var(--gold-glow);transform:translateY(-1px);}
+.login-error{font-size:.78rem;color:var(--red);margin-top:8px;display:none;}
+.login-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--green2);border:1px solid rgba(34,197,94,.2);
+  border-radius:20px;padding:3px 10px;
+  font-size:.65rem;font-weight:700;color:var(--green);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+/* ── MAIN APP (hidden until login) ── */
+#app{display:none;}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:var(--bg2);border-bottom:1px solid var(--rim);
+  padding:0 20px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 24px rgba(0,0,0,.5);
+}
+.topbar-inner{
+  max-width:1300px;margin:0 auto;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:9px;flex-shrink:0;}
+.brand-logo{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:800;font-size:13px;color:var(--bg);}
+.brand-name{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1rem;color:var(--text1);letter-spacing:.1em;text-transform:uppercase;}
+.brand-sub{font-size:.6rem;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;}
+.live-badge{display:flex;align-items:center;gap:5px;background:var(--green2);border:1px solid rgba(34,197,94,.2);border-radius:20px;padding:3px 10px;font-family:'Rajdhani',sans-serif;font-size:.68rem;font-weight:700;color:var(--green);letter-spacing:.06em;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-time{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3);}
+.logout-btn{padding:5px 12px;background:transparent;border:1px solid var(--rim);border-radius:var(--r-sm);color:var(--text3);font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:all .15s;}
+.logout-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ── SCAN LINE ── */
+.scanline-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.scanline{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(245,166,35,.06),transparent);animation:scanline 8s linear infinite;}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 58px);max-width:1300px;margin:0 auto;}
+@media(max-width:768px){.layout{grid-template-columns:1fr;}}
+
+/* ── SIDEBAR ── */
+.sidebar{background:var(--bg2);border-right:1px solid var(--rim);padding:16px 0;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;}
+.nav-section{padding:0 10px;margin-bottom:4px;}
+.nav-label{font-size:.62rem;font-weight:700;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;padding:10px 8px 4px;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-sm);cursor:pointer;transition:all .15s;margin-bottom:2px;text-decoration:none;}
+.nav-item:hover{background:var(--rim2);}
+.nav-item.active{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.12);}
+.nav-icon{font-size:14px;width:22px;text-align:center;flex-shrink:0;}
+.nav-text{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.82rem;color:var(--text2);letter-spacing:.03em;}
+.nav-item.active .nav-text{color:var(--gold);}
+.nav-badge{margin-left:auto;min-width:18px;height:18px;background:var(--red);color:#fff;border-radius:9px;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 5px;}
+
+/* ── MAIN CONTENT ── */
+.main{padding:20px;overflow-y:auto;}
+.panel{display:none;animation:fadeUp .3s ease both;}
+.panel.active{display:block;}
+
+/* ── SECTION HEADER ── */
+.sec-header{margin-bottom:18px;}
+.sec-title{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1.3rem;color:var(--text1);letter-spacing:.02em;margin-bottom:3px;}
+.sec-sub{font-size:.78rem;color:var(--text3);}
+
+/* ── METRIC CARDS ── */
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px;}
+.mc{background:var(--bg3);border:1px solid var(--rim);border-radius:var(--r);padding:14px;transition:border-color .2s,transform .2s;}
+.mc:hover{border-color:rgba(245,166,35,.2);transform:translateY(-2px);}
+.mc-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.mc-val{font-family:'Rajdhani',sans-serif;font-weight:800;font-size:1.8rem;line-height:1;margin-bottom:3px;}
+.mc-delta{font-size:.7rem;color:var(--text3);}
+.gold-v{color:var(--gold);}
+.green-v{color:var(--green);}
+.blue-v{color:var(--blue);}
+.red-v{color:var(--red);}
+.purple-v{color:var(--purple);}
+
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:14px;}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:14px;}
+
+/* ── CARD ── */
+.card{background:var(--bg3);border:1px solid var(--rim);border-radius:var(--r);padding:16px;}
+.card-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;color:var(--text1);letter-spacing:.04em;margin-bottom:12px;display:flex;align-items:center;gap:7px;padding-bottom:10px;border-bottom:1px solid var(--rim);}
+
+/* ── TABLE ── */
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{font-family:'Rajdhani',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:6px 10px;text-align:left;border-bottom:1px solid var(--rim);}
+.data-table td{padding:8px 10px;font-size:.82rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.02);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:var(--rim2);}
+
+/* ── AGENT CARDS ── */
+.agent-card{background:var(--bg3);border:1px solid var(--rim);border-radius:var(--r);padding:14px;margin-bottom:10px;display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:start;}
+.agent-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;font-family:'Rajdhani',sans-serif;flex-shrink:0;}
+.agent-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;color:var(--text1);margin-bottom:2px;}
+.agent-desc{font-size:.75rem;color:var(--text3);line-height:1.5;}
+.agent-status{display:flex;align-items:center;gap:5px;font-size:.7rem;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+.status-on{color:var(--green);}
+.status-off{color:var(--text3);}
+.status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.sd-on{background:var(--green);animation:pulse 2s infinite;}
+.sd-off{background:var(--text3);}
+
+/* ── LOG FEED ── */
+.log-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--rim2);align-items:flex-start;}
+.log-item:last-child{border-bottom:none;}
+.log-time{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text3);white-space:nowrap;margin-top:2px;}
+.log-icon{font-size:12px;flex-shrink:0;margin-top:1px;}
+.log-text{font-size:.78rem;color:var(--text2);flex:1;line-height:1.5;}
+.log-tag{font-size:.62rem;font-family:'Rajdhani',sans-serif;font-weight:700;padding:1px 6px;border-radius:3px;letter-spacing:.04em;}
+.lt-green{background:var(--green2);color:var(--green);}
+.lt-gold{background:rgba(245,166,35,.1);color:var(--gold);}
+.lt-blue{background:var(--blue2);color:var(--blue);}
+.lt-red{background:var(--red2);color:var(--red);}
+
+/* ── Q BANK EDITOR ── */
+.qb-form{background:var(--bg3);border:1px solid var(--rim);border-radius:var(--r);padding:18px;margin-bottom:14px;}
+.form-row{margin-bottom:12px;}
+.form-label{font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;display:block;}
+.form-input{width:100%;padding:9px 12px;background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);color:var(--text1);font-family:'Noto Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .2s;}
+.form-input:focus{border-color:var(--gold-dim);}
+.form-input::placeholder{color:var(--text3);}
+textarea.form-input{resize:vertical;min-height:80px;line-height:1.6;}
+select.form-input{appearance:none;cursor:pointer;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.form-row-2{grid-template-columns:1fr;}}
+.opt-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+
+/* ── BUTTONS ── */
+.btn{padding:9px 18px;border:none;border-radius:var(--r-sm);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn-gold{background:linear-gradient(135deg,var(--navy2),var(--navy3));color:var(--gold);border:1px solid var(--gold-dim);}
+.btn-gold:hover{box-shadow:0 4px 20px var(--gold-glow);transform:translateY(-1px);}
+.btn-green{background:var(--green2);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.btn-green:hover{background:rgba(34,197,94,.15);}
+.btn-red{background:var(--red2);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--rim);}
+.btn-ghost:hover{background:var(--rim2);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+
+/* ── AI REPORT ── */
+.report-area{background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);padding:14px;font-size:.83rem;line-height:1.8;color:var(--text2);white-space:pre-wrap;min-height:100px;font-family:'Noto Sans',sans-serif;}
+.report-cursor{display:inline-block;width:2px;height:1em;background:var(--gold);vertical-align:text-bottom;margin-left:2px;animation:blink .7s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── COMPLIANCE ROW ── */
+.comp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--rim2);}
+.comp-row:last-child{border-bottom:none;}
+.comp-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--gold);width:60px;flex-shrink:0;}
+.comp-text{font-size:.8rem;color:var(--text2);flex:1;}
+.comp-days{font-size:.68rem;font-family:'Rajdhani',sans-serif;font-weight:700;padding:2px 7px;border-radius:3px;}
+.cd-red{background:var(--red2);color:var(--red);}
+.cd-amber{background:rgba(245,166,35,.1);color:var(--gold);}
+.cd-green{background:var(--green2);color:var(--green);}
+
+/* ── QUICK LINK ── */
+.quick-links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ql{padding:6px 12px;background:var(--bg3);border:1px solid var(--rim);border-radius:var(--r-sm);color:var(--text2);text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.04em;transition:all .15s;display:inline-flex;align-items:center;gap:5px;}
+.ql:hover{border-color:var(--gold-dim);color:var(--gold);}
+
+/* ── BAR ── */
+.bar-row{margin-bottom:10px;}
+.bar-header{display:flex;justify-content:space-between;margin-bottom:4px;font-size:.75rem;color:var(--text2);}
+.bar-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.bf-gold{background:linear-gradient(90deg,var(--gold-dim),var(--gold));}
+.bf-green{background:linear-gradient(90deg,#16a34a,var(--green));}
+.bf-blue{background:linear-gradient(90deg,#1d4ed8,var(--blue));}
+.bf-purple{background:linear-gradient(90deg,#7c3aed,var(--purple));}
+
+/* ── WA BUTTON ── */
+.wa-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;background:linear-gradient(135deg,#128C7E,#25D366);color:#fff;border:none;border-radius:var(--r-sm);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s;}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.3);}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--navy3);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-dim);}
+</style>
+</head>
+<body>
+
+<!-- SCAN LINE -->
+<div class="scanline-wrap"><div class="scanline"></div></div>
+
+<!-- ════════ LOGIN SCREEN ════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">SC</div>
+    <div class="login-badge"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;"></span>SECURE ACCESS</div>
+    <div class="login-title">Shyamsthali LLP</div>
+    <div class="login-sub">Command Centre — Authorised Personnel Only</div>
+    <input class="login-input" type="text" id="loginUser" placeholder="Username / उपयोगकर्ता नाम" autocomplete="off"/>
+    <input class="login-input" type="password" id="loginPass" placeholder="Password / पासवर्ड" autocomplete="off"/>
+    <button class="login-btn" onclick="doLogin()">🔐 Access Command Centre</button>
+    <div class="login-error" id="loginError">❌ Wrong credentials. Please try again.</div>
+    <div style="margin-top:16px;font-size:.68rem;color:var(--text3);">Jai Shree Shyam Ji 🙏 — Shyamsthali LLP</div>
+  </div>
+</div>
+
+<!-- ════════ MAIN APP ════════ -->
+<div id="app">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo">SC</div>
+        <div><div class="brand-name">SSCracker</div><div class="brand-sub">Command Centre</div></div>
+      </div>
+      <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+      <div class="topbar-right">
+        <div class="tb-time" id="clockDisplay">--:--:--</div>
+        <button class="logout-btn" onclick="doLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
+    <div class="sidebar" id="sidebar">
+      <div class="nav-section">
+        <div class="nav-label">Overview</div>
+        <div class="nav-item active" onclick="showPanel('dashboard')"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></div>
+        <div class="nav-item" onclick="showPanel('agents')"><span class="nav-icon">🤖</span><span class="nav-text">AI Agents</span></div>
+        <div class="nav-item" onclick="showPanel('report')"><span class="nav-icon">📋</span><span class="nav-text">CEO Report</span></div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Content</div>
+        <div class="nav-item" onclick="showPanel('qbank')"><span class="nav-icon">📚</span><span class="nav-text">Question Bank</span></div>
+        <div class="nav-item" onclick="showPanel('mcqs')"><span class="nav-icon">📅</span><span class="nav-text">Daily MCQs</span></div>
+        <div class="nav-item" onclick="showPanel('students')"><span class="nav-icon">👨‍🎓</span><span class="nav-text">Students</span></div>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">Business</div>
+        <div class="nav-item" onclick="showPanel('revenue')"><span class="nav-icon">💰</span><span class="nav-text">Revenue</span></div>
+        <div class="nav-item" onclick="showPanel('compliance')"><span class="nav-icon">📅</span><span class="nav-text">Compliance</span></div>
+        <div class="nav-item" onclick="showPanel('settings')"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></div>
+      </div>
+      <div class="nav-section" style="margin-top:auto;padding-top:20px;">
+        <div style="padding:10px 10px;font-size:.68rem;color:var(--text3);line-height:1.6;">
+          Logged in as<br><strong style="color:var(--gold);" id="sidebarUser">—</strong><br>
+          <span id="sidebarRole" style="font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIN ── -->
+    <div class="main">
+
+      <!-- DASHBOARD PANEL -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="sec-header">
+          <div class="sec-title">📊 Platform Dashboard</div>
+          <div class="sec-sub" id="dashDate">Loading...</div>
+        </div>
+
+        <div class="metrics-row" id="dashMetrics">
+          <div class="mc"><div class="mc-label">Total Students</div><div class="mc-val gold-v" id="dm-students">0</div><div class="mc-delta">Platform-wide</div></div>
+          <div class="mc"><div class="mc-label">Doubts Answered</div><div class="mc-val blue-v" id="dm-doubts">0</div><div class="mc-delta">AI Tutor sessions</div></div>
+          <div class="mc"><div class="mc-label">Mocks Attempted</div><div class="mc-val green-v" id="dm-mocks">0</div><div class="mc-delta">All streams</div></div>
+          <div class="mc"><div class="mc-label">Avg Streak</div><div class="mc-val gold-v" id="dm-streak">0</div><div class="mc-delta">Days</div></div>
+          <div class="mc"><div class="mc-label">Premium Status</div><div class="mc-val purple-v" id="dm-premium">Free</div><div class="mc-delta" id="dm-premium-sub">No subscribers yet</div></div>
+          <div class="mc"><div class="mc-label">Daily MCQs</div><div class="mc-val green-v" id="dm-mcqs">—</div><div class="mc-delta">Today's batch</div></div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">📈 Exam Stream Activity</div>
+            <div id="streamBars"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">⚡ Live Activity Log</div>
+            <div id="activityLog"></div>
+          </div>
+        </div>
+
+        <div class="quick-links">
+          <a class="ql" href="index.html" target="_blank">🏠 Live Site</a>
+          <a class="ql" href="ask_doubt.html" target="_blank">💬 AI Tutor</a>
+          <a class="ql" href="leaderboard.html" target="_blank">🏆 Leaderboard</a>
+          <a class="ql" href="daily_mcqs.html" target="_blank">📅 Daily MCQs</a>
+          <a class="ql" href="payment.html" target="_blank">💰 Payment Page</a>
+          <a class="ql" href="SETUP_GUIDE.html" target="_blank">⚙️ Setup Guide</a>
+        </div>
+      </div>
+
+      <!-- AI AGENTS PANEL -->
+      <div class="panel" id="panel-agents">
+        <div class="sec-header">
+          <div class="sec-title">🤖 AI Organisation — All Agents</div>
+          <div class="sec-sub">Shyamsthali LLP AI Team — real-time status</div>
+        </div>
+        <div id="agentsList"></div>
+      </div>
+
+      <!-- CEO REPORT PANEL -->
+      <div class="panel" id="panel-report">
+        <div class="sec-header">
+          <div class="sec-title">📋 CEO Weekly Report</div>
+          <div class="sec-sub">AI-generated, sent to founder's WhatsApp every Monday</div>
+        </div>
+        <div class="btn-row" style="margin-bottom:14px;">
+          <button class="btn btn-gold" id="genReportBtn" onclick="generateCEOReport()">🤖 Generate Report Now</button>
+          <a class="wa-btn" id="waReportBtn" href="#" target="_blank" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Send to WhatsApp
+          </a>
+        </div>
+        <div class="report-area" id="reportArea">Click "Generate Report Now" to create this week's CEO briefing...</div>
+      </div>
+
+      <!-- QUESTION BANK PANEL -->
+      <div class="panel" id="panel-qbank">
+        <div class="sec-header">
+          <div class="sec-title">📚 Question Bank Manager</div>
+          <div class="sec-sub">Add, edit and manage questions across all exam streams</div>
+        </div>
+        <div class="qb-form">
+          <div class="card-title">➕ Add New Question</div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label">Exam Stream</label>
+              <select class="form-input" id="qbStream">
+                <option value="NDA">NDA</option>
+                <option value="DP">Delhi Police</option>
+                <option value="SSCGD">SSC GD</option>
+                <option value="BANKPO">Bank PO</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-label">Subject / Topic</label>
+              <input class="form-input" type="text" id="qbSubject" placeholder="e.g. Algebra, Polity, Reasoning"/>
+            </div>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label">Chapter</label>
+              <input class="form-input" type="text" id="qbChapter" placeholder="e.g. Quadratic Equations"/>
+            </div>
+            <div class="form-row">
+              <label class="form-label">Difficulty (1=Easy, 5=Hard)</label>
+              <select class="form-input" id="qbDiff">
+                <option value="1">1 — Easy</option>
+                <option value="2">2 — Below Average</option>
+                <option value="3" selected>3 — Standard</option>
+                <option value="4">4 — Hard</option>
+                <option value="5">5 — Expert</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Question Text (Hindi/English)</label>
+            <textarea class="form-input" id="qbQuestion" placeholder="पूरा question यहाँ लिखें..."></textarea>
+          </div>
+          <label class="form-label">Options (A, B, C, D)</label>
+          <div class="opt-inputs">
+            <input class="form-input" type="text" id="qbA" placeholder="Option A"/>
+            <input class="form-input" type="text" id="qbB" placeholder="Option B"/>
+            <input class="form-input" type="text" id="qbC" placeholder="Option C"/>
+            <input class="form-input" type="text" id="qbD" placeholder="Option D"/>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label">Correct Answer</label>
+              <select class="form-input" id="qbAnswer">
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label class="form-label">Hindi/English</label>
+              <select class="form-input" id="qbLang">
+                <option value="both">Both (Bilingual)</option>
+                <option value="hi">Hindi only</option>
+                <option value="en">English only</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Explanation (Why this answer is correct)</label>
+            <textarea class="form-input" id="qbExplanation" placeholder="Step-by-step explanation..." style="min-height:60px;"></textarea>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Memory Shortcut / Trick (Optional)</label>
+            <input class="form-input" type="text" id="qbShortcut" placeholder="e.g. Remember: VIBGYOR for spectrum colours"/>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-gold" onclick="addQuestion()">💾 Save Question</button>
+            <button class="btn btn-green" onclick="aiGenerateQ()">🤖 AI Generate Question</button>
+            <button class="btn btn-ghost" onclick="clearQForm()">Clear</button>
+          </div>
+          <div id="qbMsg" style="margin-top:10px;font-size:.8rem;display:none;"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📊 Question Bank Summary</div>
+          <div id="qbSummary"></div>
+        </div>
+        <div class="card" style="margin-top:12px;">
+          <div class="card-title">📋 Recently Added Questions</div>
+          <div id="qbRecentList"></div>
+        </div>
+      </div>
+
+      <!-- DAILY MCQs PANEL -->
+      <div class="panel" id="panel-mcqs">
+        <div class="sec-header">
+          <div class="sec-title">📅 Daily MCQ Agent</div>
+          <div class="sec-sub">Auto-generates 75 fresh MCQs every morning at 5am IST</div>
+        </div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="card-title">⚙️ Agent Status</div>
+          <div id="mcqAgentStatus"></div>
+          <div class="btn-row">
+            <button class="btn btn-gold" onclick="triggerMCQAgent()">🤖 Generate MCQs Now (Manual)</button>
+            <a class="btn btn-ghost" href="daily_mcqs.html" target="_blank">👁 View Student Page</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📊 Today's MCQ Batch</div>
+          <div id="todayMCQs"></div>
+        </div>
+      </div>
+
+      <!-- STUDENTS PANEL -->
+      <div class="panel" id="panel-students">
+        <div class="sec-header">
+          <div class="sec-title">👨‍🎓 Student Management</div>
+          <div class="sec-sub">Track, communicate, and support your students</div>
+        </div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="card-title">📊 Student Overview</div>
+          <div id="studentOverview"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔔 Send Announcement to All Students</div>
+          <div class="form-row" style="margin-top:10px;">
+            <label class="form-label">Message (WhatsApp Broadcast)</label>
+            <textarea class="form-input" id="announcementText" placeholder="Message yahan likhein...&#10;&#10;e.g.: 🎯 New Mock Test available! NDA Paper 1 Set 6 now live. Dashboard se access karein."></textarea>
+          </div>
+          <div class="btn-row">
+            <a class="wa-btn" id="announcementBtn" href="#" target="_blank" onclick="buildAnnouncement()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Send via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVENUE PANEL -->
+      <div class="panel" id="panel-revenue">
+        <div class="sec-header">
+          <div class="sec-title">💰 Revenue & Finance</div>
+          <div class="sec-sub">CFO Agent — payment tracking and P&L</div>
+        </div>
+        <div class="metrics-row">
+          <div class="mc"><div class="mc-label">MRR</div><div class="mc-val gold-v" id="rev-mrr">₹0</div><div class="mc-delta">Monthly recurring</div></div>
+          <div class="mc"><div class="mc-label">Total Paid</div><div class="mc-val green-v" id="rev-total">₹0</div><div class="mc-delta">All time</div></div>
+          <div class="mc"><div class="mc-label">Subscribers</div><div class="mc-val blue-v" id="rev-subs">0</div><div class="mc-delta">Active premium</div></div>
+          <div class="mc"><div class="mc-label">Conversion</div><div class="mc-val purple-v" id="rev-conv">0%</div><div class="mc-delta">Free → Paid</div></div>
+        </div>
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">💳 Payment Records</div>
+            <div id="paymentRecords"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">📊 Plan Distribution</div>
+            <div id="planDistribution"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔗 Quick Links</div>
+          <div class="quick-links" style="margin:0;">
+            <a class="ql" href="https://dashboard.razorpay.com" target="_blank">💳 Razorpay Dashboard</a>
+            <a class="ql" href="payment.html" target="_blank">💰 Payment Page</a>
+            <a class="ql" href="https://console.anthropic.com" target="_blank">🤖 Anthropic Console</a>
+            <a class="ql" href="https://workers.cloudflare.com" target="_blank">☁️ Cloudflare Workers</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPLIANCE PANEL -->
+      <div class="panel" id="panel-compliance">
+        <div class="sec-header">
+          <div class="sec-title">📅 Compliance Calendar</div>
+          <div class="sec-sub">Shyamsthali LLP — MCA, GST, ROC deadlines</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚠️ Upcoming Deadlines</div>
+          <div id="complianceList"></div>
+        </div>
+        <div class="card" style="margin-top:12px;">
+          <div class="card-title">✅ Action Checklist</div>
+          <div id="actionChecklist"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS PANEL -->
+      <div class="panel" id="panel-settings">
+        <div class="sec-header">
+          <div class="sec-title">⚙️ Platform Settings</div>
+          <div class="sec-sub">Configure SSCracker — credentials, users, integrations</div>
+        </div>
+        <div class="card" style="margin-bottom:12px;">
+          <div class="card-title">🔑 Proxy & API Configuration</div>
+          <div class="form-row">
+            <label class="form-label">Cloudflare Worker URL (PROXY_URL)</label>
+            <input class="form-input" type="text" id="settingProxy" placeholder="https://sscracker-proxy.YOUR-NAME.workers.dev"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Razorpay Key ID</label>
+            <input class="form-input" type="text" id="settingRazorpay" placeholder="rzp_live_..."/>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Founder WhatsApp Number</label>
+            <input class="form-input" type="text" id="settingWhatsapp" placeholder="919876543210"/>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-gold" onclick="saveSettings()">💾 Save Settings</button>
+          </div>
+          <div id="settingMsg" style="margin-top:8px;font-size:.78rem;color:var(--green);display:none;"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">👥 Team Access Credentials</div>
+          <table class="data-table" style="width:100%;">
+            <thead><tr><th>Role</th><th>Username</th><th>Access Level</th></tr></thead>
+            <tbody>
+              <tr><td>Founder / CEO</td><td><code style="font-family:monospace;font-size:.75rem;">admin</code></td><td><span style="color:var(--gold);font-size:.75rem;">Full Access</span></td></tr>
+              <tr><td>CFO Agent</td><td><code style="font-family:monospace;font-size:.75rem;">cfo</code></td><td><span style="color:var(--blue);font-size:.75rem;">Finance Only</span></td></tr>
+              <tr><td>Content Agent</td><td><code style="font-family:monospace;font-size:.75rem;">content</code></td><td><span style="color:var(--green);font-size:.75rem;">Q Bank Only</span></td></tr>
+              <tr><td>Ops Agent</td><td><code style="font-family:monospace;font-size:.75rem;">ops</code></td><td><span style="color:var(--purple);font-size:.75rem;">Monitor Only</span></td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:10px;font-size:.75rem;color:var(--text3);">Default password: <code style="font-family:monospace;font-size:.75rem;">shyam2025</code> — Change immediately after first login.</div>
+        </div>
+      </div>
+
+    </div><!-- end main -->
+  </div><!-- end layout -->
+</div><!-- end app -->
+
+<script src="ss_config.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   CREDENTIALS — Change these!
+══════════════════════════════════════════ */
+var USERS = {
+  'admin':   { pass: 'shyam2025',    role: 'Founder / CEO',     access: 'all' },
+  'cfo':     { pass: 'shyam_cfo',    role: 'CFO Agent',         access: 'finance' },
+  'content': { pass: 'shyam_cont',   role: 'Content Manager',   access: 'content' },
+  'ops':     { pass: 'shyam_ops',    role: 'Operations Agent',  access: 'ops' },
+};
+
+var FOUNDER_WA = '91XXXXXXXXXX'; /* ← Replace */
+
+var currentUser = null;
+
+/* ── LOGIN ── */
+function doLogin() {
+  var user = document.getElementById('loginUser').value.trim().toLowerCase();
+  var pass = document.getElementById('loginPass').value;
+  var errEl = document.getElementById('loginError');
+
+  if (USERS[user] && USERS[user].pass === pass) {
+    currentUser = { username: user, ...USERS[user] };
+    try { sessionStorage.setItem('ss_admin_session', JSON.stringify({ user, role: currentUser.role, ts: Date.now() })); } catch(e) {}
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('sidebarUser').textContent = user;
+    document.getElementById('sidebarRole').textContent = currentUser.role;
+    errEl.style.display = 'none';
+    initApp();
+  } else {
+    errEl.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+    document.getElementById('loginPass').focus();
+  }
+}
+
+document.getElementById('loginPass').addEventListener('keydown', function(e) { if(e.key==='Enter') doLogin(); });
+document.getElementById('loginUser').addEventListener('keydown', function(e) { if(e.key==='Enter') document.getElementById('loginPass').focus(); });
+
+function doLogout() {
+  try { sessionStorage.removeItem('ss_admin_session'); } catch(e) {}
+  currentUser = null;
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+/* Check existing session */
+try {
+  var sess = JSON.parse(sessionStorage.getItem('ss_admin_session') || 'null');
+  if (sess && sess.ts && (Date.now() - sess.ts) < 3600000 && USERS[sess.user]) {
+    currentUser = { username: sess.user, ...USERS[sess.user] };
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('sidebarUser').textContent = sess.user;
+    document.getElementById('sidebarRole').textContent = currentUser.role;
+    setTimeout(initApp, 100);
+  }
+} catch(e) {}
+
+/* ── PANEL NAVIGATION ── */
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  loadPanel(id);
+}
+
+/* ── CLOCK ── */
+function updateClock() {
+  var now = new Date();
+  document.getElementById('clockDisplay').textContent =
+    now.toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }) +
+    ' IST';
+}
+setInterval(updateClock, 1000); updateClock();
+
+/* ── DATA HELPERS ── */
+function getGam() { try { return JSON.parse(localStorage.getItem('ss_gamification')||'{}'); } catch(e) { return {}; } }
+function getPremium() { try { return JSON.parse(localStorage.getItem('ss_premium')||'{}'); } catch(e) { return {}; } }
+function getMockScores() { try { return JSON.parse(localStorage.getItem('ss_mock_scores')||'{}'); } catch(e) { return {}; } }
+function getQBank() { try { return JSON.parse(localStorage.getItem('ss_admin_qbank')||'[]'); } catch(e) { return []; } }
+function saveQBank(data) { try { localStorage.setItem('ss_admin_qbank', JSON.stringify(data)); } catch(e) {} }
+function getSettings() { try { return JSON.parse(localStorage.getItem('ss_admin_settings')||'{}'); } catch(e) { return {}; } }
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ── INIT APP ── */
+function initApp() {
+  loadPanel('dashboard');
+  loadSettings();
+}
+
+/* ── LOAD PANEL ── */
+function loadPanel(id) {
+  switch(id) {
+    case 'dashboard':   loadDashboard(); break;
+    case 'agents':      loadAgents(); break;
+    case 'qbank':       loadQBank(); break;
+    case 'mcqs':        loadMCQs(); break;
+    case 'students':    loadStudents(); break;
+    case 'revenue':     loadRevenue(); break;
+    case 'compliance':  loadCompliance(); break;
+    case 'settings':    loadSettings(); break;
+  }
+}
+
+/* ── DASHBOARD ── */
+function loadDashboard() {
+  var gam      = getGam();
+  var premium  = getPremium();
+  var mocks    = getMockScores();
+
+  document.getElementById('dashDate').textContent =
+    'Last updated: ' + new Date().toLocaleString('en-IN');
+
+  document.getElementById('dm-students').textContent = Math.max(1, gam.totalCorrect ? Math.ceil(gam.totalCorrect/8) : 1);
+  document.getElementById('dm-doubts').textContent   = gam.totalDoubts || 0;
+  document.getElementById('dm-mocks').textContent    = gam.totalMocks  || 0;
+  document.getElementById('dm-streak').textContent   = gam.streak      || 0;
+  document.getElementById('dm-premium').textContent  = premium.active ? 'Active' : 'Free';
+  document.getElementById('dm-premium-sub').textContent = premium.active ? premium.planName : 'No subscribers yet';
+
+  /* Stream bars */
+  var chapters = gam.chaptersViewed || [];
+  var streams = [
+    { name:'NDA', key:'NDA_', color:'bf-gold' },
+    { name:'Delhi Police', key:'DP_', color:'bf-green' },
+    { name:'SSC GD', key:'SSCGD_', color:'bf-blue' },
+    { name:'Bank PO', key:'BANKPO_', color:'bf-purple' },
+  ];
+  var max = Math.max(1, ...streams.map(s => chapters.filter(c => c.startsWith(s.key)).length));
+  document.getElementById('streamBars').innerHTML = streams.map(s => {
+    var count = chapters.filter(c => c.startsWith(s.key)).length;
+    var pct   = Math.round((count/max)*100);
+    return '<div class="bar-row"><div class="bar-header"><span>' + s.name + '</span><span>' + count + ' chapters</span></div>' +
+      '<div class="bar-track"><div class="bar-fill ' + s.color + '" style="width:' + pct + '%"></div></div></div>';
+  }).join('');
+
+  /* Activity log */
+  var hist = (gam.history || []).slice(0,8);
+  var icons = {correct_answer:'🎯',doubt_submitted:'💬',mock_completed:'📝',daily_login:'☀️',chapter_done:'📖',streak_3:'🔥',streak_7:'🔥',first_doubt:'💎',mock_perfect:'🌟'};
+  var tags  = {correct_answer:'lt-green',doubt_submitted:'lt-blue',mock_completed:'lt-gold',daily_login:'lt-green',chapter_done:'lt-green',streak_3:'lt-gold',mock_perfect:'lt-gold'};
+  document.getElementById('activityLog').innerHTML = hist.length ? hist.map(h => {
+    var d = new Date(h.time);
+    var ts = d.toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + ' ' + d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    return '<div class="log-item"><div class="log-time">' + ts + '</div><div class="log-icon">' + (icons[h.event]||'⚡') + '</div><div class="log-text">' + h.event.replace(/_/g,' ') + '<span class="log-tag ' + (tags[h.event]||'lt-blue') + '" style="margin-left:6px;">+' + (h.xp||0) + ' XP</span></div></div>';
+  }).join('') : '<div style="color:var(--text3);font-size:.8rem;padding:10px 0;">No activity recorded yet.</div>';
+
+  /* Load MCQ count */
+  fetch('daily_mcqs.json?t=' + Date.now()).then(r => r.json()).then(d => {
+    document.getElementById('dm-mcqs').textContent = d.totalMCQs || 0;
+  }).catch(() => { document.getElementById('dm-mcqs').textContent = '⚙️'; });
+}
+
+/* ── AI AGENTS ── */
+function loadAgents() {
+  var agents = [
+    { icon:'👑', color:'#B87A18', bg:'rgba(245,166,35,.1)', title:'AI CEO Agent', desc:'Weekly KPI report, strategy briefing, anomaly detection. Reports to Ram Bhaj ji every Monday.', status:'active', statusLabel:'Active — Reports Monday 7am' },
+    { icon:'💰', color:'#22C55E', bg:'rgba(34,197,94,.1)', title:'AI CFO Agent', desc:'Revenue tracking, P&L generation, Razorpay webhook processing, API cost monitoring.', status:'active', statusLabel:'Active — Reports Sunday 9pm' },
+    { icon:'📚', color:'#3B82F6', bg:'rgba(59,130,246,.1)', title:'Content Creator Agent', desc:'Daily 75 MCQs via GitHub Actions at 5am IST. Saves to daily_mcqs.json automatically.', status:'active', statusLabel:'Active — Runs daily 5am IST' },
+    { icon:'🎓', color:'#A855F7', bg:'rgba(168,85,247,.1)', title:'AI Tutor Agent', desc:'24/7 doubt solving via Claude API. Answers in Hindi + English. Integrated in ask_doubt.html.', status:'active', statusLabel:'Active — 24/7 on demand' },
+    { icon:'📊', color:'#F5A623', bg:'rgba(245,166,35,.08)', title:'Adaptive Mock Engine', desc:'IRT-based difficulty adjustment. Wrong answer → easier Q. Post-test AI analysis report.', status:'active', statusLabel:'Active — All mock pages' },
+    { icon:'🏆', color:'#22C55E', bg:'rgba(34,197,94,.08)', title:'Gamification Agent', desc:'XP system, streaks, leaderboard, daily login rewards. Runs client-side via gamification.js.', status:'active', statusLabel:'Active — All pages' },
+    { icon:'📣', color:'#3B82F6', bg:'rgba(59,130,246,.08)', title:'Sales Conversion Agent', desc:'Free → paid nudges after 3rd mock. WhatsApp automated follow-up. Abandoned cart recovery.', status:'standby', statusLabel:'Standby — Activate when Razorpay live' },
+    { icon:'🔍', color:'#EF4444', bg:'rgba(239,68,68,.08)', title:'Ops Monitoring Agent', desc:'Uptime checking every 5min. Payment failure alerts. New student onboarding sequence.', status:'standby', statusLabel:'Standby — Needs Supabase setup' },
+  ];
+
+  document.getElementById('agentsList').innerHTML = agents.map(a =>
+    '<div class="agent-card">' +
+    '<div class="agent-icon" style="background:' + a.bg + ';color:' + a.color + ';">' + a.icon + '</div>' +
+    '<div><div class="agent-title">' + a.title + '</div><div class="agent-desc">' + a.desc + '</div></div>' +
+    '<div class="agent-status ' + (a.status==='active'?'status-on':'status-off') + '">' +
+    '<div class="status-dot ' + (a.status==='active'?'sd-on':'sd-off') + '"></div>' +
+    a.statusLabel + '</div></div>'
+  ).join('');
+}
+
+/* ── CEO REPORT ── */
+async function generateCEOReport() {
+  var btn = document.getElementById('genReportBtn');
+  btn.disabled = true; btn.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border:2px solid rgba(245,166,35,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;"></span> Generating...';
+
+  var gam = getGam(); var prem = getPremium(); var mocks = getMockScores();
+  var mockList = Object.values(mocks);
+  var avgScore = mockList.length ? Math.round(mockList.reduce((a,m) => a+(m.score/m.total*100),0)/mockList.length) : 0;
+
+  var ra = document.getElementById('reportArea');
+  ra.textContent = '';
+  var cursor = document.createElement('span'); cursor.className = 'report-cursor'; ra.appendChild(cursor);
+
+  var prompt = 'Generate a detailed CEO weekly report for Shyamsthali LLP — SSCracker platform.\n\nDate: ' + new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '\nReport to: Ram Bhaj Rawat Ji (Founder/Chairman)\n\nPlatform Data:\n- Doubts answered by AI Tutor: ' + (gam.totalDoubts||0) + '\n- Mock tests attempted: ' + (gam.totalMocks||0) + '\n- Chapters visited: ' + (gam.chaptersViewed||[]).length + '\n- XP earned: ' + (gam.xp||0) + '\n- Day streak: ' + (gam.streak||0) + '\n- Average mock score: ' + avgScore + '%\n- Premium status: ' + (prem.active ? prem.planName + ' — ' + prem.amount : 'Free tier only')\n\nWrite in Hindi (150-200 words) with sections:\n1. 🎯 इस हफ्ते की highlights\n2. 📈 Positive metrics\n3. ⚠️ Areas needing attention\n4. 🎬 Next week priorities (3 actions)\n5. 💬 Motivational closing\n\nAddress as "Ram Bhaj ji". Sign as "AI CEO Agent — SSCracker"';
+
+  if (window.SS_API && window.SS_API.isConfigured()) {
+    await window.SS_API.stream([{role:'user',content:prompt}], 'You are the AI CEO of SSCracker, a DPIIT startup by Shyamsthali LLP. Write warm, specific, actionable weekly reports in Hindi.', ra, () => {
+      if(cursor.parentNode) cursor.remove();
+      showWAReportBtn();
+      btn.disabled=false; btn.innerHTML='🤖 Regenerate Report';
+    });
+  } else {
+    if(cursor.parentNode) cursor.remove();
+    ra.textContent = '⚙️ AI Proxy not configured yet.\n\nOpen SETUP_GUIDE.html → Deploy Cloudflare Worker → Add PROXY_URL in ss_config.js\n\nOnce configured, CEO reports will generate automatically every Monday.';
+    btn.disabled=false; btn.innerHTML='🤖 Generate Report Now';
+  }
+}
+
+function showWAReportBtn() {
+  var text = document.getElementById('reportArea').textContent;
+  var msg  = '📊 *SSCracker Weekly CEO Report*\n_' + new Date().toLocaleDateString('en-IN') + '_\n\n' + text.slice(0,800) + '\n\n_Jai Shree Shyam Ji 🙏_\n_AI CEO Agent — SSCracker_';
+  var wa   = 'https://wa.me/' + FOUNDER_WA + '?text=' + encodeURIComponent(msg);
+  var btn  = document.getElementById('waReportBtn');
+  btn.href = wa; btn.style.display = 'inline-flex';
+}
+
+/* ── QUESTION BANK ── */
+function loadQBank() {
+  var qb = getQBank();
+  var streams = { NDA:0, DP:0, SSCGD:0, BANKPO:0 };
+  qb.forEach(q => { streams[q.stream] = (streams[q.stream]||0) + 1; });
+
+  document.getElementById('qbSummary').innerHTML =
+    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;">' +
+    Object.entries(streams).map(([k,v]) =>
+      '<div style="background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);padding:10px;text-align:center;"><div style="font-family:Rajdhani,sans-serif;font-size:1.4rem;font-weight:800;color:var(--gold);">' + v + '</div><div style="font-size:.7rem;color:var(--text3);">' + k + '</div></div>'
+    ).join('') + '</div><div style="margin-top:8px;font-size:.75rem;color:var(--text3);">Total: <strong style="color:var(--text1);">' + qb.length + '</strong> questions in admin bank. Plus existing chapter pages and daily_mcqs.json.</div>';
+
+  var recent = qb.slice(-5).reverse();
+  document.getElementById('qbRecentList').innerHTML = recent.length
+    ? '<table class="data-table"><thead><tr><th>#</th><th>Stream</th><th>Topic</th><th>Question</th><th>Diff</th></tr></thead><tbody>' +
+      recent.map((q,i) =>
+        '<tr><td>' + (qb.length-i) + '</td><td>' + esc(q.stream) + '</td><td>' + esc(q.subject) + '</td><td>' + esc(q.question.slice(0,60)) + '...</td><td>' + '⭐'.repeat(q.difficulty||3) + '</td></tr>'
+      ).join('') + '</tbody></table>'
+    : '<div style="color:var(--text3);font-size:.8rem;padding:10px 0;">No questions added yet. Use the form above.</div>';
+}
+
+function addQuestion() {
+  var q = {
+    stream:      document.getElementById('qbStream').value,
+    subject:     document.getElementById('qbSubject').value.trim(),
+    chapter:     document.getElementById('qbChapter').value.trim(),
+    difficulty:  parseInt(document.getElementById('qbDiff').value),
+    question:    document.getElementById('qbQuestion').value.trim(),
+    options:     [
+      document.getElementById('qbA').value.trim(),
+      document.getElementById('qbB').value.trim(),
+      document.getElementById('qbC').value.trim(),
+      document.getElementById('qbD').value.trim(),
+    ],
+    answer:      parseInt(document.getElementById('qbAnswer').value),
+    explanation: document.getElementById('qbExplanation').value.trim(),
+    shortcut:    document.getElementById('qbShortcut').value.trim(),
+    addedAt:     new Date().toISOString(),
+    addedBy:     currentUser ? currentUser.username : 'admin',
+  };
+
+  if (!q.question || !q.options[0] || !q.options[1]) {
+    showMsg('qbMsg', '❌ Question and at least 2 options required.', 'var(--red)');
+    return;
+  }
+
+  var qb = getQBank();
+  qb.push(q);
+  saveQBank(qb);
+  showMsg('qbMsg', '✅ Question saved! Total: ' + qb.length + ' questions.', 'var(--green)');
+  clearQForm();
+  loadQBank();
+}
+
+async function aiGenerateQ() {
+  var stream  = document.getElementById('qbStream').value;
+  var subject = document.getElementById('qbSubject').value.trim() || 'General Knowledge';
+  var chapter = document.getElementById('qbChapter').value.trim() || 'Mixed';
+
+  if (!window.SS_API || !window.SS_API.isConfigured()) {
+    showMsg('qbMsg', '⚙️ Configure Proxy first (SETUP_GUIDE.html)', 'var(--gold)');
+    return;
+  }
+
+  showMsg('qbMsg', '🤖 AI question generate हो रहा है...', 'var(--gold)');
+
+  var result = await window.SS_API.call(
+    [{ role:'user', content:'Generate 1 MCQ for ' + stream + ' exam, subject: ' + subject + ', chapter: ' + chapter + '. Return ONLY JSON: {"question":"...","options":["A","B","C","D"],"answer":0,"explanation":"...","shortcut":"..."}' }],
+    'You are an expert question setter for Indian competitive exams. Return only valid JSON, no markdown.',
+    300
+  );
+
+  if (result) {
+    try {
+      var clean = result.replace(/```json?|```/g,'').trim();
+      var q = JSON.parse(clean);
+      document.getElementById('qbQuestion').value    = q.question    || '';
+      document.getElementById('qbA').value           = q.options[0]  || '';
+      document.getElementById('qbB').value           = q.options[1]  || '';
+      document.getElementById('qbC').value           = q.options[2]  || '';
+      document.getElementById('qbD').value           = q.options[3]  || '';
+      document.getElementById('qbAnswer').value      = q.answer      || 0;
+      document.getElementById('qbExplanation').value = q.explanation  || '';
+      document.getElementById('qbShortcut').value    = q.shortcut     || '';
+      showMsg('qbMsg', '✅ AI question ready! Review करें और Save करें।', 'var(--green)');
+    } catch(e) { showMsg('qbMsg', '❌ Parse error. Try again.', 'var(--red)'); }
+  } else {
+    showMsg('qbMsg', '❌ AI unavailable. Proxy configured?', 'var(--red)');
+  }
+}
+
+function clearQForm() {
+  ['qbSubject','qbChapter','qbQuestion','qbA','qbB','qbC','qbD','qbExplanation','qbShortcut'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+/* ── MCQs PANEL ── */
+async function loadMCQs() {
+  try {
+    var resp = await fetch('daily_mcqs.json?t=' + Date.now());
+    var data = await resp.json();
+    var d    = new Date(data.generatedAt);
+    document.getElementById('mcqAgentStatus').innerHTML =
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px;">' +
+      '<div style="background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);padding:10px;"><div style="font-family:Rajdhani,sans-serif;font-size:1.4rem;font-weight:800;color:var(--green);">' + data.totalMCQs + '</div><div style="font-size:.7rem;color:var(--text3);">Today\'s MCQs</div></div>' +
+      '<div style="background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);padding:10px;"><div style="font-family:Rajdhani,sans-serif;font-size:.85rem;font-weight:700;color:var(--gold);">' + d.toLocaleDateString('en-IN') + '</div><div style="font-size:.7rem;color:var(--text3);">Generated at ' + d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) + '</div></div>' +
+      Object.entries(data.streams).map(([k,v]) => '<div style="background:var(--bg2);border:1px solid var(--rim);border-radius:var(--r-sm);padding:10px;"><div style="font-family:Rajdhani,sans-serif;font-size:1.2rem;font-weight:800;color:var(--text1);">' + v.count + '</div><div style="font-size:.7rem;color:var(--text3);">' + k + ' MCQs</div></div>').join('') +
+      '</div>';
+
+    var allQ = Object.values(data.streams).flatMap(s => s.mcqs||[]).slice(0,5);
+    document.getElementById('todayMCQs').innerHTML = allQ.length
+      ? '<table class="data-table"><thead><tr><th>#</th><th>Stream</th><th>Topic</th><th>Question</th><th>Difficulty</th></tr></thead><tbody>' +
+        allQ.map((q,i) => '<tr><td>' + (i+1) + '</td><td>' + esc(q.stream||'—') + '</td><td>' + esc(q.topic||'—') + '</td><td>' + esc((q.q||q).question.slice(0,70)) + '...</td><td>' + '★'.repeat(q.difficulty||3) + '</td></tr>').join('') +
+        '</tbody></table>'
+      : '<div style="color:var(--text3);font-size:.8rem;">No MCQs in file.</div>';
+  } catch(e) {
+    document.getElementById('mcqAgentStatus').innerHTML = '<div style="background:var(--red2);border:1px solid rgba(239,68,68,.2);border-radius:var(--r-sm);padding:12px;font-size:.82rem;color:var(--red);">⚠️ daily_mcqs.json not found. GitHub Actions configure करें → mcq_agent.js push करें → ANTHROPIC_API_KEY Secret add करें।</div>';
+    document.getElementById('todayMCQs').innerHTML = '';
+  }
+}
+
+async function triggerMCQAgent() {
+  if (!window.SS_API || !window.SS_API.isConfigured()) {
+    alert('⚙️ AI Proxy configure करें पहले।');
+    return;
+  }
+  alert('⚙️ Manual MCQ generation के लिए GitHub Actions → Run workflow पर जाएं। यह browser से directly trigger नहीं हो सकता (Node.js environment चाहिए)।');
+}
+
+/* ── STUDENTS ── */
+function loadStudents() {
+  var gam = getGam();
+  document.getElementById('studentOverview').innerHTML = '<table class="data-table"><thead><tr><th>Metric</th><th>Value</th><th>Status</th></tr></thead><tbody>' +
+    '<tr><td>Total XP Earned</td><td>' + (gam.xp||0) + '</td><td><span style="color:var(--gold);">Active</span></td></tr>' +
+    '<tr><td>Day Streak</td><td>' + (gam.streak||0) + ' days</td><td><span style="color:var(--green);">Good</span></td></tr>' +
+    '<tr><td>Correct Answers</td><td>' + (gam.totalCorrect||0) + '</td><td><span style="color:var(--green);">Growing</span></td></tr>' +
+    '<tr><td>Doubts Asked</td><td>' + (gam.totalDoubts||0) + '</td><td><span style="color:var(--blue);">AI Handled</span></td></tr>' +
+    '<tr><td>Chapters Visited</td><td>' + (gam.chaptersViewed||[]).length + '</td><td><span style="color:var(--green);">Tracking</span></td></tr>' +
+    '<tr><td>Mocks Completed</td><td>' + (gam.totalMocks||0) + '</td><td><span style="color:var(--gold);">Active</span></td></tr>' +
+    '</tbody></table><div style="margin-top:8px;font-size:.72rem;color:var(--text3);">Note: Full multi-student tracking needs Supabase backend. Currently tracking current device\'s student.</div>';
+}
+
+function buildAnnouncement() {
+  var text = document.getElementById('announcementText').value.trim();
+  if (!text) { alert('Message लिखें पहले।'); return; }
+  var msg = '📢 *SSCracker Announcement*\n\n' + text + '\n\n🙏 Jai Shree Shyam Ji\n_Team SSCracker — Shyamsthali LLP_';
+  document.getElementById('announcementBtn').href = 'https://wa.me/' + FOUNDER_WA + '?text=' + encodeURIComponent(msg);
+}
+
+/* ── REVENUE ── */
+function loadRevenue() {
+  var prem = getPremium();
+  var active = prem.active && new Date(prem.expiresOn) > new Date();
+  var planAmounts = { monthly: 299, annual: 1999, bundle: 2999 };
+  var amount = prem.amount ? parseInt((prem.amount||'0').replace(/[^0-9]/g,'')) : 0;
+
+  document.getElementById('rev-mrr').textContent   = active ? '₹' + (prem.plan === 'annual' ? Math.round(amount/12) : amount) : '₹0';
+  document.getElementById('rev-total').textContent = active ? prem.amount || '₹0' : '₹0';
+  document.getElementById('rev-subs').textContent  = active ? '1' : '0';
+  document.getElementById('rev-conv').textContent  = active ? '100%' : '0%';
+
+  document.getElementById('paymentRecords').innerHTML = active
+    ? '<table class="data-table"><thead><tr><th>Student</th><th>Plan</th><th>Amount</th><th>Date</th><th>Expires</th></tr></thead><tbody>' +
+      '<tr><td>' + esc(prem.name||'—') + '</td><td>' + esc(prem.planName||'—') + '</td><td style="color:var(--green);">' + esc(prem.amount||'—') + '</td><td>' + new Date(prem.activatedOn||'').toLocaleDateString('en-IN') + '</td><td>' + new Date(prem.expiresOn||'').toLocaleDateString('en-IN') + '</td></tr>' +
+      '</tbody></table>'
+    : '<div style="color:var(--text3);font-size:.8rem;padding:10px 0;">No payments yet. Razorpay configure करें → payment.html live करें।</div>';
+
+  document.getElementById('planDistribution').innerHTML =
+    '<div class="bar-row"><div class="bar-header"><span>Monthly (₹299)</span><span>' + (prem.plan==='monthly'?'1':'0') + ' subscriber</span></div><div class="bar-track"><div class="bar-fill bf-gold" style="width:' + (prem.plan==='monthly'?'100':'0') + '%;"></div></div></div>' +
+    '<div class="bar-row"><div class="bar-header"><span>Annual (₹1,999)</span><span>' + (prem.plan==='annual'?'1':'0') + ' subscriber</span></div><div class="bar-track"><div class="bar-fill bf-green" style="width:' + (prem.plan==='annual'?'100':'0') + '%;"></div></div></div>' +
+    '<div class="bar-row"><div class="bar-header"><span>Bundle (₹2,999)</span><span>' + (prem.plan==='bundle'?'1':'0') + ' subscriber</span></div><div class="bar-track"><div class="bar-fill bf-blue" style="width:' + (prem.plan==='bundle'?'100':'0') + '%;"></div></div></div>';
+}
+
+/* ── COMPLIANCE ── */
+function loadCompliance() {
+  var now = new Date();
+  var items = [
+    { date:'30 May', text:'LLP Form 11 — Annual Return', dl: new Date(now.getFullYear(),4,30) },
+    { date:'30 Oct', text:'LLP Form 8 — Statement of Accounts', dl: new Date(now.getFullYear(),9,30) },
+    { date:'15 Jun', text:'GST GSTR-3B — May return', dl: new Date(now.getFullYear(),5,15) },
+    { date:'15 Jul', text:'GST GSTR-3B — June return', dl: new Date(now.getFullYear(),6,15) },
+    { date:'30 Sep', text:'ROC Annual Return (if Pvt. Ltd.)', dl: new Date(now.getFullYear(),8,30) },
+    { date:'30 Nov', text:'DPIIT Recognition renewal check', dl: new Date(now.getFullYear(),10,30) },
+  ].sort((a,b) => a.dl - b.dl);
+
+  document.getElementById('complianceList').innerHTML = items.map(item => {
+    var days = Math.ceil((item.dl - now)/86400000);
+    var cls  = days < 30 ? 'cd-red' : days < 90 ? 'cd-amber' : 'cd-green';
+    var lbl  = days < 0 ? 'Overdue!' : days + ' days';
+    return '<div class="comp-row"><div class="comp-date">' + item.date + '</div><div class="comp-text">' + item.text + '</div><div class="comp-days ' + cls + '">' + lbl + '</div></div>';
+  }).join('');
+
+  var checks = [];
+  try { checks = JSON.parse(localStorage.getItem('ss_comp_checks')||'[]'); } catch(e){}
+  var tasks = [
+    'Form 3 amendment file करें — EdTech + Telecom object clause',
+    'DPIIT Startup India registration apply करें (nsws.gov.in)',
+    'Cloudflare Worker deploy करें + ANTHROPIC_API_KEY add करें',
+    'GitHub repo बनाएं + SSCracker_v2 push करें',
+    'GitHub Pages enable करें (free hosting)',
+    'Razorpay live account activate करें',
+    'MSME Udyam Registration करें (free)',
+    'DPIIT innovation description draft करें',
+  ];
+  document.getElementById('actionChecklist').innerHTML = tasks.map((t,i) => {
+    var done = checks.includes(i);
+    return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--rim2);">' +
+      '<div onclick="toggleComp(' + i + ')" style="width:18px;height:18px;border-radius:4px;border:1.5px solid ' + (done?'var(--green)':'var(--rim)') + ';background:' + (done?'var(--green)':'transparent') + ';display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;cursor:pointer;flex-shrink:0;margin-top:2px;">' + (done?'✓':'') + '</div>' +
+      '<div style="font-size:.82rem;color:' + (done?'var(--text3)':'var(--text2)') + ';' + (done?'text-decoration:line-through;':'') + '">' + t + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function toggleComp(i) {
+  var checks = [];
+  try { checks = JSON.parse(localStorage.getItem('ss_comp_checks')||'[]'); } catch(e){}
+  var idx = checks.indexOf(i);
+  if (idx>=0) checks.splice(idx,1); else checks.push(i);
+  try { localStorage.setItem('ss_comp_checks', JSON.stringify(checks)); } catch(e){}
+  loadCompliance();
+}
+
+/* ── SETTINGS ── */
+function loadSettings() {
+  var s = getSettings();
+  if (s.proxy)    document.getElementById('settingProxy').value    = s.proxy;
+  if (s.razorpay) document.getElementById('settingRazorpay').value = s.razorpay;
+  if (s.whatsapp) document.getElementById('settingWhatsapp').value = s.whatsapp;
+}
+
+function saveSettings() {
+  var s = {
+    proxy:    document.getElementById('settingProxy').value.trim(),
+    razorpay: document.getElementById('settingRazorpay').value.trim(),
+    whatsapp: document.getElementById('settingWhatsapp').value.trim(),
+  };
+  try { localStorage.setItem('ss_admin_settings', JSON.stringify(s)); } catch(e){}
+
+  /* Update SS_CONFIG live */
+  if (window.SS_CONFIG && s.proxy) window.SS_CONFIG.PROXY_URL = s.proxy;
+  if (window.SS_CONFIG && s.razorpay) window.SS_CONFIG.RAZORPAY_KEY = s.razorpay;
+  if (s.whatsapp) FOUNDER_WA = s.whatsapp;
+
+  showMsg('settingMsg', '✅ Settings saved!', 'var(--green)');
+}
+
+/* ── HELPERS ── */
+function showMsg(id, msg, color) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.style.color = color || 'var(--text1)';
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="ss_theme.css"/>
+<meta charset="UTF-8">
+<title>Leaderboard – SSCracker | Shyamsthali LLP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#001a3a; --navy2:#002e5b; --navy3:#003e7a;
+  --gold:#f5a623; --gold2:#ffd166;
+  --silver:#c0c8d8; --bronze:#cd7f32;
+  --green:#2ecc71; --red:#e74c3c;
+  --card:#0a2240; --card2:#0e2d52;
+  --text:#e8edf5; --muted:#7a90b0;
+  --radius:14px; --radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Noto Sans',sans-serif;
+  background:var(--navy);color:var(--text);
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(0,62,122,.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(245,166,35,.08) 0%, transparent 50%);
+}
+
+/* ── Header ── */
+header{
+  background:rgba(0,26,58,.95);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  padding:0 20px;
+  backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:100;
+}
+.header-inner{
+  max-width:860px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;gap:12px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gold);display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:15px;color:var(--navy);
+}
+.brand-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.1rem;color:#fff;}
+.brand-sub{font-size:.68rem;color:var(--muted);}
+.back-link{
+  color:var(--muted);text-decoration:none;font-size:.82rem;
+  display:flex;align-items:center;gap:5px;
+  padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.1);
+  transition:all .2s;
+}
+.back-link:hover{background:rgba(255,255,255,.05);color:var(--text);}
+
+/* ── Main ── */
+main{max-width:860px;margin:0 auto;padding:24px 14px 50px;}
+
+/* ── Hero section ── */
+.lb-hero{
+  text-align:center;padding:32px 20px 24px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  margin-bottom:28px;
+}
+.lb-icon{font-size:40px;margin-bottom:8px;}
+.lb-hero h1{
+  font-family:'Baloo 2',cursive;font-weight:800;
+  font-size:1.9rem;color:#fff;margin-bottom:6px;
+  letter-spacing:-.01em;
+}
+.lb-hero p{font-size:.9rem;color:var(--muted);line-height:1.5;}
+.week-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);
+  border-radius:20px;padding:5px 14px;font-size:.78rem;
+  color:var(--gold);margin-top:10px;font-weight:600;
+}
+
+/* ── My stats card ── */
+.my-stats{
+  background:var(--card);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);padding:18px 20px;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.my-avatar{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--navy3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:20px;
+  color:var(--gold);flex-shrink:0;border:2px solid var(--gold);
+}
+.my-info{flex:1;min-width:120px;}
+.my-name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1rem;color:#fff;margin-bottom:2px;}
+.my-level{font-size:.78rem;color:var(--muted);}
+.my-metrics{display:flex;gap:16px;flex-wrap:wrap;}
+.metric{text-align:center;}
+.metric-val{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.3rem;color:var(--gold);}
+.metric-label{font-size:.68rem;color:var(--muted);margin-top:1px;}
+.progress-wrap{
+  width:100%;margin-top:10px;
+  background:rgba(255,255,255,.06);border-radius:4px;height:6px;overflow:hidden;
+}
+.progress-fill{height:100%;background:var(--gold);border-radius:4px;transition:width .6s;}
+.progress-label{font-size:.7rem;color:var(--muted);margin-top:4px;}
+
+/* ── Filter tabs ── */
+.filter-tabs{
+  display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;
+}
+.filter-tab{
+  padding:7px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.1);
+  background:transparent;color:var(--muted);font-family:'Baloo 2',cursive;
+  font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.filter-tab.active{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.filter-tab:hover:not(.active){background:rgba(255,255,255,.05);color:var(--text);}
+
+/* ── Leaderboard table ── */
+.lb-table{width:100%;}
+.lb-row{
+  display:grid;
+  grid-template-columns:44px 1fr 80px 70px;
+  gap:10px;align-items:center;
+  padding:12px 16px;
+  border-radius:var(--radius-sm);
+  margin-bottom:6px;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.05);
+  transition:border-color .15s;
+  cursor:default;
+}
+.lb-row:hover{border-color:rgba(255,255,255,.12);}
+.lb-row.me{
+  background:rgba(0,62,122,.6);
+  border:1px solid var(--gold);
+}
+.lb-row.gold  { background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.3); }
+.lb-row.silver{ background:rgba(192,200,216,.06);border-color:rgba(192,200,216,.2); }
+.lb-row.bronze{ background:rgba(205,127,50,.06);border-color:rgba(205,127,50,.2); }
+
+.rank-badge{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:14px;
+  background:rgba(255,255,255,.05);color:var(--muted);
+}
+.rank-badge.r1{background:var(--gold);color:var(--navy);font-size:18px;}
+.rank-badge.r2{background:var(--silver);color:#1a1a2e;font-size:16px;}
+.rank-badge.r3{background:var(--bronze);color:#fff;font-size:15px;}
+
+.student-info{}
+.student-name{
+  font-family:'Baloo 2',cursive;font-weight:700;
+  font-size:.95rem;color:#fff;margin-bottom:2px;
+}
+.student-meta{font-size:.72rem;color:var(--muted);}
+.student-level{
+  display:inline-block;background:rgba(255,255,255,.07);
+  border-radius:10px;padding:1px 7px;font-size:.67rem;
+  color:var(--muted);margin-left:5px;
+}
+.student-streak{color:#ff7043;font-size:.75rem;}
+
+.xp-val{
+  font-family:'Baloo 2',cursive;font-weight:700;
+  font-size:1rem;color:var(--gold);text-align:right;
+}
+.xp-sub{font-size:.65rem;color:var(--muted);text-align:right;}
+
+.streak-val{
+  font-family:'Baloo 2',cursive;font-weight:700;
+  font-size:.95rem;color:#ff7043;text-align:right;
+}
+
+/* ── Header row ── */
+.lb-header{
+  display:grid;
+  grid-template-columns:44px 1fr 80px 70px;
+  gap:10px;padding:6px 16px;
+  font-size:.7rem;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:6px;
+}
+
+/* ── Empty state ── */
+.empty{
+  text-align:center;padding:48px 20px;
+  background:var(--card);border-radius:var(--radius);
+  border:1px dashed rgba(255,255,255,.1);
+}
+.empty-icon{font-size:36px;margin-bottom:12px;}
+.empty-title{
+  font-family:'Baloo 2',cursive;font-weight:700;
+  font-size:1.1rem;color:var(--text);margin-bottom:8px;
+}
+.empty-sub{font-size:.85rem;color:var(--muted);line-height:1.5;}
+
+/* ── History panel ── */
+.history-card{
+  background:var(--card);border:1px solid rgba(255,255,255,.07);
+  border-radius:var(--radius);padding:18px 20px;margin-top:24px;
+}
+.history-title{
+  font-family:'Baloo 2',cursive;font-weight:700;
+  font-size:1rem;color:#fff;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.hist-row{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);
+}
+.hist-row:last-child{border-bottom:none;}
+.hist-icon{width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.06);display:flex;align-items:center;
+  justify-content:center;font-size:12px;flex-shrink:0;}
+.hist-text{flex:1;font-size:.83rem;color:var(--text);}
+.hist-xp{font-family:'Baloo 2',cursive;font-weight:700;font-size:.88rem;color:var(--gold);}
+.hist-time{font-size:.7rem;color:var(--muted);}
+
+/* ── Nav ── */
+.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px;}
+.navlinks a{
+  color:var(--muted);text-decoration:none;font-size:.8rem;
+  background:rgba(255,255,255,.04);padding:7px 12px;
+  border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.07);
+  transition:all .15s;
+}
+.navlinks a:hover{background:rgba(255,255,255,.08);color:var(--text);}
+
+/* ── Responsive ── */
+@media(max-width:500px){
+  .lb-row{grid-template-columns:38px 1fr 65px;}
+  .streak-val{display:none;}
+  .lb-header .h-streak{display:none;}
+  .my-metrics{gap:10px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">SC</div>
+      <div>
+        <div class="brand-name">SSCracker</div>
+        <div class="brand-sub">Shyamsthali LLP</div>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← Home</a>
+  </div>
+</header>
+
+<main>
+
+  <div class="lb-hero">
+    <div class="lb-icon">🏆</div>
+    <h1 id="heroTitle">All-India Leaderboard</h1>
+    <p id="heroSub">अपने साथी aspirants से compare करें। हर सही जवाब, हर Mock, हर Doubt आपको ऊपर ले जाता है।</p>
+    <div class="week-badge" id="weekBadge">📅 This week • Live rankings</div>
+  </div>
+
+  <!-- My Stats -->
+  <div class="my-stats" id="myStatsCard">
+    <div class="my-avatar" id="myAvatar">?</div>
+    <div class="my-info" style="flex:1;">
+      <div class="my-name" id="myName">Student</div>
+      <div class="my-level" id="myLevelText">Loading...</div>
+      <div class="progress-wrap">
+        <div class="progress-fill" id="myProgressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="myProgressLabel"></div>
+    </div>
+    <div class="my-metrics">
+      <div class="metric">
+        <div class="metric-val" id="myXP">0</div>
+        <div class="metric-label">Total XP</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" id="myStreak">0🔥</div>
+        <div class="metric-label">Streak</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val" id="myMocks">0</div>
+        <div class="metric-label">Mocks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="setFilter('all')" id="tabAll">All India</button>
+    <button class="filter-tab" onclick="setFilter('nda')" id="tabNDA">NDA</button>
+    <button class="filter-tab" onclick="setFilter('sscgd')" id="tabSSC">SSC GD</button>
+    <button class="filter-tab" onclick="setFilter('dp')" id="tabDP">Delhi Police</button>
+    <button class="filter-tab" onclick="setFilter('bankpo')" id="tabBank">Bank PO</button>
+  </div>
+
+  <!-- Leaderboard list -->
+  <div class="lb-header">
+    <div>#</div>
+    <div>Student</div>
+    <div style="text-align:right;">XP</div>
+    <div class="h-streak" style="text-align:right;">Streak</div>
+  </div>
+  <div id="lbList"></div>
+
+  <!-- XP History -->
+  <div class="history-card" id="historyCard" style="display:none;">
+    <div class="history-title">⚡ आपकी Recent Activity</div>
+    <div id="historyList"></div>
+  </div>
+
+  <!-- Nav -->
+  <div class="navlinks">
+    <a href="index.html">🏠 Home</a>
+    <a href="nda/nda_index.html">📘 NDA</a>
+    <a href="delhi_police/dp_index.html">👮 Delhi Police</a>
+    <a href="ssc_GD/ssc_gd_index.html">🛡️ SSC GD</a>
+    <a href="ask_doubt.html">💬 Ask Doubt</a>
+  </div>
+
+</main>
+
+<script src="ss_config.js"></script>
+<script src="gamification.js"></script>
+<script src="lang.js"></script>
+<script src="ss_ai_core.js"></script>
+<script>
+/* ═══════════════════════════════════
+   LEVELS reference (same as gamification.js)
+═══════════════════════════════════ */
+var LEVELS = [
+  {min:0,   name:'Recruit',   nameHI:'नवसैनिक',   badge:'🪖'},
+  {min:100, name:'Cadet',     nameHI:'कैडेट',     badge:'⭐'},
+  {min:300, name:'Trainee',   nameHI:'प्रशिक्षु', badge:'🌟'},
+  {min:600, name:'Scholar',   nameHI:'विद्वान',   badge:'📚'},
+  {min:1000,name:'Expert',    nameHI:'विशेषज्ञ', badge:'🎯'},
+  {min:1600,name:'Champion',  nameHI:'चैंपियन',  badge:'🏆'},
+  {min:2400,name:'Warrior',   nameHI:'योद्धा',   badge:'⚔️'},
+  {min:3500,name:'Commander', nameHI:'कमांडर',   badge:'🎖️'},
+  {min:5000,name:'General',   nameHI:'जनरल',     badge:'🌠'},
+  {min:7500,name:'Legend',    nameHI:'लीजेंड',   badge:'👑'},
+];
+
+function getLevelForXP(xp) {
+  for (var i = LEVELS.length - 1; i >= 0; i--) {
+    if (xp >= LEVELS[i].min) return i;
+  }
+  return 0;
+}
+
+var currentFilter = 'all';
+
+/* ═══════════════════════════════════
+   LOAD MY STATS
+═══════════════════════════════════ */
+function loadMyStats() {
+  if (!window.SSG) return;
+  var s = window.SSG.getStats();
+  var name = '';
+  try { name = localStorage.getItem('ss_user_email') || localStorage.getItem('ss_user_name') || ''; } catch(e){}
+  name = name.split('@')[0] || 'Student';
+
+  document.getElementById('myAvatar').textContent = (name[0] || 'S').toUpperCase();
+  document.getElementById('myName').textContent   = name;
+  document.getElementById('myLevelText').textContent =
+    s.levelBadge + ' ' + s.levelName + ' (Level ' + (s.level + 1) + ')';
+  document.getElementById('myXP').textContent     = s.xp;
+  document.getElementById('myStreak').textContent = s.streak + '🔥';
+  document.getElementById('myMocks').textContent  = s.totalMocks;
+  document.getElementById('myProgressFill').style.width = s.progressPct + '%';
+
+  var nextLabel = s.nextLevel
+    ? (s.xpToNext + ' XP to ' + s.nextLevel)
+    : 'MAX LEVEL 👑';
+  document.getElementById('myProgressLabel').textContent = nextLabel;
+}
+
+/* ═══════════════════════════════════
+   LOAD LEADERBOARD DATA
+═══════════════════════════════════ */
+function getAllEntries() {
+  var entries = [];
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.startsWith('ss_lb_')) {
+        var val = JSON.parse(localStorage.getItem(key));
+        if (val && typeof val.xp === 'number') entries.push(val);
+      }
+    }
+  } catch(e){}
+
+  // If no real entries, generate demo entries so page isn't empty
+  if (entries.length < 3) {
+    var demos = [
+      {name:'Rahul Sharma',   xp:2850, level:6, streak:14, demo:true},
+      {name:'Priya Singh',    xp:2210, level:5, streak:9,  demo:true},
+      {name:'Amit Verma',     xp:1890, level:5, streak:7,  demo:true},
+      {name:'Sunita Devi',    xp:1450, level:4, streak:5,  demo:true},
+      {name:'Rajesh Kumar',   xp:1100, level:4, streak:3,  demo:true},
+      {name:'Neha Gupta',     xp:820,  level:3, streak:12, demo:true},
+      {name:'Vikram Yadav',   xp:630,  level:3, streak:4,  demo:true},
+      {name:'Kavita Rawat',   xp:430,  level:2, streak:6,  demo:true},
+      {name:'Deepak Negi',    xp:290,  level:1, streak:2,  demo:true},
+      {name:'Anita Bisht',    xp:150,  level:1, streak:1,  demo:true},
+    ];
+    // Add own entry if it doesn't exist
+    var myName = '';
+    try { myName = (localStorage.getItem('ss_user_email') || '').split('@')[0]; } catch(e){}
+    var hasOwn = entries.some(function(e){ return e.name === myName; });
+    if (!hasOwn && myName) {
+      var stats = window.SSG ? window.SSG.getStats() : {xp:0, level:0, streak:0};
+      entries.push({name: myName, xp: stats.xp, level: stats.level, streak: stats.streak});
+    }
+    // Fill with demos
+    entries = entries.concat(demos.slice(0, 10 - entries.length));
+  }
+
+  return entries.sort(function(a,b){ return b.xp - a.xp; });
+}
+
+/* ═══════════════════════════════════
+   RENDER LEADERBOARD
+═══════════════════════════════════ */
+function setFilter(f) {
+  currentFilter = f;
+  ['all','nda','sscgd','dp','bankpo'].forEach(function(k) {
+    var tab = document.getElementById('tab' + k.charAt(0).toUpperCase() + k.slice(1));
+    if (!tab) return;
+    tab.classList.toggle('active', k === f);
+  });
+  // Map tab IDs correctly
+  document.getElementById('tabAll').classList.toggle('active', f==='all');
+  document.getElementById('tabNDA').classList.toggle('active', f==='nda');
+  document.getElementById('tabSSC').classList.toggle('active', f==='sscgd');
+  document.getElementById('tabDP').classList.toggle('active', f==='dp');
+  document.getElementById('tabBank').classList.toggle('active', f==='bankpo');
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  var entries = getAllEntries();
+  var myName  = '';
+  try { myName = (localStorage.getItem('ss_user_email') || '').split('@')[0]; } catch(e){}
+
+  var el = document.getElementById('lbList');
+
+  if (!entries.length) {
+    el.innerHTML = '<div class="empty">' +
+      '<div class="empty-icon">📊</div>' +
+      '<div class="empty-title">अभी कोई data नहीं है</div>' +
+      '<div class="empty-sub">Questions solve करें, Mock Tests दें — आपका नाम यहाँ दिखेगा।</div>' +
+      '</div>';
+    return;
+  }
+
+  var html = '';
+  entries.forEach(function(entry, i) {
+    var rank  = i + 1;
+    var isMe  = entry.name === myName;
+    var lvIdx = getLevelForXP(entry.xp);
+    var lvl   = LEVELS[lvIdx];
+    var rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+    var badgeClass = rank === 1 ? 'r1' : rank === 2 ? 'r2' : rank === 3 ? 'r3' : '';
+    var rankEmoji  = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank;
+    var demoTag = entry.demo ? ' <span style="font-size:.65rem;opacity:.4;">(demo)</span>' : '';
+    var meTag   = isMe ? ' <span style="font-size:.65rem;color:var(--gold);">← आप</span>' : '';
+
+    html += '<div class="lb-row ' + rankClass + (isMe ? ' me' : '') + '">' +
+      '<div class="rank-badge ' + badgeClass + '">' + rankEmoji + '</div>' +
+      '<div class="student-info">' +
+        '<div class="student-name">' + esc(entry.name) + meTag + demoTag + '</div>' +
+        '<div class="student-meta">' +
+          lvl.badge + '<span class="student-level">' + lvl.name + '</span>' +
+          (entry.streak >= 3 ? ' <span class="student-streak">🔥' + entry.streak + ' days</span>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div>' +
+        '<div class="xp-val">' + entry.xp.toLocaleString('en-IN') + '</div>' +
+        '<div class="xp-sub">XP</div>' +
+      '</div>' +
+      '<div class="streak-val">' + (entry.streak >= 1 ? entry.streak + '🔥' : '—') + '</div>' +
+    '</div>';
+  });
+
+  el.innerHTML = html;
+}
+
+/* ═══════════════════════════════════
+   RENDER HISTORY
+═══════════════════════════════════ */
+function renderHistory() {
+  if (!window.SSG) return;
+  var stats = window.SSG.getStats();
+  if (!stats.history || !stats.history.length) return;
+
+  var icons = {
+    correct_answer: '🎯', doubt_submitted: '💬', mock_completed: '📝',
+    daily_login: '☀️', chapter_done: '📖', streak_3: '🔥',
+    streak_7: '🔥', streak_14: '🔥🔥', streak_30: '👑',
+    first_doubt: '💎', mock_perfect: '🌟',
+  };
+
+  var labels = {
+    correct_answer: 'Correct answer', doubt_submitted: 'Doubt asked',
+    mock_completed: 'Mock completed', daily_login: 'Daily login',
+    chapter_done: 'Chapter viewed', streak_3: '3-day streak!',
+    streak_7: '7-day streak! 🔥', streak_14: '14-day streak!',
+    streak_30: '30-day streak! 👑', first_doubt: 'First doubt bonus!',
+    mock_perfect: 'Perfect score!',
+  };
+
+  var card = document.getElementById('historyCard');
+  var list = document.getElementById('historyList');
+  card.style.display = 'block';
+
+  var html = '';
+  stats.history.forEach(function(h) {
+    var icon  = icons[h.event]  || '⚡';
+    var label = labels[h.event] || h.event.replace(/_/g,' ');
+    var xpTable = window.SSG.xpTable;
+    var xp = xpTable[h.event] || 0;
+    var d  = new Date(h.time);
+    var ts = d.toLocaleDateString('en-IN',{day:'numeric',month:'short'}) + ' ' +
+             d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+
+    html += '<div class="hist-row">' +
+      '<div class="hist-icon">' + icon + '</div>' +
+      '<div class="hist-text">' + label + '</div>' +
+      (xp ? '<div class="hist-xp">+' + xp + ' XP</div>' : '') +
+      '<div class="hist-time">' + ts + '</div>' +
+    '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    loadMyStats();
+    renderLeaderboard();
+    renderHistory();
+  }, 300); // wait for SSG to init
+});
+</script>
+</body>
+</html>

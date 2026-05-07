@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../ss_theme.css"/>
+<meta charset="UTF-8"/>
+<title>Delhi Police – Adaptive Mock Test | SSCracker</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#002e5b;--navy2:#003e7a;
+  --gold:#f5a623;--gold2:#fff3d4;
+  --green:#27ae60;--green2:#eafaf1;
+  --red:#e74c3c;--red2:#fdecea;
+  --blue:#2980b9;--blue2:#ebf5fb;
+  --card:#fff;--page:#f0f4fb;
+  --text:#1a1a2e;--muted:#5a6480;--border:#dde5f5;
+  --radius:14px;--radius-sm:9px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--page);color:var(--text);min-height:100vh;}
+
+/* ── Header ── */
+.top-bar{background:var(--navy);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2);}
+.top-brand{display:flex;align-items:center;gap:8px;}
+.top-logo{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-weight:800;font-size:13px;color:var(--navy);}
+.top-name{font-family:'Baloo 2',cursive;font-weight:700;color:#fff;font-size:.95rem;}
+.top-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.timer-box{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;}
+.timer-icon{font-size:14px;}
+.timer-val{font-family:'Baloo 2',cursive;font-weight:700;font-size:1rem;color:#fff;}
+.timer-val.red{color:#ff6b6b;}
+.progress-pill{font-size:.75rem;color:#aac4e8;background:rgba(255,255,255,.08);border-radius:20px;padding:4px 10px;}
+
+/* ── Layout ── */
+.layout{max-width:900px;margin:0 auto;padding:16px 12px 40px;display:grid;grid-template-columns:1fr 200px;gap:14px;}
+@media(max-width:640px){.layout{grid-template-columns:1fr;}}
+
+/* ── Question Card ── */
+.q-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:20px;}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.q-num{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.1rem;color:var(--navy);}
+.q-section{font-size:.72rem;background:var(--blue2);color:var(--blue);border-radius:20px;padding:3px 10px;font-weight:600;}
+.diff-bar{display:flex;gap:3px;align-items:center;}
+.diff-dot{width:7px;height:7px;border-radius:50%;}
+.diff-dot.on{background:var(--gold);}
+.diff-dot.off{background:var(--border);}
+.diff-label{font-size:.68rem;color:var(--muted);margin-left:4px;}
+
+.q-text{font-size:.97rem;line-height:1.7;color:var(--text);margin-bottom:18px;font-weight:500;}
+
+/* Options */
+.options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.opt-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--border);background:var(--page);
+  cursor:pointer;text-align:left;width:100%;
+  font-family:'Noto Sans',sans-serif;font-size:.9rem;color:var(--text);
+  transition:all .15s;
+}
+.opt-btn:hover:not(:disabled){border-color:var(--navy);background:#f0f4ff;}
+.opt-btn.selected{border-color:var(--navy);background:#eef3ff;}
+.opt-btn.correct{border-color:var(--green);background:var(--green2);color:#1a6e3e;}
+.opt-btn.wrong{border-color:var(--red);background:var(--red2);color:#8b1a1a;}
+.opt-btn:disabled{cursor:default;}
+.opt-letter{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--border);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700;flex-shrink:0;font-family:'Baloo 2',cursive;
+  transition:all .15s;
+}
+.opt-btn.selected .opt-letter{background:var(--navy);color:#fff;}
+.opt-btn.correct .opt-letter{background:var(--green);color:#fff;}
+.opt-btn.wrong   .opt-letter{background:var(--red);color:#fff;}
+
+/* Feedback box */
+.feedback-box{
+  border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;
+  font-size:.85rem;line-height:1.6;display:none;
+}
+.fb-correct{background:var(--green2);border-left:4px solid var(--green);color:#1a6e3e;}
+.fb-wrong{background:var(--red2);border-left:4px solid var(--red);color:#8b1a1a;}
+.fb-title{font-weight:600;margin-bottom:4px;}
+
+/* Hint box */
+.hint-section{margin-bottom:14px;}
+.hint-btn{background:transparent;border:1px solid var(--gold);color:#8b5e0a;border-radius:var(--radius-sm);padding:6px 12px;font-size:.78rem;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:600;}
+.hint-btn:hover{background:var(--gold2);}
+.hint-box{background:var(--gold2);border-radius:var(--radius-sm);padding:10px 12px;margin-top:6px;font-size:.82rem;color:#6b4400;display:none;}
+
+/* Nav controls */
+.q-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.nav-btn{padding:9px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--page);font-family:'Baloo 2',cursive;font-weight:600;font-size:.85rem;color:var(--navy);cursor:pointer;transition:all .15s;}
+.nav-btn:hover{border-color:var(--navy);background:#eef3ff;}
+.nav-btn:disabled{opacity:.4;cursor:default;}
+.next-btn{background:var(--navy);border-color:var(--navy);color:#fff;}
+.next-btn:hover{background:var(--navy2);}
+.submit-btn{background:var(--green);border-color:var(--green);color:#fff;}
+.submit-btn:hover{background:#1e8e4e;}
+
+/* ── Side Panel ── */
+.side-panel{}
+.side-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:14px;margin-bottom:12px;}
+.side-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:10px;}
+
+/* Question grid */
+.q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+.q-dot{
+  width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--border);background:var(--page);color:var(--muted);
+  transition:all .12s;
+}
+.q-dot:hover{border-color:var(--navy);color:var(--navy);}
+.q-dot.current{background:var(--navy);border-color:var(--navy);color:#fff;}
+.q-dot.answered{background:#dbeafe;border-color:#93c5fd;color:var(--navy);}
+.q-dot.correct{background:var(--green2);border-color:var(--green);color:#1a6e3e;}
+.q-dot.wrong{background:var(--red2);border-color:var(--red);color:#8b1a1a;}
+
+/* Section stats */
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);}
+.stat-row:last-child{border-bottom:none;}
+.stat-name{font-size:.73rem;color:var(--muted);flex:1;}
+.stat-pct{font-family:'Baloo 2',cursive;font-weight:700;font-size:.85rem;}
+.pct-good{color:var(--green);}
+.pct-ok{color:var(--gold);}
+.pct-bad{color:var(--red);}
+
+/* ── Screens ── */
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ── Start screen ── */
+.start-screen{max-width:520px;margin:40px auto;text-align:center;}
+.start-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:28px 24px;}
+.start-icon{font-size:40px;margin-bottom:12px;}
+.start-title{font-family:'Baloo 2',cursive;font-weight:800;font-size:1.5rem;color:var(--navy);margin-bottom:8px;}
+.start-sub{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.start-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.sm-item{background:var(--page);border-radius:var(--radius-sm);padding:10px;text-align:center;}
+.sm-val{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.2rem;color:var(--navy);}
+.sm-label{font-size:.7rem;color:var(--muted);}
+.start-btn{width:100%;padding:13px;border:none;border-radius:var(--radius-sm);background:var(--navy);color:#fff;font-family:'Baloo 2',cursive;font-weight:700;font-size:1rem;cursor:pointer;transition:background .15s;}
+.start-btn:hover{background:var(--navy2);}
+
+/* ── Result screen ── */
+#resultScreen{padding:16px 12px 40px;}
+.result-wrap{max-width:860px;margin:0 auto;}
+.result-hero{background:var(--navy2);border-radius:var(--radius);padding:24px;text-align:center;margin-bottom:16px;color:#fff;}
+.result-score-big{font-family:'Baloo 2',cursive;font-weight:800;font-size:3rem;color:var(--gold);line-height:1;}
+.result-pct{font-size:1.1rem;color:#aac4e8;margin-top:4px;}
+.result-label{font-size:.85rem;color:#aac4e8;margin-top:8px;}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px;}
+.sg-item{background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:12px;text-align:center;}
+.sg-val{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.3rem;}
+.sg-label{font-size:.7rem;color:var(--muted);margin-top:2px;}
+.green-val{color:var(--green);}
+.red-val{color:var(--red);}
+.gold-val{color:#b97a00;}
+
+/* Heatmap */
+.heatmap-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.heatmap-row:last-child{border-bottom:none;}
+.hm-chapter{font-size:.83rem;font-weight:500;flex:1;color:var(--text);}
+.hm-bar-wrap{width:100px;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+.hm-bar{height:100%;border-radius:4px;}
+.hm-bar.good{background:var(--green);}
+.hm-bar.ok{background:var(--gold);}
+.hm-bar.bad{background:var(--red);}
+.hm-stat{font-size:.75rem;color:var(--muted);width:55px;text-align:right;}
+
+/* AI Report */
+.ai-report-box{background:#eef3ff;border:1px solid #c5d4f5;border-radius:var(--radius-sm);padding:16px;font-size:.88rem;line-height:1.8;color:var(--navy);white-space:pre-wrap;margin-top:12px;}
+.ai-loading{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;}
+.ai-spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Answer key */
+.ak-row{padding:10px 0;border-bottom:1px solid var(--border);}
+.ak-row:last-child{border-bottom:none;}
+.ak-qnum{font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:3px;}
+.ak-question{font-size:.83rem;color:var(--text);margin-bottom:5px;}
+.ak-answer{font-size:.8rem;font-weight:600;}
+.ak-correct{color:var(--green);}
+.ak-wrong{color:var(--red);}
+.ak-skip{color:var(--muted);}
+.ak-explanation{font-size:.75rem;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+/* Result nav */
+.result-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.r-btn{padding:9px 16px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--page);font-family:'Baloo 2',cursive;font-weight:600;font-size:.82rem;color:var(--navy);cursor:pointer;transition:all .15s;text-decoration:none;display:inline-block;}
+.r-btn:hover{border-color:var(--navy);background:#eef3ff;}
+.r-btn.primary{background:var(--navy);border-color:var(--navy);color:#fff;}
+.r-btn.primary:hover{background:var(--navy2);}
+
+/* Result cards */
+.result-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:14px;}
+.result-card-title{font-family:'Baloo 2',cursive;font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px;}
+</style>
+</head>
+<body>
+
+<!-- ════════ START SCREEN ════════ -->
+<div id="startScreen" class="screen active">
+  <div class="top-bar">
+    <div class="top-brand">
+      <div class="top-logo">SC</div>
+      <div class="top-name">SSCracker — Shyamsthali LLP</div>
+    </div>
+  </div>
+  <div class="start-screen">
+    <div class="start-card">
+      <div class="start-icon">📝</div>
+      <div class="start-title" id="startTitle">Delhi Police Adaptive Mock Test</div>
+      <div class="start-sub" id="startSub">
+        AI-powered adaptive test — जैसे-जैसे आप सही जवाब देंगे, questions और कठिन होते जाएंगे।<br>
+        गलत जवाब पर easier question मिलेगा। हर गलती का detailed explanation मिलेगा।
+      </div>
+      <div class="start-meta">
+        <div class="sm-item"><div class="sm-val" id="smTotal">100</div><div class="sm-label">Questions</div></div>
+        <div class="sm-item"><div class="sm-val" id="smTime">90</div><div class="sm-label">Minutes</div></div>
+        <div class="sm-item"><div class="sm-val" id="smNeg">0.25</div><div class="sm-label">Negative marking</div></div>
+        <div class="sm-item"><div class="sm-val" id="smSections">5</div><div class="sm-label">Sections</div></div>
+      </div>
+      <div style="background:#fff8e1;border-radius:var(--radius-sm);padding:10px 12px;font-size:.8rem;color:#7a5200;margin-bottom:16px;">
+        💡 <strong>Adaptive engine:</strong> Wrong answer → easier follow-up Q.<br>
+        3 correct in a row → difficulty increases. Post-test AI analysis in Hindi.
+      </div>
+      <button class="start-btn" id="startBtn" onclick="startTest()">✨ Test शुरू करें</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ TEST SCREEN ════════ -->
+<div id="testScreen" class="screen">
+  <div class="top-bar">
+    <div class="top-brand">
+      <div class="top-logo">SC</div>
+      <div class="top-name" id="testTitle">Delhi Police Mock</div>
+    </div>
+    <div class="top-meta">
+      <div class="timer-box">
+        <span class="timer-icon">⏱</span>
+        <span class="timer-val" id="timerDisplay">90:00</span>
+      </div>
+      <div class="progress-pill" id="progressPill">Q 1/100</div>
+      <button style="padding:6px 12px;border-radius:20px;border:1px solid #ff6b6b;background:transparent;color:#ff6b6b;font-family:'Baloo 2',cursive;font-weight:600;font-size:.75rem;cursor:pointer;" onclick="confirmSubmit()">Submit Test</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Question area -->
+    <div>
+      <div class="q-card">
+        <div class="q-meta">
+          <div class="q-num" id="qNumDisplay">Q. 1</div>
+          <div class="q-section" id="qSectionDisplay">Section</div>
+          <div class="diff-bar" id="diffBar" title="Current difficulty">
+            <div class="diff-dot" id="d1"></div>
+            <div class="diff-dot" id="d2"></div>
+            <div class="diff-dot" id="d3"></div>
+            <div class="diff-dot" id="d4"></div>
+            <div class="diff-dot" id="d5"></div>
+            <div class="diff-label" id="diffLabel">Standard</div>
+          </div>
+        </div>
+
+        <div class="q-text" id="qText">Loading question...</div>
+
+        <div class="options" id="optionsList"></div>
+
+        <!-- Feedback box -->
+        <div class="feedback-box" id="feedbackBox">
+          <div class="fb-title" id="fbTitle"></div>
+          <div id="fbBody"></div>
+        </div>
+
+        <!-- Hints -->
+        <div class="hint-section">
+          <button class="hint-btn" id="hintBtn" onclick="showHint()">💡 Hint लें</button>
+          <div class="hint-box" id="hintBox"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="q-controls">
+          <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>← Prev</button>
+          <div style="display:flex;gap:8px;">
+            <button class="nav-btn" id="clearBtn" onclick="clearAnswer()">Clear</button>
+            <button class="nav-btn next-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side panel -->
+    <div class="side-panel">
+      <!-- Question map -->
+      <div class="side-card">
+        <div class="side-title">Question Map</div>
+        <div class="q-grid" id="qGrid"></div>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:3px;font-size:.68rem;color:var(--muted);">
+            <div style="width:10px;height:10px;background:#dbeafe;border-radius:3px;border:1px solid #93c5fd;"></div>Answered
+          </div>
+          <div style="display:flex;align-items:center;gap:3px;font-size:.68rem;color:var(--muted);">
+            <div style="width:10px;height:10px;background:var(--navy);border-radius:3px;"></div>Current
+          </div>
+        </div>
+      </div>
+
+      <!-- Section stats -->
+      <div class="side-card">
+        <div class="side-title">Section Accuracy</div>
+        <div id="sectionStatsPanel"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ RESULT SCREEN ════════ -->
+<div id="resultScreen" class="screen">
+  <div class="result-wrap">
+
+    <div class="result-hero">
+      <div style="font-size:.85rem;color:#aac4e8;margin-bottom:6px;" id="resultExamName">Delhi Police Mock Test</div>
+      <div class="result-score-big" id="resultScore">—</div>
+      <div class="result-pct" id="resultPct">—%</div>
+      <div class="result-label" id="resultLabel">—</div>
+    </div>
+
+    <div class="score-grid">
+      <div class="sg-item"><div class="sg-val green-val" id="resCorrect">0</div><div class="sg-label">Correct</div></div>
+      <div class="sg-item"><div class="sg-val red-val" id="resWrong">0</div><div class="sg-label">Wrong</div></div>
+      <div class="sg-item"><div class="sg-val gold-val" id="resSkipped">0</div><div class="sg-label">Skipped</div></div>
+      <div class="sg-item"><div class="sg-val" id="resAvgTime">0s</div><div class="sg-label">Avg time/Q</div></div>
+    </div>
+
+    <!-- Section breakdown -->
+    <div class="result-card">
+      <div class="result-card-title">📊 Section-wise Performance</div>
+      <div id="sectionBreakdown"></div>
+    </div>
+
+    <!-- Weak topic heatmap -->
+    <div class="result-card">
+      <div class="result-card-title">🔥 Topic Heatmap — कहाँ ध्यान देना है</div>
+      <div id="heatmapPanel"></div>
+    </div>
+
+    <!-- AI Analysis Report -->
+    <div class="result-card">
+      <div class="result-card-title">🤖 AI Tutor Analysis — Shyamsthali LLP</div>
+      <div id="aiReportPanel">
+        <div class="ai-loading">
+          <div class="ai-spinner"></div>
+          <span>AI आपकी performance analyse कर रहा है...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Answer key -->
+    <div class="result-card">
+      <div class="result-card-title">📋 Answer Key & Explanations</div>
+      <div id="answerKeyPanel"></div>
+    </div>
+
+    <div class="result-btns">
+      <button class="r-btn primary" onclick="retakeTest()">🔄 Retake Test</button>
+      <a class="r-btn" href="../../dp_index.html">📘 DP Course</a>
+      <a class="r-btn" href="../../../ask_doubt.html?course=dp">💬 Ask Doubt</a>
+      <a class="r-btn" href="../../../leaderboard.html">🏆 Leaderboard</a>
+      <a class="r-btn" href="../../../nda/student_dashboard.html">📊 Dashboard</a>
+    </div>
+  </div>
+</div>
+
+<script src="../../../gamification.js"></script>
+<script src="../../../adaptive_engine.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════ */
+var EXAM_TYPE  = 'DP';
+var EXAM_LABEL = 'Delhi Police Constable';
+var totalSec   = 90 * 60;
+var timerInterval = null;
+var hintLevel  = 0;
+var currentQ   = null;
+var results    = null;
+
+/* ══════════════════════════════════════════
+   INIT SCREEN
+══════════════════════════════════════════ */
+(function initStart() {
+  AdaptiveEngine.init({ examType: EXAM_TYPE });
+  var bp = AdaptiveEngine.blueprints[EXAM_TYPE];
+  if (bp) {
+    document.getElementById('startTitle').textContent = bp.name + ' — Adaptive Mock Test';
+    document.getElementById('testTitle').textContent  = bp.name;
+    document.getElementById('smTotal').textContent    = bp.totalQuestions;
+    document.getElementById('smTime').textContent     = bp.timeMinutes;
+    document.getElementById('smNeg').textContent      = bp.negativeMarking;
+    document.getElementById('smSections').textContent = bp.sections.length;
+    totalSec = bp.timeMinutes * 60;
+    document.getElementById('resultExamName').textContent = bp.name + ' — Mock Test';
+  }
+})();
+
+/* ══════════════════════════════════════════
+   START TEST
+══════════════════════════════════════════ */
+function startTest() {
+  /* Use null questionBank → engine generates demo questions */
+  AdaptiveEngine.startSession(null, 'MOCK_1');
+
+  showScreen('testScreen');
+
+  buildQGrid();
+  loadQuestion(0);
+  startTimer();
+}
+
+/* ══════════════════════════════════════════
+   TIMER
+══════════════════════════════════════════ */
+function startTimer() {
+  var remaining = totalSec;
+  updateTimerDisplay(remaining);
+
+  timerInterval = setInterval(function() {
+    remaining--;
+    updateTimerDisplay(remaining);
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      submitTest(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay(sec) {
+  var m = Math.floor(sec / 60);
+  var s = sec % 60;
+  var str = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  var el = document.getElementById('timerDisplay');
+  el.textContent = str;
+  el.classList.toggle('red', sec < 300);
+}
+
+/* ══════════════════════════════════════════
+   LOAD QUESTION
+══════════════════════════════════════════ */
+function loadQuestion(index) {
+  AdaptiveEngine.goTo(index);
+  currentQ = AdaptiveEngine.getCurrentQuestion();
+  if (!currentQ) return;
+
+  hintLevel = 0;
+  document.getElementById('hintBox').style.display = 'none';
+  document.getElementById('feedbackBox').style.display = 'none';
+
+  /* Meta */
+  document.getElementById('qNumDisplay').textContent = 'Q. ' + (currentQ.index + 1);
+  document.getElementById('qSectionDisplay').textContent = currentQ.sectionName;
+  document.getElementById('progressPill').textContent = 'Q ' + (currentQ.index + 1) + '/' + currentQ.total;
+
+  /* Difficulty dots */
+  var diff = currentQ.difficulty || 3;
+  var diffLabels = ['','Easy','Medium','Standard','Hard','Expert'];
+  [1,2,3,4,5].forEach(function(n) {
+    var d = document.getElementById('d'+n);
+    d.classList.toggle('on', n <= diff);
+    d.classList.toggle('off', n > diff);
+  });
+  document.getElementById('diffLabel').textContent = diffLabels[diff] || 'Standard';
+
+  /* Question text */
+  document.getElementById('qText').textContent = currentQ.question;
+
+  /* Options */
+  var ol = document.getElementById('optionsList');
+  ol.innerHTML = '';
+  (currentQ.options || []).forEach(function(opt, i) {
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn' + (currentQ.savedAnswer === i ? ' selected' : '');
+    btn.innerHTML = '<span class="opt-letter">' + String.fromCharCode(65+i) + '</span>' + esc(opt);
+    btn.onclick = function() { selectOption(i, btn); };
+    ol.appendChild(btn);
+  });
+
+  /* Nav buttons */
+  document.getElementById('prevBtn').disabled = (currentQ.index === 0);
+  document.getElementById('nextBtn').textContent = (currentQ.index === currentQ.total - 1) ? 'Review →' : 'Next →';
+
+  /* Grid highlight */
+  updateQGrid();
+  updateSectionStats();
+}
+
+/* ══════════════════════════════════════════
+   SELECT OPTION
+══════════════════════════════════════════ */
+function selectOption(optIdx, clickedBtn) {
+  var q = currentQ;
+  if (!q) return;
+
+  /* Save start time for this interaction */
+  var timeSec = 0;
+
+  /* Mark selected visually */
+  document.querySelectorAll('.opt-btn').forEach(function(b) {
+    b.classList.remove('selected');
+  });
+  clickedBtn.classList.add('selected');
+
+  /* Submit answer to engine */
+  var result = AdaptiveEngine.submitAnswer(optIdx, timeSec);
+
+  /* Show correct/wrong colours */
+  var btns = document.querySelectorAll('.opt-btn');
+  btns.forEach(function(b, i) {
+    b.disabled = true;
+    if (i === result.correctIndex) b.classList.add('correct');
+    else if (i === optIdx && !result.isCorrect) b.classList.add('wrong');
+  });
+
+  /* Feedback box */
+  var fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box ' + (result.isCorrect ? 'fb-correct' : 'fb-wrong');
+  fb.style.display = 'block';
+  document.getElementById('fbTitle').textContent = result.isCorrect ? '✅ सही जवाब!' : '❌ गलत जवाब';
+  document.getElementById('fbBody').textContent  = result.explanation || result.feedback;
+
+  /* Update grid */
+  updateQGrid();
+  updateSectionStats();
+
+  /* Auto advance after 1.5s if correct and not last */
+  if (result.isCorrect && currentQ.index < currentQ.total - 1) {
+    setTimeout(function() { navigate(1); }, 1800);
+  }
+}
+
+/* ══════════════════════════════════════════
+   NAVIGATE
+══════════════════════════════════════════ */
+function navigate(dir) {
+  if (!currentQ) return;
+  var next = currentQ.index + dir;
+  var total = currentQ.total;
+
+  if (next >= 0 && next < total) {
+    loadQuestion(next);
+  } else if (next >= total) {
+    confirmSubmit();
+  }
+}
+
+function clearAnswer() {
+  /* Visual reset only — answer not re-submitted */
+  document.querySelectorAll('.opt-btn').forEach(function(b) {
+    b.classList.remove('selected','correct','wrong');
+    b.disabled = false;
+  });
+  document.getElementById('feedbackBox').style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   HINTS
+══════════════════════════════════════════ */
+function showHint() {
+  if (!currentQ || !currentQ.hints || !currentQ.hints.length) return;
+  hintLevel = Math.min(hintLevel + 1, currentQ.hints.length);
+  var hint = currentQ.hints[hintLevel - 1];
+  var hb = document.getElementById('hintBox');
+  hb.style.display = 'block';
+  hb.textContent = '💡 Hint ' + hintLevel + ': ' + hint;
+}
+
+/* ══════════════════════════════════════════
+   QUESTION GRID
+══════════════════════════════════════════ */
+function buildQGrid() {
+  var q = AdaptiveEngine.getCurrentQuestion();
+  if (!q) return;
+  var grid = document.getElementById('qGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < q.total; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'q-dot';
+    dot.textContent = i + 1;
+    dot.setAttribute('data-idx', i);
+    dot.onclick = (function(idx){ return function(){ navigate(idx - (currentQ ? currentQ.index : 0)); }; })(i);
+    grid.appendChild(dot);
+  }
+}
+
+function updateQGrid() {
+  if (!currentQ) return;
+  var stats = AdaptiveEngine.getSessionStats();
+  var ak    = AdaptiveEngine.getAnswerKey ? AdaptiveEngine.getAnswerKey() : [];
+  var dots  = document.querySelectorAll('.q-dot');
+  dots.forEach(function(dot, i) {
+    dot.className = 'q-dot';
+    if (i === currentQ.index) {
+      dot.classList.add('current');
+    } else if (ak[i]) {
+      if      (ak[i].status === 'correct')     dot.classList.add('correct');
+      else if (ak[i].status === 'wrong')       dot.classList.add('wrong');
+      else if (ak[i].status !== 'unattempted') dot.classList.add('answered');
+    }
+  });
+}
+
+/* ══════════════════════════════════════════
+   SECTION STATS (live)
+══════════════════════════════════════════ */
+function updateSectionStats() {
+  var stats = AdaptiveEngine.getSessionStats();
+  var panel = document.getElementById('sectionStatsPanel');
+  if (!stats.sectionStats) { panel.innerHTML = ''; return; }
+  var html = '';
+  Object.values(stats.sectionStats).forEach(function(s) {
+    var pct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : null;
+    var cls = pct === null ? '' : pct >= 70 ? 'pct-good' : pct >= 50 ? 'pct-ok' : 'pct-bad';
+    html += '<div class="stat-row">' +
+      '<div class="stat-name">' + (s.name || '').slice(0, 16) + '</div>' +
+      '<div class="stat-pct ' + cls + '">' + (pct !== null ? pct + '%' : '—') + '</div>' +
+    '</div>';
+  });
+  panel.innerHTML = html || '<div style="font-size:.78rem;color:var(--muted);">जवाब देने पर यहाँ stats दिखेंगे।</div>';
+}
+
+/* ══════════════════════════════════════════
+   SUBMIT
+══════════════════════════════════════════ */
+function confirmSubmit() {
+  var stats = AdaptiveEngine.getSessionStats();
+  var unanswered = stats.unanswered || 0;
+  var msg = unanswered > 0
+    ? unanswered + ' questions unattempted हैं। क्या आप submit करना चाहते हैं?'
+    : 'Test submit करें?';
+  if (window.confirm(msg)) submitTest(false);
+}
+
+function submitTest(auto) {
+  if (timerInterval) clearInterval(timerInterval);
+
+  results = AdaptiveEngine.submitTest();
+  showScreen('resultScreen');
+  renderResults(results);
+
+  if (auto) alert('Time over! Test automatically submitted.');
+}
+
+/* ══════════════════════════════════════════
+   RENDER RESULTS
+══════════════════════════════════════════ */
+function renderResults(r) {
+  var sc = r.score;
+  document.getElementById('resultScore').textContent = sc.correct + '/' + sc.total;
+  document.getElementById('resultPct').textContent   = sc.percent + '%';
+
+  var label = sc.percent >= 80 ? 'Excellent! 🏆 Selection के करीब हैं!'
+            : sc.percent >= 60 ? 'Good performance! 💪 थोड़ी और practice चाहिए।'
+            : sc.percent >= 40 ? 'Average. 📚 Focus on weak areas.'
+            : 'Needs improvement. 🎯 Regular practice जरूरी है।';
+  document.getElementById('resultLabel').textContent  = label;
+  document.getElementById('resCorrect').textContent   = sc.correct;
+  document.getElementById('resWrong').textContent     = sc.wrong;
+  document.getElementById('resSkipped').textContent   = sc.unattempted;
+  document.getElementById('resAvgTime').textContent   = r.avgTime + 's';
+
+  /* Section breakdown */
+  var sb = document.getElementById('sectionBreakdown');
+  var sbHtml = '';
+  Object.values(r.sectionStats || {}).forEach(function(s) {
+    var pct = s.total > 0 ? Math.round((s.correct/s.total)*100) : 0;
+    var col = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--gold)' : 'var(--red)';
+    sbHtml += '<div style="margin-bottom:10px;">' +
+      '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">' +
+        '<span style="font-size:.83rem;font-weight:500;">' + (s.name||'') + '</span>' +
+        '<span style="font-size:.83rem;font-weight:600;color:' + col + ';">' + pct + '% (' + s.correct + '/' + s.total + ')</span>' +
+      '</div>' +
+      '<div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;">' +
+        '<div style="height:100%;width:' + pct + '%;background:' + col + ';border-radius:3px;"></div>' +
+      '</div>' +
+    '</div>';
+  });
+  sb.innerHTML = sbHtml || '<div style="color:var(--muted);font-size:.83rem;">No section data.</div>';
+
+  /* Heatmap */
+  var hp = document.getElementById('heatmapPanel');
+  var hmHtml = '';
+  (r.heatmap || []).slice(0, 10).forEach(function(h) {
+    var total = h.correct + h.wrong;
+    var acc   = total > 0 ? Math.round((h.correct/total)*100) : 0;
+    var cls   = acc >= 70 ? 'good' : acc >= 50 ? 'ok' : 'bad';
+    hmHtml += '<div class="heatmap-row">' +
+      '<div class="hm-chapter">' + esc(h.chapter) + '</div>' +
+      '<div class="hm-bar-wrap"><div class="hm-bar ' + cls + '" style="width:' + acc + '%;"></div></div>' +
+      '<div class="hm-stat">' + h.correct + '/' + total + '</div>' +
+    '</div>';
+  });
+  hp.innerHTML = hmHtml || '<div style="color:var(--muted);font-size:.83rem;">No heatmap data.</div>';
+
+  /* Answer key */
+  var ak = AdaptiveEngine.getAnswerKey ? AdaptiveEngine.getAnswerKey() : [];
+  var akHtml = '';
+  ak.forEach(function(item) {
+    var statusCls = item.status === 'correct' ? 'ak-correct' : item.status === 'wrong' ? 'ak-wrong' : 'ak-skip';
+    var statusText = item.status === 'correct' ? '✅ Correct'
+                   : item.status === 'wrong'   ? '❌ Wrong — Correct: ' + String.fromCharCode(65 + item.correctIdx) + '. ' + esc(item.options[item.correctIdx])
+                   : '⚪ Skipped';
+    akHtml += '<div class="ak-row">' +
+      '<div class="ak-qnum">Q' + item.index + ' · ' + esc(item.chapter) + ' · ' + item.timeSec + 's</div>' +
+      '<div class="ak-question">' + esc(item.question.slice(0, 120)) + (item.question.length > 120 ? '…' : '') + '</div>' +
+      '<div class="ak-answer ' + statusCls + '">' + statusText + '</div>' +
+      (item.explanation ? '<div class="ak-explanation">' + esc(item.explanation) + '</div>' : '') +
+    '</div>';
+  });
+  document.getElementById('answerKeyPanel').innerHTML = akHtml || '<div style="color:var(--muted);font-size:.83rem;">No answer key.</div>';
+
+  /* AI Report (async) */
+  generateAIReport(r);
+}
+
+async function generateAIReport(r) {
+  var panel = document.getElementById('aiReportPanel');
+  try {
+    var report = await AdaptiveEngine.generateAIReport(r);
+    panel.innerHTML = '<div class="ai-report-box">' + esc(report) + '</div>';
+  } catch(e) {
+    panel.innerHTML = '<div style="color:var(--muted);font-size:.83rem;">AI report unavailable. Please try again.</div>';
+  }
+}
+
+/* ══════════════════════════════════════════
+   UTILITIES
+══════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function retakeTest() {
+  AdaptiveEngine.reset();
+  showScreen('startScreen');
+}
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
+-e 
+<script src="../lang.js"></script>
+<script src="../ss_ai_core.js"></script>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<title>SSCracker Premium — Subscribe | Shyamsthali LLP</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="stylesheet" href="ss_theme.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0D1F3C;--navy2:#132847;--navy3:#1A3560;
+  --gold:#F5A623;--gold2:#FFC857;--gold-dim:#B87A18;
+  --green:#22C55E;--red:#EF4444;
+  --page:#F2F6FF;--card:#fff;--border:#DDE6F5;
+  --text:#1a1a2e;--muted:#5a6480;
+  --r:14px;--r-sm:9px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans',sans-serif;background:var(--page);color:var(--text);min-height:100vh;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.3)}50%{box-shadow:0 0 0 10px transparent}}
+
+/* Header */
+header{background:var(--navy);padding:0 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3);}
+.header-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:12px;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;color:var(--navy);}
+.brand-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:.06em;text-transform:uppercase;}
+.brand-sub{font-size:.65rem;color:#7a90b0;letter-spacing:.1em;text-transform:uppercase;}
+.back-link{color:#7a90b0;font-family:'Rajdhani',sans-serif;font-size:.8rem;font-weight:600;text-decoration:none;letter-spacing:.04em;padding:6px 12px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r-sm);transition:all .2s;}
+.back-link:hover{background:rgba(255,255,255,.05);color:#fff;}
+
+main{max-width:1000px;margin:0 auto;padding:28px 14px 60px;}
+
+/* Hero */
+.pay-hero{
+  background:var(--navy2);border-radius:var(--r);border:1px solid rgba(255,255,255,.06);
+  padding:32px 28px;text-align:center;margin-bottom:28px;
+  position:relative;overflow:hidden;animation:fadeUp .5s ease both;
+}
+.pay-hero::before{content:'';position:absolute;top:-50%;left:-20%;width:40%;height:200%;background:linear-gradient(180deg,transparent,rgba(245,166,35,.04),transparent);transform:rotate(-15deg);pointer-events:none;}
+.pay-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.25);border-radius:20px;padding:4px 14px;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
+.pay-hero h1{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:2rem;color:#fff;margin-bottom:8px;letter-spacing:.02em;}
+.pay-hero p{font-size:.9rem;color:#7a90b0;max-width:500px;margin:0 auto;line-height:1.6;}
+
+/* Plans grid */
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:28px;}
+
+/* Plan card */
+.plan-card{
+  background:var(--card);border:2px solid var(--border);border-radius:var(--r);
+  padding:24px 20px;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;animation:fadeUp .5s ease both;
+}
+.plan-card:nth-child(2){animation-delay:.08s;}
+.plan-card:nth-child(3){animation-delay:.16s;}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(13,31,60,.15);}
+.plan-card.popular{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-dim),0 8px 32px rgba(245,166,35,.15);animation:pulseGold 3s ease infinite;}
+.plan-card.selected{border-color:var(--navy);background:#f0f5ff;box-shadow:0 8px 32px rgba(13,31,60,.12);}
+
+.popular-ribbon{
+  position:absolute;top:16px;right:-28px;
+  background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+  color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 36px;transform:rotate(45deg);box-shadow:0 2px 8px rgba(245,166,35,.3);
+}
+
+.plan-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;}
+.plan-duration{font-size:.75rem;color:var(--muted);margin-bottom:16px;}
+.plan-price{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;}
+.plan-rs{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:2.2rem;color:var(--navy);}
+.plan-per{font-size:.78rem;color:var(--muted);}
+.plan-orig{font-size:.8rem;color:var(--muted);text-decoration:line-through;margin-bottom:14px;}
+.plan-save{display:inline-block;background:#E8F8EF;color:#166534;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:14px;}
+
+.plan-features{list-style:none;margin-bottom:20px;}
+.plan-features li{display:flex;align-items:flex-start;gap:7px;font-size:.83rem;color:var(--text);padding:5px 0;border-bottom:1px solid #f0f4fb;line-height:1.4;}
+.plan-features li:last-child{border-bottom:none;}
+.feat-check{color:var(--green);font-size:12px;margin-top:2px;flex-shrink:0;}
+.feat-cross{color:#d1d5db;font-size:12px;margin-top:2px;flex-shrink:0;}
+.feat-dim{color:var(--muted);}
+
+.select-btn{
+  width:100%;padding:11px;border:none;border-radius:var(--r-sm);
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;
+}
+.plan-card.popular .select-btn{background:linear-gradient(135deg,var(--navy),var(--navy3));color:var(--gold);border:1px solid var(--gold-dim);}
+.plan-card:not(.popular) .select-btn{background:var(--page);color:var(--navy);border:1.5px solid var(--border);}
+.select-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(13,31,60,.15);}
+.plan-card.popular .select-btn:hover{box-shadow:0 4px 20px rgba(245,166,35,.3);}
+
+/* Free tier bar */
+.free-bar{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 20px;margin-bottom:28px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  animation:fadeUp .5s .2s ease both;
+}
+.free-label{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;color:var(--navy);letter-spacing:.04em;text-transform:uppercase;}
+.free-desc{font-size:.8rem;color:var(--muted);}
+.free-tag{background:#EEF3FF;color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:4px;border:1px solid #c5d4f5;}
+
+/* Checkout panel */
+.checkout-panel{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;margin-bottom:20px;display:none;
+  animation:fadeUp .35s ease both;
+}
+.checkout-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:var(--navy);letter-spacing:.04em;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.form-row{margin-bottom:14px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:480px){.form-row-2{grid-template-columns:1fr;}}
+label{display:block;margin-bottom:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.8rem;color:var(--navy);letter-spacing:.03em;text-transform:uppercase;}
+input,select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:.88rem;font-family:'Noto Sans',sans-serif;color:var(--text);background:#fafcff;outline:none;transition:border-color .2s,box-shadow .2s;}
+input:focus,select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,31,60,.08);background:#fff;}
+
+/* Order summary */
+.order-summary{background:#f8faff;border:1px solid var(--border);border-radius:var(--r-sm);padding:14px;margin-bottom:16px;}
+.order-row{display:flex;justify-content:space-between;padding:5px 0;font-size:.83rem;border-bottom:1px solid var(--border);}
+.order-row:last-child{border-bottom:none;font-weight:600;font-size:.9rem;color:var(--navy);}
+.order-label{color:var(--muted);}
+
+/* Pay button */
+.pay-btn{
+  width:100%;padding:14px;border:none;border-radius:var(--r-sm);
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
+  color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:1rem;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);
+  border:1px solid var(--gold-dim);position:relative;overflow:hidden;
+}
+.pay-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,.3),0 0 0 1px var(--gold-dim);}
+.pay-btn:active{transform:scale(.99);}
+.pay-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transition:left .5s;}
+.pay-btn:hover::after{left:150%;}
+.pay-btn:disabled{background:#8fa0b8;border-color:#8fa0b8;color:#fff;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Trust badges */
+.trust-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:14px 0;font-size:.75rem;color:var(--muted);}
+.trust-item{display:flex;align-items:center;gap:4px;}
+
+/* Success screen */
+.success-screen{display:none;text-align:center;padding:32px 20px;animation:fadeUp .4s ease both;}
+.success-icon{font-size:52px;margin-bottom:14px;}
+.success-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--navy);margin-bottom:8px;letter-spacing:.02em;}
+.success-sub{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+.success-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px;text-align:left;}
+.success-detail{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);font-size:.83rem;}
+.success-detail:last-child{border-bottom:none;}
+.sd-label{color:var(--muted);}
+.sd-val{font-weight:600;color:var(--navy);}
+.action-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.action-btn{padding:10px 20px;border-radius:var(--r-sm);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:1.5px solid var(--border);color:var(--navy);background:var(--page);transition:all .15s;}
+.action-btn.primary{background:var(--navy);color:var(--gold);border-color:var(--gold-dim);}
+.action-btn:hover{transform:translateY(-1px);}
+
+/* Premium gate */
+.gate-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px;margin-bottom:14px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+}
+.gate-lock{font-size:20px;}
+.gate-text{flex:1;font-size:.85rem;color:var(--muted);line-height:1.5;}
+.gate-text strong{color:var(--navy);font-weight:600;display:block;margin-bottom:2px;}
+.gate-btn{padding:8px 16px;border-radius:var(--r-sm);border:1px solid var(--gold-dim);background:var(--gold);color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+
+/* Spin */
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(245,166,35,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Nav links */
+.navlinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);}
+.navlinks a{color:var(--navy);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;background:var(--page);padding:7px 12px;border-radius:var(--r-sm);border:1px solid var(--border);transition:all .15s;}
+.navlinks a:hover{background:var(--navy);color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">SC</div>
+      <div>
+        <div class="brand-name">SSCracker</div>
+        <div class="brand-sub">Shyamsthali LLP</div>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← Home</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <div class="pay-hero" id="heroSection">
+    <div class="hero-badge">⚡ Premium Membership</div>
+    <h1>Exam को Crack करने का Plan</h1>
+    <p>Unlimited AI Tutor • Unlimited Mock Tests • Personalised Study Plan • All 12+ Exam Streams</p>
+  </div>
+
+  <!-- Free tier info -->
+  <div class="free-bar">
+    <div>
+      <div class="free-label">Free Plan — अभी active है</div>
+      <div class="free-desc">3 Mock Tests / month • 3 AI Doubt answers / day • Basic study material</div>
+    </div>
+    <span class="free-tag">Free Forever</span>
+  </div>
+
+  <!-- Plans -->
+  <div class="plans-grid" id="plansGrid">
+
+    <!-- Monthly -->
+    <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
+      <div class="plan-name">Monthly</div>
+      <div class="plan-duration">30 days access</div>
+      <div class="plan-price"><span class="plan-rs">₹299</span><span class="plan-per">/month</span></div>
+      <div class="plan-orig">₹499/month</div>
+      <div class="plan-save">Save 40%</div>
+      <ul class="plan-features">
+        <li><span class="feat-check">✓</span>Unlimited AI Tutor (24/7)</li>
+        <li><span class="feat-check">✓</span>Unlimited Mock Tests</li>
+        <li><span class="feat-check">✓</span>AI Personalised Study Plan</li>
+        <li><span class="feat-check">✓</span>NDA + SSC GD + Delhi Police</li>
+        <li><span class="feat-check">✓</span>Performance Analytics</li>
+        <li><span class="feat-cross">✗</span><span class="feat-dim">Bank PO + Railway streams</span></li>
+        <li><span class="feat-cross">✗</span><span class="feat-dim">WhatsApp doubt support</span></li>
+      </ul>
+      <button class="select-btn" onclick="selectPlan('monthly')">Select Monthly</button>
+    </div>
+
+    <!-- Annual — POPULAR -->
+    <div class="plan-card popular" id="plan-annual" onclick="selectPlan('annual')">
+      <div class="popular-ribbon">Best Value</div>
+      <div class="plan-name">Annual</div>
+      <div class="plan-duration">365 days access</div>
+      <div class="plan-price"><span class="plan-rs">₹1,999</span><span class="plan-per">/year</span></div>
+      <div class="plan-orig">₹5,988/year</div>
+      <div class="plan-save">Save 67% — ₹166/month only!</div>
+      <ul class="plan-features">
+        <li><span class="feat-check">✓</span>Everything in Monthly</li>
+        <li><span class="feat-check">✓</span>Bank PO (IBPS) + Railway streams</li>
+        <li><span class="feat-check">✓</span>WhatsApp doubt support</li>
+        <li><span class="feat-check">✓</span>Current Affairs digest monthly</li>
+        <li><span class="feat-check">✓</span>All-India rank in mock tests</li>
+        <li><span class="feat-check">✓</span>Certificate of completion</li>
+        <li><span class="feat-check">✓</span>Priority new exam streams</li>
+      </ul>
+      <button class="select-btn" onclick="selectPlan('annual')">Select Annual ⭐</button>
+    </div>
+
+    <!-- Bundle -->
+    <div class="plan-card" id="plan-bundle" onclick="selectPlan('bundle')">
+      <div class="plan-name">Group Bundle</div>
+      <div class="plan-duration">5 students • 1 year</div>
+      <div class="plan-price"><span class="plan-rs">₹2,999</span><span class="plan-per">/group</span></div>
+      <div class="plan-orig">₹9,995 for 5 students</div>
+      <div class="plan-save">Save 70% — ₹599/student</div>
+      <ul class="plan-features">
+        <li><span class="feat-check">✓</span>Everything in Annual</li>
+        <li><span class="feat-check">✓</span>5 separate student accounts</li>
+        <li><span class="feat-check">✓</span>Group study squad feature</li>
+        <li><span class="feat-check">✓</span>Teacher/parent dashboard</li>
+        <li><span class="feat-check">✓</span>Group leaderboard</li>
+        <li><span class="feat-check">✓</span>Offline download mode</li>
+        <li><span class="feat-check">✓</span>Dedicated support</li>
+      </ul>
+      <button class="select-btn" onclick="selectPlan('bundle')">Select Bundle</button>
+    </div>
+
+  </div>
+
+  <!-- Checkout form -->
+  <div class="checkout-panel" id="checkoutPanel">
+    <div class="checkout-title">🔒 Secure Checkout — <span id="selectedPlanName">Monthly Plan</span></div>
+
+    <div class="form-row-2">
+      <div>
+        <label>Full Name / पूरा नाम</label>
+        <input type="text" id="payName" placeholder="Ram Bhaj Rawat"/>
+      </div>
+      <div>
+        <label>Mobile Number</label>
+        <input type="tel" id="payPhone" placeholder="9876543210" maxlength="10"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Email Address</label>
+      <input type="email" id="payEmail" placeholder="you@email.com"/>
+    </div>
+    <div class="form-row">
+      <label>Exam Preparing For</label>
+      <select id="payExam">
+        <option value="NDA">NDA</option>
+        <option value="SSC_GD">SSC GD</option>
+        <option value="Delhi_Police">Delhi Police</option>
+        <option value="IBPS_PO">Bank PO (IBPS)</option>
+        <option value="RRB">Railway (RRB)</option>
+        <option value="Multiple">Multiple Exams</option>
+      </select>
+    </div>
+
+    <div class="order-summary" id="orderSummary">
+      <div class="order-row"><span class="order-label">Plan</span><span id="osPlan">Monthly</span></div>
+      <div class="order-row"><span class="order-label">Duration</span><span id="osDuration">30 days</span></div>
+      <div class="order-row"><span class="order-label">Original Price</span><span id="osOrig" style="text-decoration:line-through;color:var(--muted);">₹499</span></div>
+      <div class="order-row"><span class="order-label">Discount</span><span id="osDiscount" style="color:var(--green);">-₹200</span></div>
+      <div class="order-row"><span class="order-label">Total Amount</span><span id="osTotal">₹299</span></div>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item">🔒 100% Secure Payment</div>
+      <div class="trust-item">💳 UPI / Cards / NetBanking</div>
+      <div class="trust-item">✅ Instant Activation</div>
+    </div>
+
+    <button class="pay-btn" id="payBtn" onclick="initiatePayment()">
+      🔐 Pay Now via Razorpay
+    </button>
+
+    <div style="margin-top:10px;text-align:center;font-size:.75rem;color:var(--muted);">
+      By paying you agree to our <a href="#" style="color:var(--navy);">Terms</a>. No auto-renewal without consent.
+    </div>
+  </div>
+
+  <!-- Success Screen -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">Payment Successful!</div>
+    <div class="success-sub" id="successMsg">SSCracker Premium activate हो गया। आपकी पढ़ाई शुरू होती है अभी से!</div>
+    <div class="success-card" id="receiptCard">
+      <div class="success-detail"><span class="sd-label">Student Name</span><span class="sd-val" id="rcName">—</span></div>
+      <div class="success-detail"><span class="sd-label">Plan</span><span class="sd-val" id="rcPlan">—</span></div>
+      <div class="success-detail"><span class="sd-label">Amount Paid</span><span class="sd-val" id="rcAmount">—</span></div>
+      <div class="success-detail"><span class="sd-label">Valid Until</span><span class="sd-val" id="rcExpiry">—</span></div>
+      <div class="success-detail"><span class="sd-label">Transaction ID</span><span class="sd-val" id="rcTxn">—</span></div>
+    </div>
+    <div class="action-btns">
+      <a class="action-btn primary" href="nda/nda_index.html">🚀 Start Studying</a>
+      <a class="action-btn" href="nda/student_dashboard.html">📊 Dashboard</a>
+      <a class="action-btn" href="leaderboard.html">🏆 Leaderboard</a>
+    </div>
+  </div>
+
+  <div class="navlinks">
+    <a href="index.html">🏠 Home</a>
+    <a href="nda/nda_index.html">📘 NDA</a>
+    <a href="delhi_police/dp_index.html">👮 Delhi Police</a>
+    <a href="ask_doubt.html">💬 AI Tutor</a>
+    <a href="leaderboard.html">🏆 Leaderboard</a>
+  </div>
+
+</main>
+
+<script src="ss_config.js"></script>
+<script src="gamification.js"></script>
+<script src="lang.js"></script>
+<script src="ss_ai_core.js"></script>
+<script>
+/* ══════════════════════════════════════════
+   RAZORPAY CONFIGURATION
+   Replace with your actual Razorpay Key ID
+   from dashboard.razorpay.com
+══════════════════════════════════════════ */
+var RAZORPAY_KEY = 'rzp_test_YOUR_KEY_HERE'; // ← Replace with your key
+
+var PLANS = {
+  monthly: { name:'Monthly Plan',    amount:29900,  duration:'30 days',  orig:'₹499',  discount:'₹200', display:'₹299' },
+  annual:  { name:'Annual Plan ⭐',  amount:199900, duration:'365 days', orig:'₹5,988',discount:'₹3,989',display:'₹1,999' },
+  bundle:  { name:'Group Bundle',    amount:299900, duration:'365 days (5 students)', orig:'₹9,995', discount:'₹6,996', display:'₹2,999' },
+};
+
+var selectedPlan = null;
+
+/* ── PLAN SELECTION ── */
+function selectPlan(planKey) {
+  selectedPlan = planKey;
+  var plan = PLANS[planKey];
+
+  /* Highlight selected */
+  ['monthly','annual','bundle'].forEach(function(k) {
+    var el = document.getElementById('plan-' + k);
+    if (el) el.classList.toggle('selected', k === planKey);
+  });
+
+  /* Update order summary */
+  document.getElementById('selectedPlanName').textContent = plan.name;
+  document.getElementById('osPlan').textContent      = plan.name;
+  document.getElementById('osDuration').textContent  = plan.duration;
+  document.getElementById('osOrig').textContent      = plan.orig;
+  document.getElementById('osDiscount').textContent  = '-' + plan.discount;
+  document.getElementById('osTotal').textContent     = plan.display;
+
+  /* Show checkout */
+  var cp = document.getElementById('checkoutPanel');
+  cp.style.display = 'block';
+  cp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  /* Pre-fill from localStorage */
+  try {
+    var email = localStorage.getItem('ss_user_email') || '';
+    var name  = localStorage.getItem('ss_user_name')  || '';
+    if (email) document.getElementById('payEmail').value = email;
+    if (name)  document.getElementById('payName').value  = name;
+  } catch(e) {}
+}
+
+/* ── INITIATE PAYMENT ── */
+function initiatePayment() {
+  if (!selectedPlan) { alert('Please select a plan first.'); return; }
+
+  var name  = document.getElementById('payName').value.trim();
+  var phone = document.getElementById('payPhone').value.trim();
+  var email = document.getElementById('payEmail').value.trim();
+  var exam  = document.getElementById('payExam').value;
+
+  if (!name)  { alert('कृपया अपना नाम दर्ज करें।'); document.getElementById('payName').focus(); return; }
+  if (!phone || phone.length !== 10) { alert('कृपया 10-digit mobile number दर्ज करें।'); document.getElementById('payPhone').focus(); return; }
+  if (!email || !email.includes('@')) { alert('कृपया valid email दर्ज करें।'); document.getElementById('payEmail').focus(); return; }
+
+  var plan = PLANS[selectedPlan];
+  var btn  = document.getElementById('payBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Payment शुरू हो रहा है...';
+
+  /* ── Razorpay Options ── */
+  var options = {
+    key:         RAZORPAY_KEY,
+    amount:      plan.amount,       /* in paise */
+    currency:    'INR',
+    name:        'Shyamsthali LLP',
+    description: 'SSCracker ' + plan.name,
+    image:       '',                /* Add your logo URL */
+    prefill: {
+      name:    name,
+      email:   email,
+      contact: phone,
+    },
+    notes: {
+      plan:    selectedPlan,
+      exam:    exam,
+      student: name,
+    },
+    theme: {
+      color: '#002E5B',
+    },
+    modal: {
+      ondismiss: function() {
+        btn.disabled = false;
+        btn.innerHTML = '🔐 Pay Now via Razorpay';
+      }
+    },
+    handler: function(response) {
+      /* Payment success */
+      onPaymentSuccess(response, { name, email, phone, exam, plan });
+    }
+  };
+
+  /* Load Razorpay script dynamically */
+  if (window.Razorpay) {
+    openRazorpay(options, btn);
+  } else {
+    var script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = function() { openRazorpay(options, btn); };
+    script.onerror = function() {
+      btn.disabled = false;
+      btn.innerHTML = '🔐 Pay Now via Razorpay';
+      alert('Payment gateway load नहीं हो पाया। Internet connection check करें।');
+    };
+    document.head.appendChild(script);
+  }
+}
+
+function openRazorpay(options, btn) {
+  try {
+    var rzp = new window.Razorpay(options);
+    rzp.on('payment.failed', function(resp) {
+      btn.disabled = false;
+      btn.innerHTML = '🔐 Pay Now via Razorpay';
+      alert('Payment failed: ' + (resp.error.description || 'Please try again.'));
+    });
+    rzp.open();
+  } catch(e) {
+    btn.disabled = false;
+    btn.innerHTML = '🔐 Pay Now via Razorpay';
+    alert('Razorpay initialize नहीं हो पाया। Key सही है?');
+  }
+}
+
+/* ── PAYMENT SUCCESS ── */
+function onPaymentSuccess(response, data) {
+  var plan      = data.plan;
+  var expiryDays = selectedPlan === 'monthly' ? 30 : 365;
+  var expiry    = new Date(Date.now() + expiryDays * 86400000);
+  var expiryStr = expiry.toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+  var txnId     = response.razorpay_payment_id || ('TXN' + Date.now());
+
+  /* Save premium status to localStorage */
+  var premiumData = {
+    active:    true,
+    plan:      selectedPlan,
+    planName:  plan.name,
+    amount:    plan.display,
+    name:      data.name,
+    email:     data.email,
+    exam:      data.exam,
+    txnId:     txnId,
+    activatedOn: new Date().toISOString(),
+    expiresOn:   expiry.toISOString(),
+  };
+  try {
+    localStorage.setItem('ss_premium', JSON.stringify(premiumData));
+    localStorage.setItem('ss_user_name',  data.name);
+    localStorage.setItem('ss_user_email', data.email);
+  } catch(e) {}
+
+  /* XP bonus for subscribing */
+  if (window.SSG) window.SSG.award('mock_completed', { bonus: 'subscription' });
+
+  /* Show success screen */
+  document.getElementById('heroSection').style.display   = 'none';
+  document.getElementById('plansGrid').style.display     = 'none';
+  document.getElementById('free-bar') && (document.querySelector('.free-bar').style.display = 'none');
+  document.getElementById('checkoutPanel').style.display = 'none';
+
+  document.getElementById('rcName').textContent   = data.name;
+  document.getElementById('rcPlan').textContent   = plan.name;
+  document.getElementById('rcAmount').textContent = plan.display;
+  document.getElementById('rcExpiry').textContent = expiryStr;
+  document.getElementById('rcTxn').textContent    = txnId;
+
+  var ss = document.getElementById('successScreen');
+  ss.style.display = 'block';
+  ss.scrollIntoView({ behavior: 'smooth' });
+
+  /* Send WhatsApp confirmation (wa.me link) */
+  sendWhatsAppConfirmation(data, txnId, expiryStr, plan);
+}
+
+/* ── WHATSAPP CONFIRMATION ── */
+function sendWhatsAppConfirmation(data, txnId, expiry, plan) {
+  var msg = encodeURIComponent(
+    '🎉 SSCracker Premium Activated!\n\n' +
+    '👤 Student: ' + data.name + '\n' +
+    '📚 Plan: ' + plan.name + '\n' +
+    '💰 Amount: ' + plan.display + '\n' +
+    '📅 Valid till: ' + expiry + '\n' +
+    '🔖 Transaction ID: ' + txnId + '\n\n' +
+    '✅ Your account is now active. Start studying at SSCracker.in\n\n' +
+    'Jai Shree Shyam Ji 🙏 — Shyamsthali LLP'
+  );
+
+  /* Auto-open WhatsApp on mobile (optional) */
+  /* Founder notification — replace with your number */
+  var founderMsg = encodeURIComponent(
+    '💰 NEW PAYMENT RECEIVED!\n' +
+    'Student: ' + data.name + '\n' +
+    'Plan: ' + plan.name + '\n' +
+    'Amount: ' + plan.display + '\n' +
+    'Exam: ' + data.exam + '\n' +
+    'Phone: ' + data.phone + '\n' +
+    'TXN: ' + txnId
+  );
+
+  /* Notify founder silently */
+  try {
+    var founderNumber = '91XXXXXXXXXX'; /* ← Replace with your WhatsApp number */
+    var notifLink = 'https://wa.me/' + founderNumber + '?text=' + founderMsg;
+    /* Hidden iframe to trigger — optional */
+  } catch(e) {}
+}
+
+/* ── CHECK PREMIUM STATUS (exported for other pages) ── */
+window.SSCPremium = {
+  isActive: function() {
+    try {
+      var p = JSON.parse(localStorage.getItem('ss_premium') || '{}');
+      if (!p.active) return false;
+      return new Date(p.expiresOn) > new Date();
+    } catch(e) { return false; }
+  },
+  getData: function() {
+    try { return JSON.parse(localStorage.getItem('ss_premium') || '{}'); } catch(e) { return {}; }
+  },
+  /* Call on mock test pages to check access */
+  gateMock: function(mockNumber) {
+    if (this.isActive()) return true;
+    if (mockNumber <= 3) return true; /* Free: 3 mocks */
+    /* Show upgrade prompt */
+    showUpgradePrompt('Mock Test ' + mockNumber + ' is a Premium feature.');
+    return false;
+  },
+};
+
+function showUpgradePrompt(reason) {
+  var existing = document.getElementById('ss-upgrade-prompt');
+  if (existing) existing.remove();
+  var div = document.createElement('div');
+  div.id = 'ss-upgrade-prompt';
+  div.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);width:min(380px,90vw);background:#0D1F3C;color:#fff;border-radius:14px;padding:16px;box-shadow:0 16px 48px rgba(0,0,0,.4);z-index:9999;border:1px solid #F5A623;text-align:center;font-family:"Rajdhani",sans-serif;';
+  div.innerHTML = '<div style="font-size:18px;margin-bottom:8px;">🔒</div>' +
+    '<div style="font-weight:700;font-size:.95rem;margin-bottom:4px;">' + reason + '</div>' +
+    '<div style="font-size:.78rem;color:#7a90b0;margin-bottom:12px;">Upgrade to Premium for unlimited access</div>' +
+    '<a href="payment.html" style="display:inline-block;padding:8px 20px;background:#F5A623;color:#0D1F3C;border-radius:8px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;">Upgrade Now ₹299/month</a>' +
+    '<button onclick="this.closest(\'#ss-upgrade-prompt\').remove()" style="display:block;width:100%;margin-top:8px;background:transparent;border:none;color:#5a6480;font-size:.75rem;cursor:pointer;">Maybe later</button>';
+  document.body.appendChild(div);
+  setTimeout(function() { if (div.parentNode) div.remove(); }, 8000);
+}
+
+/* ── INIT ── */
+(function() {
+  /* If premium active, show a different hero */
+  if (window.SSCPremium && window.SSCPremium.isActive()) {
+    var d = window.SSCPremium.getData();
+    document.querySelector('.pay-hero h1').textContent = 'Premium Active — ' + d.planName;
+    document.querySelector('.pay-hero p').textContent = 'Valid till: ' + new Date(d.expiresOn).toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  }
+})();
+</script>
+</body>
+</html>

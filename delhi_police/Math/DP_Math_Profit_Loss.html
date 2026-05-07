@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="../../ss_theme.css"/>
+<meta charset="utf-8">
+<title>DP Math – Chapter 4: Profit & Loss (Enhanced)</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;margin:0;padding:0;}
+.header{background:#002b5c;color:#fff;padding:14px 20px;font-size:20px;}
+.container{max-width:960px;margin:auto;padding:20px;}
+.card{background:#fff;padding:20px;margin-bottom:16px;border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+h2,h3{margin-top:0;}
+.tip{background:#e8f5e9;border-left:5px solid #2e7d32;padding:10px;margin:10px 0;}
+.note{background:#e3f2fd;border-left:5px solid #1565c0;padding:10px;margin:10px 0;}
+.challenge{background:#fff3e0;border-left:5px solid #ef6c00;padding:10px;margin:10px 0;}
+ol li{margin-bottom:6px;}
+</style>
+</head>
+
+<body>
+<div class="sscr-nav" style="position:sticky; top:0; z-index:999; background:#ffffff; border-bottom:1px solid #e5e5e5; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+  <div style="font-weight:700; color:#003366;">Delhi Police Constable</div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="sscr-btn" href="Math_Index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #003366; border-radius:8px; color:#003366; font-weight:700;">← Back</a>
+    <a class="sscr-btn" href="../../ask_doubt.html?course=dp" style="text-decoration:none; padding:8px 12px; border:1px solid #ff6f00; border-radius:8px; color:#ff6f00; font-weight:700;">Ask Doubt</a>
+    <a class="sscr-btn" href="../dp_index.html" style="text-decoration:none; padding:8px 12px; border:1px solid #0d47a1; border-radius:8px; color:#0d47a1; font-weight:700;">DP Index</a>
+  </div>
+</div>
+
+<div class="header">Delhi Police – Chapter 4: Profit & Loss / लाभ व हानि</div>
+
+<div class="container">
+
+<div class="card">
+<h2>🎙 Teacher-Style Introduction</h2>
+<p>
+Profit & Loss chapter real life se directly जुड़ा हुआ topic है – dukaan, business, discount, MRP,
+sab yahin se aata hai. Delhi Police Constable exam mein ye 2–3 super easy questions deta hai.
+</p>
+<p>
+Agar aap CP (Cost Price), SP (Selling Price), Profit, Loss aur inka % relation samajh lenge,
+toh ye chapter हमेशा high-scoring rahega.
+</p>
+</div>
+
+<div class="card">
+<h2>📘 Important Formulas / महत्वपूर्ण सूत्र</h2>
+<ul>
+<li><b>Cost Price (CP)</b> = buying price</li>
+<li><b>Selling Price (SP)</b> = selling price</li>
+<li><b>Profit = SP − CP</b></li>
+<li><b>Loss = CP − SP</b></li>
+<li><b>Profit% = (Profit / CP) × 100</b></li>
+<li><b>Loss% = (Loss / CP) × 100</b></li>
+<li><b>SP (at profit%) = CP × (1 + Profit%/100)</b></li>
+<li><b>SP (at loss%) = CP × (1 − Loss%/100)</b></li>
+</ul>
+
+<ul>
+<li><b>लागत मूल्य (CP)</b> = जिस दाम पर सामान खरीदा जाए</li>
+<li><b>विक्रय मूल्य (SP)</b> = जिस दाम पर सामान बेचा जाए</li>
+<li><b>लाभ = SP − CP</b></li>
+<li><b>हानि = CP − SP</b></li>
+<li><b>लाभ% = (लाभ / CP) × 100</b></li>
+<li><b>हानि% = (हानि / CP) × 100</b></li>
+<li><b>SP (लाभ%) = CP × (1 + लाभ%/100)</b></li>
+<li><b>SP (हानि%) = CP × (1 − हानि%/100)</b></li>
+</ul>
+</div>
+
+<div class="card">
+<h2>⚡ Tricks & Shortcuts / ट्रिक्स व शॉर्टकट</h2>
+<ul>
+<li>Profit / Loss हमेशा CP पर निकाला जाता है (SP पर नहीं).</li>
+<li>“Profit% diya ho aur CP diya ho” → SP = CP × (100 + P)% / 100.</li>
+<li>“Loss% diya ho aur CP diya ho” → SP = CP × (100 − L)% / 100.</li>
+<li>Question mein “sold at 20% profit” likha ho → iska matlab SP = 120% of CP.</li>
+<li>DP exam mein numbers हमेशा छोटे aur आसान होते हैं (100, 150, 200 type).</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🎯 Exam Angle (Delhi Police)</h2>
+<ul>
+<li>Har paper mein 2–3 questions P&L se aana common hai.</li>
+<li>Mostly direct CP–SP–Profit%–Loss% based questions.</li>
+<li>No tricky shopkeeper cheating type questions – बस 1–2 step calculation.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>✔ Solved Examples / हल प्रश्न</h2>
+
+<p><b>Example 1:</b> A shopkeeper buys an item for ₹100 and sells it for ₹120. Find profit and profit%.<br>
+<b>Solution (English):</b> Profit = 120 − 100 = ₹20. Profit% = (20/100)×100 = <b>20%</b>.<br>
+<b>समाधान (Hindi):</b> लाभ = 120 − 100 = ₹20, लाभ% = (20/100)×100 = <b>20%</b>।</p>
+
+<p><b>Example 2:</b> An article is sold at 10% loss for ₹180. Find the cost price.<br>
+<b>Solution:</b> Let CP = x.<br>
+10% loss ⇒ SP = 90% of CP ⇒ 0.9x = 180 ⇒ x = 180 / 0.9 = <b>₹200</b>.<br>
+<b>समाधान:</b> मान लें CP = x, 10% हानि पर SP = 90% of CP ⇒ 0.9x = 180 ⇒ x = 200।</p>
+
+<div class="tip">Micro Tip: “x ka 90% = 180” type ho to सीधे 180 ÷ 0.9 या 180 × (100/90) kar sakte hain.</div>
+
+<p><b>Example 3:</b> Find SP if CP = ₹250 and profit% = 12%.<br>
+<b>Solution:</b> Profit = 12% of 250 = 0.12 × 250 = 30 ⇒ SP = 250 + 30 = <b>₹280</b>.</p>
+
+<p><b>Example 4:</b> A toy costs ₹400 and is sold at 15% loss. Find selling price.<br>
+<b>Solution:</b> Loss = 15% of 400 = 0.15 × 400 = 60 ⇒ SP = 400 − 60 = <b>₹340</b>.</p>
+
+<p><b>Example 5:</b> If CP = ₹500 and SP = ₹475, find loss%.<br>
+<b>Solution:</b> Loss = 500 − 475 = 25.<br>
+Loss% = (25/500)×100 = <b>5%</b>.</p>
+
+<p><b>Example 6:</b> An article is sold for ₹330 at 10% profit. Find CP.<br>
+<b>Solution:</b> 10% profit ⇒ SP = 110% of CP ⇒ 1.1×CP = 330 ⇒ CP = 330 / 1.1 = <b>₹300</b>.</p>
+
+<p><b>Example 7:</b> If loss% is 20% and SP = ₹240, find CP.<br>
+<b>Solution:</b> 20% loss ⇒ SP = 80% of CP ⇒ 0.8×CP = 240 ⇒ CP = 240 / 0.8 = <b>₹300</b>.</p>
+
+<p><b>Example 8:</b> CP = ₹600, loss = ₹30. Find loss%.<br>
+<b>Solution:</b> Loss% = (30/600)×100 = <b>5%</b>.</p>
+
+</div>
+
+<div class="card">
+<h2>✔ MCQs (Delhi Police Pattern)</h2>
+<ol>
+<li>CP = ₹200, SP = ₹240. Profit% = ?<br>
+<b>Answer:</b> Profit = 40 → (40/200)×100 = <b>20%</b></li>
+
+<li>CP = ₹150, loss% = 10%. SP = ?<br>
+<b>Answer:</b> SP = 150 × (90/100) = <b>₹135</b></li>
+
+<li>Loss of ₹25 on CP = ₹125. Loss% = ?<br>
+<b>Answer:</b> (25/125)×100 = <b>20%</b></li>
+
+<li>CP = ₹300, SP = ₹360. Profit% = ?<br>
+<b>Answer:</b> Profit = 60 → (60/300)×100 = <b>20%</b></li>
+
+<li>SP = ₹180 at 20% loss. CP = ?<br>
+<b>Answer:</b> SP = 80% of CP ⇒ CP = 180 × (100/80) = <b>₹225</b></li>
+
+<li>Profit of ₹40 at 8% profit. CP = ?<br>
+<b>Answer:</b> 8% of CP = 40 ⇒ CP = 40 × (100/8) = <b>₹500</b></li>
+
+<li>CP = ₹500, loss = ₹50. SP = ?<br>
+<b>Answer:</b> SP = 500 − 50 = <b>₹450</b></li>
+
+<li>SP = ₹264 at 10% profit. CP = ?<br>
+<b>Answer:</b> SP = 110% of CP ⇒ CP = 264 × (100/110) = <b>₹240</b></li>
+
+<li>If CP = ₹250, profit% = 5%. SP = ?<br>
+<b>Answer:</b> SP = 250 × (105/100) = <b>₹262.50</b></li>
+
+<li>CP = ₹800, loss% = 12.5%. Find SP.<br>
+<b>Answer:</b> SP = 800 × (87.5/100) = 800 × 0.875 = <b>₹700</b></li>
+</ol>
+</div>
+
+<div class="card challenge">
+<h2>🔥 Challenge Question</h2>
+<p>
+A shopkeeper marks an article at ₹500 and sells it at 10% discount. He still earns 11.11% profit.
+Find the cost price.
+</p>
+<p><b>Solution Sketch:</b><br>
+Marked Price = 500, Discount 10% ⇒ SP = 90% of 500 = 450.<br>
+SP = 450 is at 11.11% profit ≈ 1/9 profit ⇒ SP = (10/9) × CP ⇒ CP = 450 × (9/10) = <b>₹405</b>.</p>
+</div>
+
+<div class="card">
+<p><b>💡 Motivation:</b> Aapne Profit & Loss jaise practical chapter ko master kar liya — ab shopkeeper ke hisaab se nahi, apne hisaab se sochoge. Ye hi officer wali soch hai. 🚓</p>
+</div>
+<div class="back-link">
+  <a href="Math_Index.html">← Back to Main Index</a>
+</div>
+
+</div>
+<script src="../../ss_config.js"></script>
+<script src="../../gamification.js"></script>
+<script src="../../lang.js"></script>
+<script src="../../ss_ai_core.js"></script>
+</body>
+</html>
