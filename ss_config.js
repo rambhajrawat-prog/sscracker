@@ -21,9 +21,7 @@ window.SS_CONFIG = {
      Worker URL here. It looks like:
      https://sscracker-proxy.YOUR-NAME.workers.dev
   ──────────────────────────────────── */
-  PROXY_URL: 'https://YOUR-WORKER.workers.dev',  /* ← REPLACE THIS */
-
-
+  PROXY_URL: 'https://sscracker-proxy.rambhajrawat.workers.dev',
   /* ─── AI Model ─── */
   MODEL: 'claude-sonnet-4-20250514',
 
